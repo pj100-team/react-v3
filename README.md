@@ -16,7 +16,7 @@
 
 #### 例（`[practice1] component & props`を行う場合）
 
-1. 前準備で作成した main ブランチ(`姓_名`)から作業ブランチ(`[practice1] component & props`)を作成する。
+1. 前準備で作成した main ブランチ(`姓_名`)から作業ブランチ(`practice1`)を作成する。
 2. 課題完了後、PR を作成。
 3. 指摘箇所修正。
 
