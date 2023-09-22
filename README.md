@@ -2,9 +2,9 @@
 
 1. `node`をインストール [参照](https://pj100.esa.io/posts/4318)
 2. ローカルにこのリポジトリを`clone`する。
-3. `npm install`
-4. `npm run start`でアプリケーションが起動すれば OK！
-5. main ブランチから自分の main ブランチ(`姓_名`)を作成する。
+3. `clone`後、main ブランチから自分の main ブランチ(`姓_名`)を作成する。
+4. `npm install`
+5. `npm run start`でアプリケーションが起動すれば OK！
 
 # 進め方
 
@@ -16,7 +16,7 @@
 
 #### 例（`[practice1] component & props`を行う場合）
 
-1. main ブランチ(`姓_名`)から作業ブランチ(`practice1`)を作成する。
+1. 前準備で作成した main ブランチ(`姓_名`)から作業ブランチ(`practice1`)を作成する。
 2. 課題完了後、PR を作成。
 3. 指摘箇所修正。
 
