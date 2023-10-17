@@ -1,5 +1,7 @@
+import { useState } from "react";
 import "./App.css";
 import Button from "./components/Button";
+import Input from "./components/Input";
 
 function App() {
   /* Question1 */
@@ -10,6 +12,10 @@ function App() {
     "bg-[#86efac]",
   ];
   const color: string = "text-[#f9fafb]";
+
+  /* Question2 */
+  const [textVisible, setTextVisibility] = useState(false);
+
   return (
     <>
       <div className="flex justify-center bg-slate-400 text-white py-3">
@@ -38,6 +44,18 @@ function App() {
           color={color}
           onClick={() => console.log(buttonName[2])}
         />
+      </div>
+      {/* Question2 */}
+      <div className="flex justify-center">
+        <Input
+          type="checkbox"
+          // ？：静的エラーの原因
+          styles="flex justify-start"
+          onChange={() =>
+            textVisible ? setTextVisibility(false) : setTextVisibility(true)
+          }
+        ></Input>
+        {textVisible && <label className="block mx-2"> hello world</label>}
       </div>
     </>
   );
