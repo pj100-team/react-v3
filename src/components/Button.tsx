@@ -15,7 +15,7 @@ const Button = ({
 }: Props) => {
   return (
     <button
-      className={`${color} ${backGroundColor} py-2 px-4 rounded mx-5 my-10`}
+      className={`${color} ${backGroundColor} py-2 px-4 rounded mx-5`}
       onClick={onClick}
     >
       {buttonName}

@@ -1,12 +1,19 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 interface Props {
-  type: string;
+  type: "text" | "checkbox";
+  value?: string;
   styles: string;
-  onChange: () => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ type, styles, onChange }: Props) => {
-  return <input type={type} onChange={onChange} className={styles} />;
+const Input = ({ type, styles, value, onChange }: Props) => {
+  if (type === "text") {
+    return (
+      <input type={type} value={value} onChange={onChange} className={styles} />
+    );
+  } else {
+    return <input type={type} onChange={onChange} className={styles} />;
+  }
 };
 
 export default Input;
