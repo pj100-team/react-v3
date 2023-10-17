@@ -1,15 +1,10 @@
 import "./App.css";
 import Button from "./components/Button";
 
+/* Question1 */
+const color: string = "text-[#f9fafb]";
+
 function App() {
-  /* Question1 */
-  const buttonName: string[] = ["button1", "button2", "button3"];
-  const buttonBackgroundColor: string[] = [
-    "bg-[#f87171]",
-    "bg-[#fcd34d]",
-    "bg-[#86efac]",
-  ];
-  const color: string = "text-[#f9fafb]";
   return (
     <>
       <div className="flex justify-center bg-slate-400 text-white py-3">
@@ -18,25 +13,25 @@ function App() {
       {/* Question1 */}
       <div className="flex justify-center">
         <Button
-          buttonName={buttonName[0]}
-          borderColor={buttonBackgroundColor[0]}
-          backGroundColor={buttonBackgroundColor[0]}
+          buttonName={"button1"}
+          borderColor={"bg-[#f87171]"}
+          backGroundColor={"bg-[#f87171]"}
           color={color}
-          onClick={() => console.log(buttonName[0])}
+          onClick={() => console.log("button1")}
         />
         <Button
-          buttonName={buttonName[1]}
-          borderColor={buttonBackgroundColor[1]}
-          backGroundColor={buttonBackgroundColor[1]}
+          buttonName={"button2"}
+          borderColor={"bg-[#fcd34d]"}
+          backGroundColor={"bg-[#fcd34d]"}
           color={color}
-          onClick={() => console.log(buttonName[1])}
+          onClick={() => console.log("button2")}
         />
         <Button
-          buttonName={buttonName[2]}
-          borderColor={buttonBackgroundColor[2]}
-          backGroundColor={buttonBackgroundColor[2]}
+          buttonName={"button3"}
+          borderColor={"bg-[#86efac]"}
+          backGroundColor={"bg-[#86efac]"}
           color={color}
-          onClick={() => console.log(buttonName[2])}
+          onClick={() => console.log("button3")}
         />
       </div>
     </>
