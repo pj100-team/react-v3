@@ -10,15 +10,15 @@ function App() {
   /* Question2 */
   const [textVisible, setTextVisibility] = useState(false);
   /* Question3 */
-  const [inputText, setInputText] = useState("sample");
+  const [inputText, setInputText] = useState("");
 
   return (
     <>
-      <div className="flex justify-center bg-slate-400 text-white py-3 my-10">
+      <div className="flex justify-center bg-slate-400 text-white py-3">
         <p>React-V3</p>
       </div>
       {/* Question1 */}
-      <div className="flex justify-center">
+      <div className="flex justify-center my-10">
         <Button
           buttonName={"button1"}
           borderColor={"bg-[#f87171]"}
