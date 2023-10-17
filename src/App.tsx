@@ -3,16 +3,10 @@ import "./App.css";
 import Button from "./components/Button";
 import Input from "./components/Input";
 
-function App() {
-  /* Question1 */
-  const buttonName: string[] = ["button1", "button2", "button3"];
-  const buttonBackgroundColor: string[] = [
-    "bg-[#f87171]",
-    "bg-[#fcd34d]",
-    "bg-[#86efac]",
-  ];
-  const color: string = "text-[#f9fafb]";
+/* Question1 */
+const color: string = "text-[#f9fafb]";
 
+function App() {
   /* Question2 */
   const [textVisible, setTextVisibility] = useState(false);
 
@@ -24,38 +18,45 @@ function App() {
       {/* Question1 */}
       <div className="flex justify-center">
         <Button
-          buttonName={buttonName[0]}
-          borderColor={buttonBackgroundColor[0]}
-          backGroundColor={buttonBackgroundColor[0]}
+          buttonName={"button1"}
+          borderColor={"bg-[#f87171]"}
+          backGroundColor={"bg-[#f87171]"}
           color={color}
-          onClick={() => console.log(buttonName[0])}
+          onClick={() => console.log("button1")}
         />
         <Button
-          buttonName={buttonName[1]}
-          borderColor={buttonBackgroundColor[1]}
-          backGroundColor={buttonBackgroundColor[1]}
+          buttonName={"button2"}
+          borderColor={"bg-[#fcd34d]"}
+          backGroundColor={"bg-[#fcd34d]"}
           color={color}
-          onClick={() => console.log(buttonName[1])}
+          onClick={() => console.log("button2")}
         />
         <Button
-          buttonName={buttonName[2]}
-          borderColor={buttonBackgroundColor[2]}
-          backGroundColor={buttonBackgroundColor[2]}
+          buttonName={"button3"}
+          borderColor={"bg-[#86efac]"}
+          backGroundColor={"bg-[#86efac]"}
           color={color}
-          onClick={() => console.log(buttonName[2])}
+          onClick={() => console.log("button3")}
         />
       </div>
       {/* Question2 */}
       <div className="flex justify-center">
         <Input
           type="checkbox"
-          // ？：静的エラーの原因
           styles="flex justify-start"
           onChange={() =>
             textVisible ? setTextVisibility(false) : setTextVisibility(true)
           }
         ></Input>
-        {textVisible && <label className="block mx-2"> hello world</label>}
+        {
+          <label
+            className={`block mx-2 ${
+              textVisible ? "text-black" : "text-transparent"
+            }`}
+          >
+            hello world
+          </label>
+        }
       </div>
     </>
   );
