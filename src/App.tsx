@@ -8,9 +8,9 @@ const color: string = "text-[#f9fafb]";
 
 function App() {
   /* Question2 */
-  const [textVisible, setTextVisibility] = useState(false);
+  const [isTextVisible, setTextVisibility] = useState<boolean>(false);
   /* Question3 */
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState<string>("");
 
   return (
     <>
@@ -46,19 +46,17 @@ function App() {
         <Input
           type="checkbox"
           styles="flex justify-start"
-          onChange={() =>
-            textVisible ? setTextVisibility(false) : setTextVisibility(true)
-          }
+          onChange={(event) => {
+            setTextVisibility(event.target.checked ? true : false);
+          }}
         />
-        {
-          <label
-            className={`block mx-2 ${
-              textVisible ? "text-black" : "text-transparent"
-            }`}
-          >
-            hello world
-          </label>
-        }
+        <label
+          className={`block mx-2 ${
+            isTextVisible ? "text-black" : "text-transparent"
+          }`}
+        >
+          hello world
+        </label>
       </div>
       {/* Question3 */}
       <div className="flex justify-center my-10">
