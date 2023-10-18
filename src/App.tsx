@@ -16,9 +16,6 @@ function App() {
   /* Question3 */
   //   return (
   //     <>
-  //       <div className="flex justify-center bg-slate-400 text-white py-3 my-10">
-  //         <p>React-V3</p>
-  //       </div>
   //       {/* Question1 */}
   //       <div className="flex justify-center">
   //         <Button
@@ -85,8 +82,11 @@ function App() {
   //       </div>
   //     </>
   // );
-
-  return <AddressSearch />;
+  return (
+    <>
+      <AddressSearch />
+    </>
+  );
 }
 
 export default App;
