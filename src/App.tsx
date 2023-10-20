@@ -3,6 +3,7 @@ import "./App.css";
 import Button from "./components/Button";
 import Input from "./components/Input";
 import AddressSearch from "./components/AddressSearch";
+import Practice5 from "./components/Practice5";
 
 /* Question1 */
 const color: string = "text-[#f9fafb]";
@@ -84,7 +85,7 @@ function App() {
   // );
   return (
     <>
-      <AddressSearch />
+      <Practice5 />
     </>
   );
 }

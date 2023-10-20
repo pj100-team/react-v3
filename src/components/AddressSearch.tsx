@@ -43,7 +43,7 @@ const AddressSearch = () => {
 
   return (
     <>
-      <div className="flex justify-center bg-slate-400 text-white py-3 my-10">
+      <div className="flex justify-center bg-slate-400 text-white py-3">
         <p>React-V3</p>
       </div>
       <div className="App">
