@@ -1,19 +1,45 @@
 import { useForm } from "react-hook-form";
-import FetchData from "./FetchData";
+import { useEffect } from "react";
+import useFetchData from "./FetchData";
 
 const color: string = "text-[#f9fafb]";
 const gray: string = "bg-slate-400";
 const requiredText: string = "必須項目です";
 const zipCodeValidation: string = "7桁の数字を入力してください。";
 
+interface FormInputs {
+  zipCode: string;
+  prefecture: string;
+  city: string;
+}
+
 const AddressSearch = () => {
+  const { addressList, fetchAddressData } = useFetchData();
+
+  const postCodeRegex = /^\d{7}$/;
+  const onSubmit = (data: FormInputs) => console.log(data);
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    setValue,
+  } = useForm<FormInputs>({
+    criteriaMode: "all",
+  });
+  const zipCode = watch("zipCode");
+  useEffect(() => {
+    if (zipCode?.match(postCodeRegex)) {
+      fetchAddressData(zipCode);
+    }
+  }, [zipCode]);
 
-  const onSubmit = (data: any) => console.log(data);
+  useEffect(() => {
+    if (addressList) {
+      setValue("prefecture", addressList[0].address1, { shouldValidate: true });
+      setValue("city", addressList[0].address2, { shouldValidate: true });
+    }
+  }, [addressList]);
 
   return (
     <>
@@ -35,20 +61,10 @@ const AddressSearch = () => {
                     message: requiredText,
                   },
                   pattern: {
-                    value: /[0-9]/,
-                    message: zipCodeValidation,
-                  },
-                  maxLength: {
-                    value: 7,
+                    value: postCodeRegex,
                     message: zipCodeValidation,
                   },
                 })}
-                onChange={(event) => {
-                  console.log(event.target.value);
-                  event.target.value.length === 7 && (
-                    <FetchData zipCode={parseInt(event.target.value)} />
-                  );
-                }}
               />
               {errors.zipCode && (
                 <label className="text-red-500">
@@ -70,8 +86,6 @@ const AddressSearch = () => {
                     message: requiredText,
                   },
                 })}
-                type="prefecture"
-                value="aaaa"
               />
               {errors.prefecture && (
                 <label className="text-red-500">
@@ -93,8 +107,6 @@ const AddressSearch = () => {
                     message: requiredText,
                   },
                 })}
-                type="city"
-                value="aaaaaa"
               />
               {errors.city && (
                 <label className="text-red-500">
@@ -108,7 +120,6 @@ const AddressSearch = () => {
             <button
               type="submit"
               className={`${color} ${gray} py-2 px-4 rounded mx-5`}
-              onSubmit={() => {}}
             >
               送信
             </button>
