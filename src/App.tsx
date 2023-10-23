@@ -8,7 +8,7 @@ const color: string = "text-[#f9fafb]";
 
 function App() {
   /* Question2 */
-  const [isTextVisible, setTextVisibility] = useState<boolean>(false);
+  const [isTextVisible, setIsTextVisibility] = useState<boolean>(false);
   /* Question3 */
   const [inputText, setInputText] = useState<string>("");
 
@@ -47,7 +47,7 @@ function App() {
           type="checkbox"
           styles="flex justify-start"
           onChange={(event) => {
-            setTextVisibility(event.target.checked ? true : false);
+            setIsTextVisibility(event.target.checked);
           }}
         />
         <label
