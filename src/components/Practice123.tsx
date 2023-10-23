@@ -48,7 +48,7 @@ const Practice123 = () => {
       {/* Question3 */}
       <div className="flex justify-center my-10">
         <Input
-          styles=" h-8 border-2"
+          styles="h-8 border-2"
           value={inputText}
           onChange={(event) => {
             setInputText(event.target.value);

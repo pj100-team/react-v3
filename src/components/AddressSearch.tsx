@@ -2,8 +2,9 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import useFetchData from "./FetchData";
 
-const color: string = "text-[#f9fafb]";
+const whiteText: string = "text-[#f9fafb]";
 const gray: string = "bg-slate-400";
+const red: string = "text-red-500";
 const requiredText: string = "必須項目です";
 const zipCodeValidation: string = "7桁の数字を入力してください。";
 
@@ -15,7 +16,6 @@ interface FormInputs {
 
 const AddressSearch = () => {
   const { addressList, fetchAddressData } = useFetchData();
-
   const postCodeRegex = /^\d{7}$/;
   const onSubmit = (data: FormInputs) => console.log(data);
   const {
@@ -38,12 +38,15 @@ const AddressSearch = () => {
     if (addressList) {
       setValue("prefecture", addressList[0].address1, { shouldValidate: true });
       setValue("city", addressList[0].address2, { shouldValidate: true });
+    } else {
+      setValue("prefecture", "");
+      setValue("city", "");
     }
   }, [addressList]);
 
   return (
     <>
-      <div className="flex justify-center bg-slate-400 text-white py-3 my-10">
+      <div className={`flex justify-center ${gray} ${whiteText} py-3 my-10`}>
         <p>React-V3</p>
       </div>
       <div className="App">
@@ -67,7 +70,7 @@ const AddressSearch = () => {
                 })}
               />
               {errors.zipCode && (
-                <label className="text-red-500">
+                <label className={red}>
                   {errors.zipCode.message as string}
                 </label>
               )}
@@ -109,20 +112,22 @@ const AddressSearch = () => {
                 })}
               />
               {errors.city && (
-                <label className="text-red-500">
-                  {errors.city.message as string}
-                </label>
+                <label className={red}>{errors.city.message as string}</label>
               )}
             </div>
           </div>
           {/* 送信 */}
           <div className="flex justify-center py-5">
-            <button
-              type="submit"
-              className={`${color} ${gray} py-2 px-4 rounded mx-5`}
-            >
-              送信
-            </button>
+            {addressList === null ? (
+              <label className={red}>該当する住所が存在しません</label>
+            ) : (
+              <button
+                type="submit"
+                className={`${whiteText} ${gray} py-2 px-4 rounded mx-5`}
+              >
+                送信
+              </button>
+            )}
           </div>
         </form>
       </div>

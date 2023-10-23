@@ -1,6 +1,5 @@
 import React, { ChangeEvent } from "react";
 interface Props {
-  value?: string;
   styles: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
