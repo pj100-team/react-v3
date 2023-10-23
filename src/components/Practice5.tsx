@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
-import TableContent from "./TableContent";
 
 const color: string = "text-[#f9fafb]";
 const gray: string = "bg-slate-400";
@@ -9,18 +8,23 @@ const now = new Date();
 
 const Practice5 = () => {
   const [inputText, setInputText] = useState<string>("");
+  const [allCheck, setAllCheck] = useState<boolean>(false);
   const [todoList, setTodoList] = useState<string[][]>();
-  const [isButtonVisible, setButtonVisible] = useState<boolean>(false);
-  const [isTableVisible, setTableVisibility] = useState<boolean>(false);
-
+  const [checkList, setCheckList] = useState<boolean[]>([]);
   const onClickAdd = () => {
     if (inputText === "") return;
     if (todoList !== undefined) {
-      setTodoList([...todoList!, [`${now.getFullYear()}`, inputText]]);
+      setCheckList([...checkList, false]);
+      setTodoList([
+        ...todoList!,
+        [`${now.getFullYear()}/${now.getMonth()}/${now.getDate()}`, inputText],
+      ]);
     } else {
-      setTodoList([[`${now.getFullYear()}`, inputText]]);
+      setCheckList([false]);
+      setTodoList([
+        [`${now.getFullYear()}/${now.getMonth()}/${now.getDate()}`, inputText],
+      ]);
     }
-
     setInputText("");
   };
   return (
@@ -29,7 +33,7 @@ const Practice5 = () => {
         <p>React-V3</p>
       </div>
       <p className="flex justify-center my-10">TodoList</p>
-      <div className="flex justify-center my-10">
+      <div className="flex justify-center my-5">
         <Input
           type="text"
           styles=" h-8 border-2"
@@ -45,26 +49,34 @@ const Practice5 = () => {
           onClick={onClickAdd}
         />
       </div>
-      {isButtonVisible && (
-        <div className="flex justify-center my-10">
-          <Button
-            buttonName={"一括削除"}
-            backGroundColor="bg-red-500"
-            color={color}
+      <div className="flex justify-center h-10">
+        {checkList.includes(true) && (
+          <button
+            className={`${color} bg-red-500`}
             onClick={() => console.log("button3")}
-          />
-        </div>
-      )}
-      {!isTableVisible && (
-        <div className="flex justify-center my-10">
+          >
+            {"一括削除"}
+          </button>
+        )}
+      </div>
+
+      {todoList !== undefined && (
+        <div className="flex justify-center my-5">
           <table className="table-auto border-collapse border border-slate-400">
             <thead>
               <tr>
                 <th className="table-auto border-collapse border border-slate-400">
-                  <Input
+                  <input
                     type="checkbox"
-                    styles="flex justify-start"
-                    onChange={() => {}}
+                    checked={allCheck}
+                    onChange={(event) => {
+                      const newcheck = [...checkList].fill(
+                        event.target.checked
+                      );
+                      setCheckList(newcheck);
+                      setAllCheck(event.target.checked);
+                    }}
+                    className="flex justify-start"
                   />
                 </th>
                 <th className="table-auto border-collapse border border-slate-400">
@@ -79,7 +91,42 @@ const Practice5 = () => {
               </tr>
             </thead>
             <tbody>
-              <TableContent todoList={todoList!} />
+              <>
+                {todoList !== undefined &&
+                  todoList.map((todo, index) => (
+                    <tr>
+                      <td className="table-auto border-collapse border border-slate-400">
+                        <Input
+                          type="checkbox"
+                          styles="flex justify-start"
+                          checked={checkList[index]}
+                          onChange={(event) => {
+                            const nextChecks = checkList.map(
+                              (value, mapindex) => {
+                                console.log(value);
+                                return index === mapindex
+                                  ? event.target.checked
+                                  : value;
+                              }
+                            );
+                            setCheckList(nextChecks);
+                          }}
+                        />
+                      </td>
+                      <td className="table-auto border-collapse border border-slate-400">
+                        {todo[0]}
+                      </td>
+                      <td className="table-auto border-collapse border border-slate-400">
+                        {todo[1]}
+                      </td>
+                      <td className="table-auto border-collapse border border-slate-400">
+                        <button onClick={() => console.log(checkList)}>
+                          削除
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </>
             </tbody>
           </table>
         </div>
