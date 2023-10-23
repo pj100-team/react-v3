@@ -2,16 +2,12 @@ import { useState } from "react";
 import "./App.css";
 import Button from "./components/Button";
 import Input from "./components/Input";
-
-/* Question1 */
-const color: string = "text-[#f9fafb]";
-
+import Checkbox from "./components/CheckBox";
 function App() {
   /* Question2 */
   const [isTextVisible, setIsTextVisibility] = useState<boolean>(false);
   /* Question3 */
   const [inputText, setInputText] = useState<string>("");
-
   return (
     <>
       <div className="flex justify-center bg-slate-400 text-white py-3">
@@ -20,40 +16,31 @@ function App() {
       {/* Question1 */}
       <div className="flex justify-center my-10">
         <Button
-          buttonName={"button1"}
-          borderColor={"bg-[#f87171]"}
-          backGroundColor={"bg-[#f87171]"}
-          color={color}
+          buttonName="button1"
+          backGroundColor="red"
           onClick={() => console.log("button1")}
         />
         <Button
-          buttonName={"button2"}
-          borderColor={"bg-[#fcd34d]"}
-          backGroundColor={"bg-[#fcd34d]"}
-          color={color}
+          buttonName="button2"
+          backGroundColor="yellow"
           onClick={() => console.log("button2")}
         />
         <Button
-          buttonName={"button3"}
-          borderColor={"bg-[#86efac]"}
-          backGroundColor={"bg-[#86efac]"}
-          color={color}
+          buttonName="button3"
+          backGroundColor="green"
           onClick={() => console.log("button3")}
         />
       </div>
       {/* Question2 */}
       <div className="flex justify-center my-10">
-        <Input
-          type="checkbox"
+        <Checkbox
           styles="flex justify-start"
           onChange={(event) => {
             setIsTextVisibility(event.target.checked);
           }}
         />
         <label
-          className={`block mx-2 ${
-            isTextVisible ? "text-black" : "text-transparent"
-          }`}
+          className={`block mx-2 ${isTextVisible ? "visible" : "invisible"}`}
         >
           hello world
         </label>
@@ -61,7 +48,6 @@ function App() {
       {/* Question3 */}
       <div className="flex justify-center my-10">
         <Input
-          type="text"
           styles=" h-8 border-2"
           value={inputText}
           onChange={(event) => {
@@ -70,10 +56,8 @@ function App() {
           }}
         />
         <Button
-          buttonName={"reset"}
-          borderColor={"bg-[#f87171]"}
-          backGroundColor={"bg-[#f87171]"}
-          color={color}
+          buttonName="reset"
+          backGroundColor="red"
           onClick={() => {
             setInputText("");
           }}
