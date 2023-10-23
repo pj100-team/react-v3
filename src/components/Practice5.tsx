@@ -11,6 +11,7 @@ const Practice5 = () => {
   const [allCheck, setAllCheck] = useState<boolean>(false);
   const [todoList, setTodoList] = useState<string[][]>();
   const [checkList, setCheckList] = useState<boolean[]>([]);
+  // 追加
   const onClickAdd = () => {
     if (inputText === "") return;
     if (todoList !== undefined) {
@@ -27,6 +28,10 @@ const Practice5 = () => {
     }
     setInputText("");
   };
+  //削除
+  const deleteRecord = () => {};
+  //全削除
+  const deleteAll = () => {};
   return (
     <>
       <div className={`flex justify-center ${gray} text-white py-3`}>
@@ -120,7 +125,13 @@ const Practice5 = () => {
                         {todo[1]}
                       </td>
                       <td className="table-auto border-collapse border border-slate-400">
-                        <button onClick={() => console.log(checkList)}>
+                        <button
+                          onClick={() => {
+                            const nextChecks = [...checkList].splice(index);
+                            setCheckList(nextChecks);
+                            setTodoList([...todoList].splice(index));
+                          }}
+                        >
                           削除
                         </button>
                       </td>
