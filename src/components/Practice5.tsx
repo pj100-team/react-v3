@@ -75,11 +75,7 @@ const Practice5 = () => {
             setInputText(event.target.value);
           }}
         />
-        <Button
-          buttonName={"追加"}
-          backGroundColor="gray"
-          onClick={onClickAdd}
-        />
+        <Button buttonName="追加" backGroundColor="gray" onClick={onClickAdd} />
       </div>
       <div className="flex justify-center h-10">
         {checkList.includes(true) && (
