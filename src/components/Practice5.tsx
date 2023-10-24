@@ -24,18 +24,42 @@ const Practice5 = () => {
   };
   //一括削除
   const onSelectedDelete = () => {
-    let newTodo: string[][] = [];
-    let newBool: boolean[] = [];
+    let newTodoList: string[][] = [];
+    let newCheckList: boolean[] = [];
     for (let i = 0; i < checkList.length; i++) {
       if (!checkList[i]) {
-        console.log(i);
-        newTodo.push(todoList[i]);
-        newBool.push(false);
+        newTodoList.push(todoList[i]);
+        newCheckList.push(false);
       }
     }
-    setTodoList(newTodo);
-    setCheckList(newBool);
+    setTodoList(newTodoList);
+    setCheckList(newCheckList);
     setAllCheck(false);
+  };
+  //全選択
+  const doAllCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newChecks = [...checkList].fill(event.target.checked);
+    setCheckList(newChecks);
+    setAllCheck(event.target.checked);
+  };
+  //選択
+  const doCheck = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const nextChecks = checkList.map((value, checkIndex) => {
+      return index === checkIndex ? event.target.checked : value;
+    });
+    setCheckList(nextChecks);
+  };
+  //行削除
+  const deleteRecord = (index: number) => () => {
+    const nextCheck = [...checkList];
+    nextCheck.splice(index, 1);
+    const nextTodo = [...todoList];
+    nextTodo.splice(index, 1);
+    setCheckList(nextCheck);
+    setTodoList(nextTodo);
   };
   return (
     <>
@@ -45,7 +69,7 @@ const Practice5 = () => {
       <p className="flex justify-center my-10">TodoList</p>
       <div className="flex justify-center my-5">
         <Input
-          styles=" h-8 border-2"
+          styles="h-8 border-2"
           value={inputText}
           onChange={(event) => {
             setInputText(event.target.value);
@@ -74,13 +98,7 @@ const Practice5 = () => {
                   <input
                     type="checkbox"
                     checked={allCheck}
-                    onChange={(event) => {
-                      const newChecks = [...checkList].fill(
-                        event.target.checked
-                      );
-                      setCheckList(newChecks);
-                      setAllCheck(event.target.checked);
-                    }}
+                    onChange={doAllCheck}
                     className="flex justify-start"
                   />
                 </th>
@@ -104,16 +122,7 @@ const Practice5 = () => {
                         <Checkbox
                           styles="flex justify-start"
                           checked={checkList[index]}
-                          onChange={(event) => {
-                            const nextChecks = checkList.map(
-                              (value, checkIndex) => {
-                                return index === checkIndex
-                                  ? event.target.checked
-                                  : value;
-                              }
-                            );
-                            setCheckList(nextChecks);
-                          }}
+                          onChange={(event) => doCheck(event, index)}
                         />
                       </td>
                       <td className="table-auto border-collapse border border-slate-400">
@@ -123,18 +132,7 @@ const Practice5 = () => {
                         {todo[1]}
                       </td>
                       <td className="table-auto border-collapse border border-slate-400">
-                        <button
-                          onClick={() => {
-                            const nextCheck = [...checkList];
-                            nextCheck.splice(index, 1);
-                            const nextTodo = [...todoList];
-                            nextTodo.splice(index, 1);
-                            setCheckList(nextCheck);
-                            setTodoList(nextTodo);
-                          }}
-                        >
-                          削除
-                        </button>
+                        <button onClick={deleteRecord(index)}>削除</button>
                       </td>
                     </tr>
                   ))}
