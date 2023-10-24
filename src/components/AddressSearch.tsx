@@ -46,7 +46,7 @@ const AddressSearch = () => {
 
   return (
     <>
-      <div className={`flex justify-center ${gray} ${whiteText} py-3 my-10`}>
+      <div className={`flex justify-center ${gray} ${whiteText} py-3`}>
         <p>React-V3</p>
       </div>
       <div className="App">
@@ -56,13 +56,10 @@ const AddressSearch = () => {
             <label className="mx-5">郵便番号</label>
             <div className="flex flex-col h-10">
               <input
-                className=" h-8 border-2"
+                className="h-8 border-2"
                 id="zipCode"
                 {...register("zipCode", {
-                  required: {
-                    value: true,
-                    message: requiredText,
-                  },
+                  required: requiredText,
                   pattern: {
                     value: postCodeRegex,
                     message: zipCodeValidation,
@@ -70,9 +67,7 @@ const AddressSearch = () => {
                 })}
               />
               {errors.zipCode && (
-                <label className={red}>
-                  {errors.zipCode.message as string}
-                </label>
+                <label className={red}>{errors.zipCode.message}</label>
               )}
             </div>
           </div>
@@ -81,18 +76,15 @@ const AddressSearch = () => {
             <label className="mx-5">都道府県</label>
             <div className="flex flex-col h-10">
               <input
-                className=" h-8 border-2"
+                className="h-8 border-2"
                 id="prefecture"
                 {...register("prefecture", {
-                  required: {
-                    value: true,
-                    message: requiredText,
-                  },
+                  required: requiredText,
                 })}
               />
               {errors.prefecture && (
                 <label className="text-red-500">
-                  {errors.prefecture.message as string}
+                  {errors.prefecture.message}
                 </label>
               )}
             </div>
@@ -102,17 +94,14 @@ const AddressSearch = () => {
             <label className="mx-5">市区町村</label>
             <div className="flex flex-col h-10">
               <input
-                className=" h-8 border-2"
+                className="h-8 border-2"
                 id="city"
                 {...register("city", {
-                  required: {
-                    value: true,
-                    message: requiredText,
-                  },
+                  required: requiredText,
                 })}
               />
               {errors.city && (
-                <label className={red}>{errors.city.message as string}</label>
+                <label className={red}>{errors.city.message}</label>
               )}
             </div>
           </div>
