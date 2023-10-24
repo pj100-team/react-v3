@@ -3,7 +3,6 @@ interface Props {
   backGroundColor: "red" | "green" | "yellow";
   onClick: () => void;
 }
-
 const Button = ({ buttonName, backGroundColor, onClick }: Props) => {
   let color;
   switch (backGroundColor) {
