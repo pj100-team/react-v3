@@ -9,29 +9,19 @@ const now = new Date();
 const Practice5 = () => {
   const [inputText, setInputText] = useState<string>("");
   const [allCheck, setAllCheck] = useState<boolean>(false);
-  const [todoList, setTodoList] = useState<string[][]>();
+  const [todoList, setTodoList] = useState<string[][]>([]);
   const [checkList, setCheckList] = useState<boolean[]>([]);
   // 追加
   const onClickAdd = () => {
     if (inputText === "") return;
-    if (todoList !== undefined) {
-      setCheckList([...checkList, false]);
-      setTodoList([
-        ...todoList!,
-        [`${now.getFullYear()}/${now.getMonth()}/${now.getDate()}`, inputText],
-      ]);
-    } else {
-      setCheckList([false]);
-      setTodoList([
-        [`${now.getFullYear()}/${now.getMonth()}/${now.getDate()}`, inputText],
-      ]);
-    }
+    setCheckList([...checkList, false]);
+    setTodoList([
+      ...todoList,
+      [`${now.getFullYear()}/${now.getMonth()}/${now.getDate()}`, inputText],
+    ]);
+
     setInputText("");
   };
-  //削除
-  const deleteRecord = () => {};
-  //全削除
-  const deleteAll = () => {};
   return (
     <>
       <div className={`flex justify-center ${gray} text-white py-3`}>
@@ -58,14 +48,27 @@ const Practice5 = () => {
         {checkList.includes(true) && (
           <button
             className={`${color} bg-red-500`}
-            onClick={() => console.log("button3")}
+            onClick={() => {
+              let newTodo: string[][] = [];
+              let newBool: boolean[] = [];
+              for (let i = 0; i < checkList.length; i++) {
+                if (!checkList[i]) {
+                  console.log(i);
+                  newTodo.push(todoList[i]);
+                  newBool.push(false);
+                }
+              }
+              setTodoList(newTodo);
+              setCheckList(newBool);
+              setAllCheck(false);
+            }}
           >
-            {"一括削除"}
+            一括削除
           </button>
         )}
       </div>
 
-      {todoList !== undefined && (
+      {todoList.length !== 0 && (
         <div className="flex justify-center my-5">
           <table className="table-auto border-collapse border border-slate-400">
             <thead>
@@ -75,10 +78,10 @@ const Practice5 = () => {
                     type="checkbox"
                     checked={allCheck}
                     onChange={(event) => {
-                      const newcheck = [...checkList].fill(
+                      const newChecks = [...checkList].fill(
                         event.target.checked
                       );
-                      setCheckList(newcheck);
+                      setCheckList(newChecks);
                       setAllCheck(event.target.checked);
                     }}
                     className="flex justify-start"
@@ -97,7 +100,7 @@ const Practice5 = () => {
             </thead>
             <tbody>
               <>
-                {todoList !== undefined &&
+                {todoList.length !== 0 &&
                   todoList.map((todo, index) => (
                     <tr>
                       <td className="table-auto border-collapse border border-slate-400">
@@ -107,9 +110,8 @@ const Practice5 = () => {
                           checked={checkList[index]}
                           onChange={(event) => {
                             const nextChecks = checkList.map(
-                              (value, mapindex) => {
-                                console.log(value);
-                                return index === mapindex
+                              (value, checkIndex) => {
+                                return index === checkIndex
                                   ? event.target.checked
                                   : value;
                               }
@@ -127,9 +129,14 @@ const Practice5 = () => {
                       <td className="table-auto border-collapse border border-slate-400">
                         <button
                           onClick={() => {
-                            const nextChecks = [...checkList].splice(index);
-                            setCheckList(nextChecks);
-                            setTodoList([...todoList].splice(index));
+                            console.log(index);
+                            const nextCheck = [...checkList];
+                            nextCheck.splice(index, 1);
+                            const nextTodo = [...todoList];
+                            nextTodo.splice(index, 1);
+                            console.log(nextTodo);
+                            setCheckList(nextCheck);
+                            setTodoList(nextTodo);
                           }}
                         >
                           削除
