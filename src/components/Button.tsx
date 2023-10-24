@@ -1,6 +1,10 @@
 interface Props {
   buttonName: string;
+<<<<<<< HEAD
   backGroundColor: "red" | "green" | "yellow" | "gray";
+=======
+  backGroundColor: "red" | "green" | "yellow";
+>>>>>>> d710fe3d486872031b0d265970db2a7fad844e44
   onClick: () => void;
 }
 const Button = ({ buttonName, backGroundColor, onClick }: Props) => {
@@ -15,9 +19,12 @@ const Button = ({ buttonName, backGroundColor, onClick }: Props) => {
     case "green":
       color = "bg-[#86efac]";
       break;
+<<<<<<< HEAD
     case "gray":
       color = "bg-slate-400";
       break;
+=======
+>>>>>>> d710fe3d486872031b0d265970db2a7fad844e44
   }
   return (
     <button

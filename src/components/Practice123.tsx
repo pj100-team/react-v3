@@ -38,7 +38,10 @@ const Practice123 = () => {
           onChange={(event) => {
             setIsTextVisibility(event.target.checked);
           }}
+<<<<<<< HEAD
           checked={false}
+=======
+>>>>>>> d710fe3d486872031b0d265970db2a7fad844e44
         />
         <label
           className={`block mx-2 ${isTextVisible ? "visible" : "invisible"}`}
