@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
+import Checkbox from "./Checkbox";
 
 const color: string = "text-[#f9fafb]";
 const gray: string = "bg-slate-400";
@@ -19,8 +20,22 @@ const Practice5 = () => {
       ...todoList,
       [`${now.getFullYear()}/${now.getMonth()}/${now.getDate()}`, inputText],
     ]);
-
     setInputText("");
+  };
+  //一括削除
+  const onSelectedDelete = () => {
+    let newTodo: string[][] = [];
+    let newBool: boolean[] = [];
+    for (let i = 0; i < checkList.length; i++) {
+      if (!checkList[i]) {
+        console.log(i);
+        newTodo.push(todoList[i]);
+        newBool.push(false);
+      }
+    }
+    setTodoList(newTodo);
+    setCheckList(newBool);
+    setAllCheck(false);
   };
   return (
     <>
@@ -30,7 +45,6 @@ const Practice5 = () => {
       <p className="flex justify-center my-10">TodoList</p>
       <div className="flex justify-center my-5">
         <Input
-          type="text"
           styles=" h-8 border-2"
           value={inputText}
           onChange={(event) => {
@@ -39,35 +53,18 @@ const Practice5 = () => {
         />
         <Button
           buttonName={"追加"}
-          backGroundColor={gray}
-          color={color}
+          backGroundColor="gray"
           onClick={onClickAdd}
         />
       </div>
       <div className="flex justify-center h-10">
         {checkList.includes(true) && (
-          <button
-            className={`${color} bg-red-500`}
-            onClick={() => {
-              let newTodo: string[][] = [];
-              let newBool: boolean[] = [];
-              for (let i = 0; i < checkList.length; i++) {
-                if (!checkList[i]) {
-                  console.log(i);
-                  newTodo.push(todoList[i]);
-                  newBool.push(false);
-                }
-              }
-              setTodoList(newTodo);
-              setCheckList(newBool);
-              setAllCheck(false);
-            }}
-          >
+          <button className={`${color} bg-red-500`} onClick={onSelectedDelete}>
             一括削除
           </button>
         )}
       </div>
-
+      1
       {todoList.length !== 0 && (
         <div className="flex justify-center my-5">
           <table className="table-auto border-collapse border border-slate-400">
@@ -104,8 +101,7 @@ const Practice5 = () => {
                   todoList.map((todo, index) => (
                     <tr>
                       <td className="table-auto border-collapse border border-slate-400">
-                        <Input
-                          type="checkbox"
+                        <Checkbox
                           styles="flex justify-start"
                           checked={checkList[index]}
                           onChange={(event) => {
@@ -129,12 +125,10 @@ const Practice5 = () => {
                       <td className="table-auto border-collapse border border-slate-400">
                         <button
                           onClick={() => {
-                            console.log(index);
                             const nextCheck = [...checkList];
                             nextCheck.splice(index, 1);
                             const nextTodo = [...todoList];
                             nextTodo.splice(index, 1);
-                            console.log(nextTodo);
                             setCheckList(nextCheck);
                             setTodoList(nextTodo);
                           }}
