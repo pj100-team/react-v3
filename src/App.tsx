@@ -1,8 +1,8 @@
 import "./App.css";
-import AddressSearch from "./components/AddressSearch";
+import Practice5 from "./components/Practice5";
 
 function App() {
-  return <AddressSearch />;
+  return <Practice5 />;
 }
 
 export default App;

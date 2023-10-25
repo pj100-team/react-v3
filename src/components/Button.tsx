@@ -1,6 +1,6 @@
 interface Props {
   buttonName: string;
-  backGroundColor: "red" | "green" | "yellow";
+  backGroundColor: "red" | "green" | "yellow" | "gray";
   onClick: () => void;
 }
 const Button = ({ buttonName, backGroundColor, onClick }: Props) => {
@@ -14,6 +14,9 @@ const Button = ({ buttonName, backGroundColor, onClick }: Props) => {
       break;
     case "green":
       color = "bg-[#86efac]";
+      break;
+    case "gray":
+      color = "bg-slate-400";
       break;
   }
   return (

@@ -20,7 +20,7 @@ const useFetchData = () => {
    const fetchAddressData = useCallback(
       async(zipCode:String) =>{ 
         try{
-          const res = await fetch(url + `?zipcode=${zipCode}`, {
+          const res = await fetch(`${url}?zipcode=${zipCode}`, {
             method: 'GET',
           });
           if(res.status !== 200){
