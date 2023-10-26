@@ -1,11 +1,20 @@
 import "./App.css";
+import Practice1 from "./practice1";
+import Practice2 from "./practice2";
+
 
 function App() {
 	return (
+		
 		<>
-			<p className="text-center">チュートリアル</p>
+			<header>React-v3</header>
+			<div>
+				<Practice1/>
+				<Practice2/>
+			</div>
 		</>
 	);
 }
+
 
 export default App;

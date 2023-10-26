@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+header{
+  background-color: #8d8d8d;
+  text-align: center;
+  color: whitesmoke;
+  height: 40px;
+  font-size: 23px;
+}
+
+.button{
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.checkbox{
+  width: 100%; 
+  display:flex;
+  justify-content: center;
+  margin: auto;
+  /* position: 40%, 20%; */
+}
