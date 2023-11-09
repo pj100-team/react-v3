@@ -1,21 +1,15 @@
-import React from 'react'
-import Practice1 from './Components/Practice1'
-import styled from 'styled-components';
-import Practice2 from './Components/Practice2'
+import "./App.css";
+import { Practice4 } from "./Components/templates/Practice4";
 
-const onClickName=()=>{
-	console.log('きむら');
-  };
-
-  const Style = styled.p`
-  color:${(props)=>props.color};
- `;
-
-
-  const App = () => {
-  return (
-    <Practice2 />
-    )
+function App() {
+	return (
+		<>
+			<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
+				React-v3
+			</header>
+			<Practice4 />
+		</>
+	);
 }
 
 export default App
