@@ -1,4 +1,6 @@
 import "./App.css";
+import { Practice2 } from "./Components/templates/Practice2";
+import { Practice3 } from "./Components/templates/Practice3";
 import { Practice4 } from "./Components/templates/Practice4";
 
 function App() {
@@ -12,4 +14,4 @@ function App() {
 	);
 }
 
-export default App
+export default App;
