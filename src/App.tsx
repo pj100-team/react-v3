@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import { Group } from "./components/templates/group";
 
@@ -29,6 +30,12 @@ function App() {
 	const min = 0;
 	const max = attendees.length - 1;
 	const manageNumber: Array<number> = [];
+	const [result, setResult] = useState<resultArray>({
+		firstArray: [],
+		secondArray: [],
+		thirdArray: [],
+		forthArray: [],
+	});
 
 	//ランダム変数設定
 	for (let i = min; i <= max; i++) {
@@ -47,12 +54,6 @@ function App() {
 		const array2: Array<string> = [];
 		const array3: Array<string> = [];
 		const array4: Array<string> = [];
-		let result: resultArray = {
-			firstArray: [],
-			secondArray: [],
-			thirdArray: [],
-			forthArray: [],
-		};
 		manageNumber.forEach((item) => {
 			if (array1.length <= 3) {
 				array1.push(array[item]);
@@ -63,35 +64,45 @@ function App() {
 			} else {
 				array4.push(array[item]);
 			}
-			result = {
+			setResult({
 				firstArray: array1,
 				secondArray: array2,
 				thirdArray: array3,
 				forthArray: array4,
-			};
+			});
 		});
 		return result;
 	};
 
 	return (
-		<div className="flex justify-center gap-10 mt-10">
-			<div className="flex">
-				<div>
-					<Group groupAArray={makeGroups(attendees).firstArray} />
-				</div>
-				<div>
-					<Group groupAArray={makeGroups(attendees).secondArray} />
-				</div>
-			</div>
-			<div>
-				<div className="flex mt-[120px]">
-					<Group groupAArray={makeGroups(attendees).thirdArray} />
-				</div>
+		<>
+			<div className="flex justify-center gap-10 mt-10">
 				<div className="flex">
-					<Group groupAArray={makeGroups(attendees).forthArray} />
+					<div>
+						<Group groupArray={result.firstArray} />
+					</div>
+					<div>
+						<Group groupArray={result.secondArray} />
+					</div>
+				</div>
+				<div>
+					<div className="flex mt-[120px]">
+						<Group groupArray={result.thirdArray} />
+					</div>
+					<div className="flex">
+						<Group groupArray={result.forthArray} />
+					</div>
 				</div>
 			</div>
-		</div>
+			<button
+				className="mt-10 block mx-auto border border-gray-900 p-[10px] rounded"
+				onClick={() => {
+					makeGroups(attendees);
+				}}
+			>
+				席替え
+			</button>
+		</>
 	);
 }
 

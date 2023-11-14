@@ -1,11 +1,11 @@
 type Props = {
-	groupAArray: Array<string>;
+	groupArray: Array<string>;
 };
 
-export const Group = ({ groupAArray }: Props) => {
+export const Group = ({ groupArray }: Props) => {
 	return (
 		<>
-			{groupAArray.map((item, index) => {
+			{groupArray.map((item, index) => {
 				return (
 					<div
 						key={index}
