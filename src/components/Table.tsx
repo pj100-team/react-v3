@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const StyledTable = styled.table`
@@ -15,9 +16,12 @@ const StyledTh = styled.th`
 
 const Table = () => {
   const dataArray = [
-    { date: "2023/11/29", todo: "掃除", delete: "削除" },
-    { date: "2023/11/30", todo: "洗濯", delete: "削除" },
+    { date: "2023/11/29", todo: "掃除"},
+    { date: "2023/11/30", todo: "洗濯"},
   ];
+// for(i=0;i<date.length; i++){
+//     dataArray[date] = date[i]
+// }
   return (
     <StyledTable>
       <StyledThead>
@@ -38,7 +42,7 @@ const Table = () => {
             </td>
             <td>{item.date}</td>
             <td>{item.todo}</td>
-            <td>{item.delete}</td>
+            <td><button>削除</button></td>
           </tr>
         ))}
       </tbody>

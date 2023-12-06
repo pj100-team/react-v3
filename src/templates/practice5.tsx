@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Table from "../components/Table";
+import { useEffect, useState } from "react";
 
 const StyledInput = styled.input`
   border: 2px solid;
@@ -7,7 +8,6 @@ const StyledInput = styled.input`
   border-radius: 5px;
   width: 250px;
   height: 35px;
-
 `;
 const StyledButton = styled.button`
   background-color: #94a3b8;
@@ -16,7 +16,7 @@ const StyledButton = styled.button`
   width: 100px;
   height: 40px;
   font-size: 1.5rem;
-  margin:5px;
+  margin: 5px;
 `;
 const StyledText = styled.p`
   text-align: center;
@@ -27,13 +27,40 @@ const CenteredContainer = styled.div`
   margin: 10px;
 `;
 
+const StyledDeleteButton = styled.button`
+  background-color: red;
+  border-radius: 5px;
+  color: #f9fafb;
+`;
 const ToDoList = () => {
+  const [date, setDate] = useState("");
+  const [dateList, setdateList] = useState<string[]>([]);
+console.log(date)
+  const getTodoDate = () => {
+    setInterval(() => {
+      let d = new Date();
+      let year = d.getFullYear();
+      let month = d.getMonth() + 1;
+      let day = d.getDate();
+      setDate(year + "/" + month + "/" + day);
+    }); 
+    if(date==="")return
+    else if (dateList.length) {
+      setdateList([...dateList, date]);
+    } else {
+      setdateList([date]);
+    }
+
+    console.log(dateList);
+  };
+
   return (
     <>
       <CenteredContainer>
         <StyledText>TODOList</StyledText>
         <StyledInput />
-        <StyledButton>追加</StyledButton>
+        <StyledButton onClick={getTodoDate}>追加</StyledButton>
+        <StyledDeleteButton>一括削除</StyledDeleteButton>
         <Table />
       </CenteredContainer>
     </>
