@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+interface Props{
+    checkedValue: string[] ,
+    setCheckedValue: React.Dispatch<React.SetStateAction<string[]>>
+}
 const StyledTable = styled.table`
   border: solid 2px;
   margin: auto;
@@ -14,7 +18,7 @@ const StyledTh = styled.th`
   color: #f9fafb;
 `;
 
-const Table = () => {
+const Table = ({checkedValue, setCheckedValue}:Props) => {
   const dataArray = [
     { date: "2023/11/29", todo: "掃除"},
     { date: "2023/11/30", todo: "洗濯"},
@@ -38,7 +42,7 @@ const Table = () => {
         {dataArray.map((item, index) => (
           <tr key={index}>
             <td>
-              <input type="checkbox" />
+              <input type="checkbox" checked={checkedValue.includes("あ")} onChange={()=>{setCheckedValue([...checkedValue, ])}}/>
             </td>
             <td>{item.date}</td>
             <td>{item.todo}</td>

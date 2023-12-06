@@ -33,25 +33,26 @@ const StyledDeleteButton = styled.button`
   color: #f9fafb;
 `;
 const ToDoList = () => {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState("あ");
   const [dateList, setdateList] = useState<string[]>([]);
-console.log(date)
-  const getTodoDate = () => {
+  const [checkedValue, setCheckedValue] = useState<string[]>([]);
+  console.log(date);
+  useEffect(() => {
     setInterval(() => {
       let d = new Date();
       let year = d.getFullYear();
       let month = d.getMonth() + 1;
       let day = d.getDate();
       setDate(year + "/" + month + "/" + day);
-    }); 
-    if(date==="")return
-    else if (dateList.length) {
+    });
+    console.log(date);
+  }, []);
+  const getTodoDate = () => {
+    if (dateList.length !== 0) {
       setdateList([...dateList, date]);
-    } else {
+    } else if (dateList.length === 0){
       setdateList([date]);
     }
-
-    console.log(dateList);
   };
 
   return (
@@ -61,7 +62,7 @@ console.log(date)
         <StyledInput />
         <StyledButton onClick={getTodoDate}>追加</StyledButton>
         <StyledDeleteButton>一括削除</StyledDeleteButton>
-        <Table />
+        <Table checkedValue={checkedValue} setCheckedValue={setCheckedValue} />
       </CenteredContainer>
     </>
   );
