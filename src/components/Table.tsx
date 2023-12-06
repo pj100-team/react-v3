@@ -1,9 +1,15 @@
+import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-interface Props{
-    checkedValue: string[] ,
-    setCheckedValue: React.Dispatch<React.SetStateAction<string[]>>
+interface Props {
+  checkedValue: string[];
+  setCheckedValue: React.Dispatch<React.SetStateAction<string[]>>;
+  dataArray: {
+    date: string;
+    todo: string;
+  }[];
+  todo: string;
 }
 const StyledTable = styled.table`
   border: solid 2px;
@@ -18,20 +24,44 @@ const StyledTh = styled.th`
   color: #f9fafb;
 `;
 
-const Table = ({checkedValue, setCheckedValue}:Props) => {
-  const dataArray = [
-    { date: "2023/11/29", todo: "掃除"},
-    { date: "2023/11/30", todo: "洗濯"},
-  ];
-// for(i=0;i<date.length; i++){
-//     dataArray[date] = date[i]
-// }
+const Table = ({ checkedValue, setCheckedValue, dataArray, todo }: Props) => {
+
+    const uuid = Math.random()
+    
+
+  const ManageCheckbox = (uuid: number) => {
+    console.log(uuid)
+    console.log(dataArray)
+    if (checkedValue.includes(dataArray[uuid].todo)) {
+      setCheckedValue(
+        checkedValue.filter((item) => item !== dataArray[uuid].todo)
+      );
+    } else {
+      if (checkedValue.length !== 0) {
+        setCheckedValue([...checkedValue, dataArray[uuid].todo]);
+      } else {
+        setCheckedValue([todo]);
+      }
+    }
+  }; //なぜか最初に１つ目のチェックボックスを押した時、indexが末尾になってしまっている
+
+  const allSelect = () => {
+    console.log("全選択したい");
+  };
+
+
+  
+  
+  
+ 
+
+  
   return (
     <StyledTable>
       <StyledThead>
         <tr>
           <StyledTh>
-            <input type="checkbox" />
+            <input type="checkbox" onChange={allSelect} />
           </StyledTh>
           <StyledTh>日付</StyledTh>
           <StyledTh>TODO</StyledTh>
@@ -39,14 +69,23 @@ const Table = ({checkedValue, setCheckedValue}:Props) => {
         </tr>
       </StyledThead>
       <tbody>
-        {dataArray.map((item, index) => (
-          <tr key={index}>
+        {dataArray.map((item, uuid) => (
+          <tr key={uuid}>
             <td>
-              <input type="checkbox" checked={checkedValue.includes("あ")} onChange={()=>{setCheckedValue([...checkedValue, ])}}/>
+              <input
+                type="checkbox"
+                name={String(uuid)}
+                onChange={() => {
+                  ManageCheckbox(uuid);
+                }}
+                // checked={checked}
+              />
             </td>
             <td>{item.date}</td>
             <td>{item.todo}</td>
-            <td><button>削除</button></td>
+            <td>
+              <button>削除</button>
+            </td>
           </tr>
         ))}
       </tbody>

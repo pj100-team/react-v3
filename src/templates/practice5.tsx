@@ -32,11 +32,17 @@ const StyledDeleteButton = styled.button`
   border-radius: 5px;
   color: #f9fafb;
 `;
+
 const ToDoList = () => {
-  const [date, setDate] = useState("あ");
+  const [date, setDate] = useState("");
   const [dateList, setdateList] = useState<string[]>([]);
+  const [todo, setTodo] = useState<string>("");
   const [checkedValue, setCheckedValue] = useState<string[]>([]);
-  console.log(date);
+  const [dataArray, setDataArray] = useState<{ date: string; todo: string }[]>(
+    []
+  );
+//   const [checked, setCheed] = useState<boolean[]>([])
+
   useEffect(() => {
     setInterval(() => {
       let d = new Date();
@@ -50,19 +56,43 @@ const ToDoList = () => {
   const getTodoDate = () => {
     if (dateList.length !== 0) {
       setdateList([...dateList, date]);
-    } else if (dateList.length === 0){
+    } else if (dateList.length === 0) {
       setdateList([date]);
     }
   };
+  const AddTask = () => {
+    if (dataArray.length !== 0) {
+      setDataArray([...dataArray, { date: date, todo: todo }]);
+    } else {
+      setDataArray([{ date: date, todo: todo }]);
+    }
+  };
 
+  console.log(todo);
   return (
     <>
       <CenteredContainer>
         <StyledText>TODOList</StyledText>
-        <StyledInput />
-        <StyledButton onClick={getTodoDate}>追加</StyledButton>
+        <StyledInput
+          onChange={(e) => {
+            setTodo(e.target.value);
+          }}
+        />
+        <StyledButton
+          onClick={() => {
+            getTodoDate();
+            AddTask();
+          }}
+        >
+          追加
+        </StyledButton>
         <StyledDeleteButton>一括削除</StyledDeleteButton>
-        <Table checkedValue={checkedValue} setCheckedValue={setCheckedValue} />
+        <Table
+          checkedValue={checkedValue}
+          setCheckedValue={setCheckedValue}
+          dataArray={dataArray}
+          todo ={todo}
+        />
       </CenteredContainer>
     </>
   );
