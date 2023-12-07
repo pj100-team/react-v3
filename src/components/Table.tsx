@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -9,7 +7,14 @@ interface Props {
     date: string;
     todo: string;
   }[];
-  todo: string;
+  setDataArray: React.Dispatch<
+    React.SetStateAction<
+      {
+        date: string;
+        todo: string;
+      }[]
+    >
+  >;
 }
 const StyledTable = styled.table`
   border: solid 2px;
@@ -24,38 +29,41 @@ const StyledTh = styled.th`
   color: #f9fafb;
 `;
 
-const Table = ({ checkedValue, setCheckedValue, dataArray, todo }: Props) => {
-
-    const uuid = Math.random()
-    
-
-  const ManageCheckbox = (uuid: number) => {
-    console.log(uuid)
-    console.log(dataArray)
-    if (checkedValue.includes(dataArray[uuid].todo)) {
+const Table = ({
+  checkedValue,
+  setCheckedValue,
+  dataArray,
+  setDataArray,
+}: Props) => {
+  const ManageCheckbox = (index: number) => {
+    if (checkedValue.includes(dataArray[index].todo)) {
       setCheckedValue(
-        checkedValue.filter((item) => item !== dataArray[uuid].todo)
+        checkedValue.filter((item) => item !== dataArray[index].todo)
       );
     } else {
       if (checkedValue.length !== 0) {
-        setCheckedValue([...checkedValue, dataArray[uuid].todo]);
+        setCheckedValue([...checkedValue, dataArray[index].todo]);
       } else {
-        setCheckedValue([todo]);
+        setCheckedValue([dataArray[index].todo]);
       }
     }
-  }; //なぜか最初に１つ目のチェックボックスを押した時、indexが末尾になってしまっている
-
-  const allSelect = () => {
-    console.log("全選択したい");
   };
 
+  const allSelect = () => {
+    const allCheckedValue = dataArray.map((item) => {
+      return item.todo;
+    });
+    setCheckedValue(allCheckedValue);
+  };
+  const deleteTask = (index: number) => {
+    setDataArray(dataArray.filter((item) => item !== dataArray[index]));
+    if (checkedValue.includes(dataArray[index].todo)) {
+      setCheckedValue(
+        checkedValue.filter((item) => item !== dataArray[index].todo)
+      );
+    }
+  };
 
-  
-  
-  
- 
-
-  
   return (
     <StyledTable>
       <StyledThead>
@@ -69,22 +77,22 @@ const Table = ({ checkedValue, setCheckedValue, dataArray, todo }: Props) => {
         </tr>
       </StyledThead>
       <tbody>
-        {dataArray.map((item, uuid) => (
-          <tr key={uuid}>
+        {dataArray.map((item, index) => (
+          <tr key={index}>
             <td>
               <input
                 type="checkbox"
-                name={String(uuid)}
+                name={String(index)}
                 onChange={() => {
-                  ManageCheckbox(uuid);
+                  ManageCheckbox(index);
                 }}
-                // checked={checked}
+                checked={checkedValue.includes(item.todo)}
               />
             </td>
             <td>{item.date}</td>
             <td>{item.todo}</td>
             <td>
-              <button>削除</button>
+              <button onClick={() => deleteTask(index)}>削除</button>
             </td>
           </tr>
         ))}

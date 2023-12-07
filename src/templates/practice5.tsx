@@ -41,7 +41,8 @@ const ToDoList = () => {
   const [dataArray, setDataArray] = useState<{ date: string; todo: string }[]>(
     []
   );
-//   const [checked, setCheed] = useState<boolean[]>([])
+  const [checked, setChecked] = useState<boolean>(false);
+  const [checkList, setCheckedList] = useState<boolean[]>([]);
 
   useEffect(() => {
     setInterval(() => {
@@ -51,7 +52,6 @@ const ToDoList = () => {
       let day = d.getDate();
       setDate(year + "/" + month + "/" + day);
     });
-    console.log(date);
   }, []);
   const getTodoDate = () => {
     if (dateList.length !== 0) {
@@ -68,7 +68,22 @@ const ToDoList = () => {
     }
   };
 
-  console.log(todo);
+  const handleDelete = () => {
+    let newDataArray: { date: string; todo: string }[] = [];
+    for (let i = 0; i < dataArray.length; i++) {
+      if (checkedValue.includes(dataArray[i].todo)) {
+      } else {
+        if (newDataArray.length !== 0) {
+          newDataArray = [...newDataArray, dataArray[i]];
+        } else {
+          newDataArray = [dataArray[i]];
+        }
+      }
+    }
+    setDataArray(newDataArray);
+    setCheckedValue([]);
+  };
+
   return (
     <>
       <CenteredContainer>
@@ -86,12 +101,12 @@ const ToDoList = () => {
         >
           追加
         </StyledButton>
-        <StyledDeleteButton>一括削除</StyledDeleteButton>
+        <StyledDeleteButton onClick={handleDelete}>一括削除</StyledDeleteButton>
         <Table
           checkedValue={checkedValue}
           setCheckedValue={setCheckedValue}
           dataArray={dataArray}
-          todo ={todo}
+          setDataArray={setDataArray}
         />
       </CenteredContainer>
     </>
