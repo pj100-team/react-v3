@@ -7,7 +7,7 @@ const StyledInput = styled.input`
   color: #94a3b8;
   border-radius: 5px;
   width: 250px;
-  height: 35px;
+  height: 40px;
 `;
 const StyledButton = styled.button`
   background-color: #94a3b8;
@@ -16,22 +16,19 @@ const StyledButton = styled.button`
   width: 100px;
   height: 40px;
   font-size: 1.5rem;
-  margin: 5px;
+  margin-left: 30px;
 `;
 const StyledText = styled.p`
   text-align: center;
   font-size: 2rem;
+  margin: 1rem;
 `;
 const CenteredContainer = styled.div`
   text-align: center;
   margin: 10px;
 `;
 
-const StyledDeleteButton = styled.button`
-  background-color: red;
-  border-radius: 5px;
-  color: #f9fafb;
-`;
+
 
 const ToDoList = () => {
   const [date, setDate] = useState("");
@@ -41,8 +38,6 @@ const ToDoList = () => {
   const [dataArray, setDataArray] = useState<{ date: string; todo: string }[]>(
     []
   );
-  const [checked, setChecked] = useState<boolean>(false);
-  const [checkList, setCheckedList] = useState<boolean[]>([]);
 
   useEffect(() => {
     setInterval(() => {
@@ -68,21 +63,6 @@ const ToDoList = () => {
     }
   };
 
-  const handleDelete = () => {
-    let newDataArray: { date: string; todo: string }[] = [];
-    for (let i = 0; i < dataArray.length; i++) {
-      if (checkedValue.includes(dataArray[i].todo)) {
-      } else {
-        if (newDataArray.length !== 0) {
-          newDataArray = [...newDataArray, dataArray[i]];
-        } else {
-          newDataArray = [dataArray[i]];
-        }
-      }
-    }
-    setDataArray(newDataArray);
-    setCheckedValue([]);
-  };
 
   return (
     <>
@@ -101,14 +81,13 @@ const ToDoList = () => {
         >
           追加
         </StyledButton>
-        <StyledDeleteButton onClick={handleDelete}>一括削除</StyledDeleteButton>
+        </CenteredContainer>
         <Table
           checkedValue={checkedValue}
           setCheckedValue={setCheckedValue}
           dataArray={dataArray}
           setDataArray={setDataArray}
         />
-      </CenteredContainer>
     </>
   );
 };
