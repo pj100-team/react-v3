@@ -15,13 +15,13 @@ const StyledButton = styled.button`
   border-radius: 5px;
   width: 100px;
   height: 40px;
-  font-size: 1.5rem;
+  font-size: 24px;
   margin-left: 30px;
 `;
 const StyledText = styled.p`
   text-align: center;
-  font-size: 2rem;
-  margin: 1rem;
+  font-size: 32px;
+  margin: 16px;
 `;
 const CenteredContainer = styled.div`
   text-align: center;
@@ -57,12 +57,12 @@ const ToDoList = () => {
   };
   const AddTask = () => {
     if (dataArray.length !== 0) {
-      setDataArray([...dataArray, { date: date, todo: todo }]);
+      setDataArray([...dataArray, { date, todo }]);
     } else {
-      setDataArray([{ date: date, todo: todo }]);
+      setDataArray([{ date, todo }]);
     }
   };
-
+console.log(dataArray)
 
   return (
     <>
@@ -82,7 +82,7 @@ const ToDoList = () => {
           追加
         </StyledButton>
         </CenteredContainer>
-        <Table
+        <Table 
           checkedValue={checkedValue}
           setCheckedValue={setCheckedValue}
           dataArray={dataArray}

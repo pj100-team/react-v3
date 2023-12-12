@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -17,14 +18,14 @@ interface Props {
   >;
 }
 const StyledTable = styled.table`
-  border: solid 2px;
   margin: auto;
   width: 75%;
-  font-size: 1.5rem;
+  font-size: 24px;
   margin-top: 10px;
   position: relative;
   text-align: center;
   width: 100%;
+  border: solid 2px;
 `;
 const StyledThead = styled.thead``;
 const StyledTh = styled.th`
@@ -54,6 +55,8 @@ const Table = ({
   dataArray,
   setDataArray,
 }: Props) => {
+  const [checked, setChecked] = useState(false);
+
   const ManageCheckbox = (index: number) => {
     if (checkedValue.includes(dataArray[index].todo)) {
       setCheckedValue(
@@ -69,10 +72,12 @@ const Table = ({
   };
 
   const allSelect = () => {
-    const allCheckedValue = dataArray.map((item) => {
-      return item.todo;
-    });
-    setCheckedValue(allCheckedValue);
+    if (checked == false) {
+      const allCheckedValue = dataArray.map((item) => {
+        return item.todo;
+      });
+      setCheckedValue(allCheckedValue);
+    }
   };
   const deleteTask = (index: number) => {
     setDataArray(dataArray.filter((item) => item !== dataArray[index]));
@@ -96,6 +101,7 @@ const Table = ({
     }
     setDataArray(newDataArray);
     setCheckedValue([]);
+    setChecked(false);
   };
 
   return (
@@ -107,7 +113,14 @@ const Table = ({
         <StyledThead>
           <tr>
             <StyledTh>
-              <input type="checkbox" onChange={allSelect} />
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={(e) => {
+                  setChecked(true);
+                  allSelect();
+                }}
+              />
             </StyledTh>
             <StyledTh>登録日</StyledTh>
             <StyledTh>TODO</StyledTh>
