@@ -7,7 +7,7 @@ const StyledInput = styled.input`
   color: #94a3b8;
   border-radius: 5px;
   width: 250px;
-  height: 35px;
+  height: 40px;
 `;
 const StyledButton = styled.button`
   background-color: #94a3b8;
@@ -15,54 +15,79 @@ const StyledButton = styled.button`
   border-radius: 5px;
   width: 100px;
   height: 40px;
-  font-size: 1.5rem;
-  margin: 5px;
+  font-size: 24px;
+  margin-left: 30px;
 `;
 const StyledText = styled.p`
   text-align: center;
-  font-size: 2rem;
+  font-size: 32px;
+  margin: 16px;
 `;
 const CenteredContainer = styled.div`
   text-align: center;
   margin: 10px;
 `;
 
-const StyledDeleteButton = styled.button`
-  background-color: red;
-  border-radius: 5px;
-  color: #f9fafb;
-`;
+
+
 const ToDoList = () => {
   const [date, setDate] = useState("");
   const [dateList, setdateList] = useState<string[]>([]);
-console.log(date)
-  const getTodoDate = () => {
+  const [todo, setTodo] = useState<string>("");
+  const [checkedValue, setCheckedValue] = useState<string[]>([]);
+  const [dataArray, setDataArray] = useState<{ date: string; todo: string }[]>(
+    []
+  );
+
+  useEffect(() => {
     setInterval(() => {
       let d = new Date();
       let year = d.getFullYear();
       let month = d.getMonth() + 1;
       let day = d.getDate();
       setDate(year + "/" + month + "/" + day);
-    }); 
-    if(date==="")return
-    else if (dateList.length) {
+    });
+  }, []);
+  const getTodoDate = () => {
+    if (dateList.length !== 0) {
       setdateList([...dateList, date]);
-    } else {
+    } else if (dateList.length === 0) {
       setdateList([date]);
     }
-
-    console.log(dateList);
+  };
+  const AddTask = () => {
+    if (dataArray.length !== 0) {
+      setDataArray([...dataArray, { date, todo }]);
+    } else {
+      setDataArray([{ date, todo }]);
+    }
   };
 
   return (
     <>
       <CenteredContainer>
         <StyledText>TODOList</StyledText>
-        <StyledInput />
-        <StyledButton onClick={getTodoDate}>追加</StyledButton>
-        <StyledDeleteButton>一括削除</StyledDeleteButton>
-        <Table />
-      </CenteredContainer>
+        <StyledInput
+          onChange={(e) => {
+            setTodo(e.target.value);
+          }}
+        />
+        <StyledButton
+          onClick={() => {
+            getTodoDate();
+            AddTask();
+          }}
+        >
+          追加
+        </StyledButton>
+        </CenteredContainer>
+        {dataArray.length ? 
+        <Table 
+          checkedValue={checkedValue}
+          setCheckedValue={setCheckedValue}
+          dataArray={dataArray}
+          setDataArray={setDataArray}
+        /> : <></>}
     </>
   );
 };
