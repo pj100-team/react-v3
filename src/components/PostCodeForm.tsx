@@ -9,18 +9,6 @@ type Inputs = {
   Prefecture: string;
   CityTownVillage: string;
 };
-type AddressType = {
-  message: null;
-  results: {
-    address1: string;
-    address2: string;
-    address3: string;
-    kana1: string;
-    kana2: string;
-    prefcode: string;
-    zipcode: string;
-  }[];
-};
 interface Props {
   setAd: React.Dispatch<React.SetStateAction<boolean>>;
   setPrefecture: React.Dispatch<React.SetStateAction<string>>;
@@ -28,6 +16,7 @@ interface Props {
   register: UseFormRegister<Inputs>;
   control: Control<Inputs, any>;
   errors: FieldErrors<Inputs>;
+  getAddress: (PostCode: number) => Promise<void>;
 }
 
 const PostCodeForm = ({
@@ -37,30 +26,9 @@ const PostCodeForm = ({
   register,
   control,
   errors,
+  getAddress
 }: Props) => {
   const PostCode = useWatch({ control, name: "PostCode" });
-
-  const fetchAddress = (PostCode: number): Promise<AddressType> => {
-    return new Promise<AddressType>((resolve, reject) => {
-      fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${PostCode}`)
-        .then((response) => response.json())
-        .then((data) => resolve(data))
-        .then((error) => reject(error));
-    });
-  };
-  const getAddress = async (PostCode: number) => {
-    if (String(PostCode).length === 7) {
-      const fetchdata = await fetchAddress(PostCode);
-      console.log(fetchdata);
-      if (fetchdata.results === null) {
-        console.log("該当する住所が存在しません");
-        setAd(false);
-      } else {
-        setPrefecture(fetchdata.results[0].address1);
-        setCity(fetchdata.results[0].address2);
-      }
-    }
-  };
 
   return (
     <div className="container mx-auto p-[20px] ">

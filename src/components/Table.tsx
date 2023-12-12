@@ -58,8 +58,8 @@ const StyledP = styled.p`
   color: #f9fafb;
 `;
 const StyledTd = styled.td`
-border: solid 2px;
-`
+  border: solid 2px;
+`;
 
 const Table = ({
   checkedValue,
@@ -67,7 +67,7 @@ const Table = ({
   dataArray,
   setDataArray,
 }: Props) => {
-  const [checked, setChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const ManageCheckbox = (index: number) => {
     if (checkedValue.includes(dataArray[index].todo)) {
@@ -84,7 +84,7 @@ const Table = ({
   };
 
   const allSelect = () => {
-    if (checked == false) {
+    if (isChecked == false) {
       const allCheckedValue = dataArray.map((item) => {
         return item.todo;
       });
@@ -113,7 +113,7 @@ const Table = ({
     }
     setDataArray(newDataArray);
     setCheckedValue([]);
-    setChecked(false);
+    setIsChecked(false);
   };
 
   return (
@@ -127,9 +127,9 @@ const Table = ({
             <StyledTh>
               <input
                 type="checkbox"
-                checked={checked}
+                checked={isChecked}
                 onChange={(e) => {
-                  setChecked(true);
+                  setIsChecked(true);
                   allSelect();
                 }}
               />

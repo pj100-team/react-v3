@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Table from "../components/Table";
 import { useEffect, useState } from "react";
+import { useTodoList } from "../hooks/useTodoList";
 
 const StyledInput = styled.input`
   border: 2px solid;
@@ -31,37 +32,8 @@ const CenteredContainer = styled.div`
 
 
 const ToDoList = () => {
-  const [date, setDate] = useState("");
-  const [dateList, setdateList] = useState<string[]>([]);
-  const [todo, setTodo] = useState<string>("");
-  const [checkedValue, setCheckedValue] = useState<string[]>([]);
-  const [dataArray, setDataArray] = useState<{ date: string; todo: string }[]>(
-    []
-  );
+const {setTodo, getTodoDate, AddTask, dataArray, checkedValue, setCheckedValue, setDataArray} = useTodoList()
 
-  useEffect(() => {
-    setInterval(() => {
-      let d = new Date();
-      let year = d.getFullYear();
-      let month = d.getMonth() + 1;
-      let day = d.getDate();
-      setDate(year + "/" + month + "/" + day);
-    });
-  }, []);
-  const getTodoDate = () => {
-    if (dateList.length !== 0) {
-      setdateList([...dateList, date]);
-    } else if (dateList.length === 0) {
-      setdateList([date]);
-    }
-  };
-  const AddTask = () => {
-    if (dataArray.length !== 0) {
-      setDataArray([...dataArray, { date, todo }]);
-    } else {
-      setDataArray([{ date, todo }]);
-    }
-  };
 
   return (
     <>
