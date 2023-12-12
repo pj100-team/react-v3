@@ -31,6 +31,7 @@ export const useTodoList = () => {
     } else {
       setDataArray([{ date, todo }]);
     }
+    
   };
   return {setTodo, getTodoDate, AddTask, dataArray, checkedValue, setCheckedValue, setDataArray};
 };

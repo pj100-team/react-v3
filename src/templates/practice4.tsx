@@ -13,7 +13,7 @@ type Inputs = {
 };
 
 const AddressSearch = () => {
-  const {getAddress, prefecture, city, ad, setPrefecture, setAd, setCity } = useAddressSearch();
+  const {getAddress, prefecture, city, isAd, setPrefecture, setIsAd, setCity } = useAddressSearch();
   const {
     register,
     handleSubmit,
@@ -36,7 +36,7 @@ const AddressSearch = () => {
           register={register}
           control={control}
           errors={errors}
-          setAd={setAd}
+          setAd={setIsAd}
           setPrefecture={setPrefecture}
           setCity={setCity}
           getAddress={getAddress}
@@ -45,7 +45,7 @@ const AddressSearch = () => {
         <CityTownVillageForm city={city} register={register} errors={errors} />
         <SubmitButton PostCode={PostCode} />
 
-        {ad === false && (
+        {isAd === false && (
           <p className="text-red-500">該当する住所が存在しません</p>
         )}
       </form>

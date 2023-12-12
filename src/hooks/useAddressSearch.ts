@@ -14,7 +14,7 @@ type AddressType = {
 export const useAddressSearch = () => {
   const [prefecture, setPrefecture] = useState("");
   const [city, setCity] = useState("");
-  const [ad, setAd] = useState(true);
+  const [isAd, setIsAd] = useState(true);
 
   const fetchAddress = (PostCode: number): Promise<AddressType> => {
     return new Promise<AddressType>((resolve, reject) => {
@@ -27,10 +27,8 @@ export const useAddressSearch = () => {
   const getAddress = async (PostCode: number) => {
     if (String(PostCode).length === 7) {
       const fetchdata = await fetchAddress(PostCode);
-      console.log(fetchdata);
       if (fetchdata.results === null) {
-        console.log("該当する住所が存在しません");
-        setAd(false);
+        setIsAd(false);
       } else {
         setPrefecture(fetchdata.results[0].address1);
         setCity(fetchdata.results[0].address2);
@@ -38,5 +36,5 @@ export const useAddressSearch = () => {
     }
   };
 
-  return { getAddress, prefecture, city, ad, setPrefecture, setAd, setCity };
+  return { getAddress, prefecture, city, isAd, setPrefecture, setIsAd, setCity };
 };
