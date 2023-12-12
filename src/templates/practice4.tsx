@@ -4,6 +4,7 @@ import PostCodeForm from "../components/PostCodeForm";
 import PrefectureForm from "../components/PrefectureForm";
 import CityTownVillageForm from "../components/CityTownVillageForm";
 import SubmitButton from "../components/SubmitButton";
+import { useAddressSearch } from "../hooks/useAddressSearch";
 
 type Inputs = {
   PostCode: number;
@@ -12,10 +13,7 @@ type Inputs = {
 };
 
 const AddressSearch = () => {
-  const [prefecture, setPrefecture] = useState("");
-  const [city, setCity] = useState("");
-  const [ad, setAd] = useState(true);
-
+  const {getAddress, prefecture, city, ad, setPrefecture, setAd, setCity } = useAddressSearch();
   const {
     register,
     handleSubmit,
@@ -41,6 +39,7 @@ const AddressSearch = () => {
           setAd={setAd}
           setPrefecture={setPrefecture}
           setCity={setCity}
+          getAddress={getAddress}
         />
         <PrefectureForm prefecture={prefecture} register={register} errors={errors}/>
         <CityTownVillageForm city={city} register={register} errors={errors} />
