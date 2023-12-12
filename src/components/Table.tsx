@@ -30,7 +30,7 @@ const StyledTable = styled.table`
 const StyledThead = styled.thead``;
 const StyledTh = styled.th`
   background-color: #94a3b8;
-  color: #f9fafb;
+  border: solid 2px;
 `;
 const StyledDeleteButton = styled.button`
   background-color: red;
@@ -48,6 +48,18 @@ const StyledDiv = styled.div`
   padding-top: 30px;
   margin-top: 75px;
 `;
+const StyledTbody = styled.tbody`
+  border: solid 2px;
+`;
+const StyledTr = styled.tr`
+  border: solid 2px;
+`;
+const StyledP = styled.p`
+  color: #f9fafb;
+`;
+const StyledTd = styled.td`
+border: solid 2px;
+`
 
 const Table = ({
   checkedValue,
@@ -122,15 +134,21 @@ const Table = ({
                 }}
               />
             </StyledTh>
-            <StyledTh>登録日</StyledTh>
-            <StyledTh>TODO</StyledTh>
-            <StyledTh>削除</StyledTh>
+            <StyledTh>
+              <StyledP>登録日</StyledP>
+            </StyledTh>
+            <StyledTh>
+              <StyledP>TODO</StyledP>
+            </StyledTh>
+            <StyledTh>
+              <StyledP>削除</StyledP>
+            </StyledTh>
           </tr>
         </StyledThead>
-        <tbody>
+        <StyledTbody>
           {dataArray.map((item, index) => (
-            <tr key={index}>
-              <td>
+            <StyledTr key={index}>
+              <StyledTd>
                 <input
                   type="checkbox"
                   name={String(index)}
@@ -139,15 +157,15 @@ const Table = ({
                   }}
                   checked={checkedValue.includes(item.todo)}
                 />
-              </td>
-              <td>{item.date}</td>
-              <td>{item.todo}</td>
-              <td>
+              </StyledTd>
+              <StyledTd>{item.date}</StyledTd>
+              <StyledTd>{item.todo}</StyledTd>
+              <StyledTd>
                 <button onClick={() => deleteTask(index)}>削除</button>
-              </td>
-            </tr>
+              </StyledTd>
+            </StyledTr>
           ))}
-        </tbody>
+        </StyledTbody>
       </StyledTable>
     </StyledDiv>
   );

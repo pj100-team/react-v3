@@ -62,7 +62,6 @@ const ToDoList = () => {
       setDataArray([{ date, todo }]);
     }
   };
-console.log(dataArray)
 
   return (
     <>
@@ -82,12 +81,13 @@ console.log(dataArray)
           追加
         </StyledButton>
         </CenteredContainer>
+        {dataArray.length ? 
         <Table 
           checkedValue={checkedValue}
           setCheckedValue={setCheckedValue}
           dataArray={dataArray}
           setDataArray={setDataArray}
-        />
+        /> : <></>}
     </>
   );
 };
