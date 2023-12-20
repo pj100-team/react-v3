@@ -13,7 +13,15 @@ type Inputs = {
 };
 
 const AddressSearch = () => {
-  const {getAddress, prefecture, city, isAd, setPrefecture, setIsAd, setCity } = useAddressSearch();
+  const {
+    getAddress,
+    prefecture,
+    city,
+    isAd,
+    setPrefecture,
+    setIsAd,
+    setCity,
+  } = useAddressSearch();
   const {
     register,
     handleSubmit,
@@ -41,7 +49,11 @@ const AddressSearch = () => {
           setCity={setCity}
           getAddress={getAddress}
         />
-        <PrefectureForm prefecture={prefecture} register={register} errors={errors}/>
+        <PrefectureForm
+          prefecture={prefecture}
+          register={register}
+          errors={errors}
+        />
         <CityTownVillageForm city={city} register={register} errors={errors} />
         <SubmitButton PostCode={PostCode} />
 
