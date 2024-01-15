@@ -1,8 +1,5 @@
 import "./App.css";
-import Practice1 from "./components/practice1";
-import Practice2 from "./components/practice2";
-import Practice3 from "./templates/practice3";
-import Practice4 from "./templates/practice4";
+import Practice5 from "./templates/practice5";
 
 
 function App() {
@@ -13,10 +10,7 @@ function App() {
 			</header>
 			<main className="mt-[100px]">
 				<section className="flex flex-col gap-40">
-					<Practice1 />
-					<Practice2 />
-					<Practice3 />
-					<Practice4 />
+					<Practice5 />
 					
 				</section>
 			</main>
