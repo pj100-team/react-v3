@@ -2,9 +2,9 @@ import Input from "./input";
 import { useState } from "react";
 
 export default function Practice2() {
-    const [checkbox, setCheckbox] = useState<Boolean>(false);
+    const [isCheck, setIsCheck] = useState<Boolean>(false);
     const handleChange = () => {
-        setCheckbox((onChange) => !onChange);
+        setIsCheck((prev) => !prev);
     };
     return (
         <Input
@@ -13,7 +13,7 @@ export default function Practice2() {
             style="max-w-fit mx-auto flex gap-4"
             onChange={handleChange}
         >
-            <p className={!checkbox ? "opacity-0 invisible" : ""}>
+            <p className={!isCheck ? "opacity-0 invisible" : ""}>
                 hello world!
             </p>
         </Input>

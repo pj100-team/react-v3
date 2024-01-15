@@ -3,12 +3,12 @@ import Button from "../components/button";
 import { FormEvent, useState } from "react";
 
 const Practice3: React.FC = () => {
-    const [input, setInput] = useState<string>("");
+    const [inputValue, setInputValue] = useState<string>("");
     const handleChange = (e: FormEvent<HTMLInputElement>) => {
-        setInput(e.currentTarget.value);
+        setInputValue(e.currentTarget.value);
     };
     const handleClear = () => {
-        setInput("");
+        setInputValue("");
     };
 
     return (
@@ -18,7 +18,7 @@ const Practice3: React.FC = () => {
                 name="word"
                 style="p-form__input"
                 onChange={handleChange}
-                value={input}
+                value={inputValue}
             />
             <Button
                 type="button"
