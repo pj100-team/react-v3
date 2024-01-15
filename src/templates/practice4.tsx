@@ -19,7 +19,7 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 const Practice4: React.FC = () => {
-    const [submitable, setSubmitable] = useState(true);
+    const [isSubmitable, setIsSubmitable] = useState<Boolean>(true);
     const {
         register,
         handleSubmit,
@@ -54,7 +54,7 @@ const Practice4: React.FC = () => {
     useEffect(() => {
         const zipVal = getValues("zip");
         if (!zipVal) {
-            setSubmitable(true);
+            setIsSubmitable(true);
             return;
         }
         const setAddress = async () => {
@@ -70,11 +70,11 @@ const Practice4: React.FC = () => {
                 setValue("zip", response.data.results[0].zipcode);
                 setValue("city", response.data.results[0].address2);
                 setValue("pref", response.data.results[0].address1);
-                setSubmitable(true);
+                setIsSubmitable(true);
             } catch (error) {
                 setValue("city", "");
                 setValue("pref", "");
-                setSubmitable(false);
+                setIsSubmitable(false);
             } finally {
                 trigger();
             }
@@ -145,7 +145,7 @@ const Practice4: React.FC = () => {
                         )}
                     </div>
                 </div>
-                {submitable ? (
+                {isSubmitable ? (
                     <button className="p-form__submit" type="submit">
                         送信
                     </button>
