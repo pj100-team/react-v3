@@ -6,34 +6,13 @@ export default function Practice1() {
   };
   return (
     <div className="flex justify-center mx-auto gap-10">
-      <Button
-        style={{
-          txtColor: 'text-[#f9fafb]',
-          bgColor: 'bg-[#f87171]',
-          borderColor: 'border-[#f87171]',
-        }}
-        onClick={handleClick}
-      >
+      <Button style={'text-[#f9fafb] bg-[#f87171] border-[#f87171]'} onClick={handleClick}>
         button1
       </Button>
-      <Button
-        style={{
-          txtColor: 'text-[#f9fafb]',
-          bgColor: 'bg-[#fcd34d]',
-          borderColor: 'border-[#fcd34d]',
-        }}
-        onClick={handleClick}
-      >
+      <Button style={'text-[#f9fafb] bg-[#fcd34d] border-[#fcd34d]'} onClick={handleClick}>
         button2
       </Button>
-      <Button
-        style={{
-          txtColor: 'text-[#f9fafb]',
-          bgColor: 'bg-[#86efac]',
-          borderColor: 'border-[#86efac]',
-        }}
-        onClick={handleClick}
-      >
+      <Button style={'text-[#f9fafb] bg-[#86efac] border-[#86efac]'} onClick={handleClick}>
         button3
       </Button>
     </div>

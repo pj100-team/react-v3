@@ -14,15 +14,7 @@ const Practice3: React.FC = () => {
   return (
     <div className="flex flex-col items-center gap-5">
       <Input type="text" name="word" style="p-form__input" onChange={handleChange} value={inputValue} />
-      <Button
-        type="button"
-        onClick={handleClear}
-        style={{
-          txtColor: 'text-[#f9fafb]',
-          bgColor: 'bg-[#f87171]',
-          borderColor: 'border-[#f87171]',
-        }}
-      >
+      <Button type="button" onClick={handleClear} style={'text-[#f9fafb] bg-[#f87171] border-[#f87171]'}>
         リセット
       </Button>
     </div>

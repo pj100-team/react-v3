@@ -38,7 +38,7 @@ const Practice4: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    alert('送信完了しました');
+    console.log(data);
   };
   const handleKeyDown = (e: { key: string; preventDefault: () => void }) => {
     if (e.key === 'Enter') {
@@ -46,7 +46,7 @@ const Practice4: React.FC = () => {
     }
   };
   const onError: any = (err: any) => {
-    alert(`正しく送信できませんでした。\nエラー内容を修正の上、再度送信をお願いいたします。`);
+    console.error(`正しく送信できませんでした。\nエラー内容を修正の上、再度送信をお願いいたします。`);
   };
 
   useEffect(() => {
