@@ -2,19 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
-	.practice1_btn{
-		@apply rounded-md py-[0.5em] px-[2em] text-[1rem] border-[1px] border-solid transition hover:opacity-50
+	.practice1_btn {
+		@apply rounded-md py-[0.5em] px-[2em] text-[1rem] border-[1px] border-solid transition hover:opacity-50;
 	}
-	.p-form__input{
+
+	.p-form__input {
 		@apply border border-gray-200 border-2 rounded-sm px-1;
 	}
-	.p-form__error{
-		@apply text-red-600 whitespace-nowrap absolute top-7;
-	}	
-	.p-form__submit{
-		@apply text-white bg-gray-400 rounded-lg w-fit py-2 px-8 mt-12 flex justify-center items-center transition hover:opacity-50;
-	}	
-}
 
+	.p-form__error {
+		@apply text-red-600 whitespace-nowrap absolute top-7;
+	}
+
+	.p-form__submit {
+		@apply text-white bg-gray-400 rounded-lg w-fit py-2 px-8 mt-12 flex justify-center items-center transition hover:opacity-50;
+	}
+}
