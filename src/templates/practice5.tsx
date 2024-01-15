@@ -1,40 +1,42 @@
-import { useState } from 'react'
+import { FormEvent, useState } from "react";
 import todoItem from '../components/todoItem'
-
 
 export type PropsTodo = {
 	id:number,
 	createdDate: Date,
-	task:String
+	task:string
 }
 
 const Practice5 = () => {
-
-	const sample : PropsTodo[] = [
-		// {
-		// 	id:0,
-		// 	createdDate:new Date('2023-01-01'),
-		// 	task:'sample1'
-		// },
-		// {
-		// 	id:1,
-		// 	createdDate:new Date('2023-01-03'),
-		// 	task:'sample2'
-		// },
-	]
-	const [todos, setTodos] = useState<PropsTodo[]>(sample)
-	const [input, setInput] = useState<String>('')
+	const [todos, setTodos] = useState<PropsTodo[]>([])
+	const [inputValue, setInputValue] = useState<string>('')
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setInput(e.target.value)
+		setInputValue(e.target.value)
 	}
 	const addTodoItem = () => {
-		setTodos(state => [...state,{id: state.length,task:input,createdDate:new Date()}])
-		setInput('')
+		setTodos(state => {
+			const getMaxIdNum = () => {
+				if(state.length === 0){
+					return 0
+				}
+				return Math.max.apply(null,state.map(obj => obj.id)) + 1
+			}
+			return [...state,{id: getMaxIdNum(),task:inputValue,createdDate:new Date()}]
+		})
+		setInputValue('')
 	}
 
-	const deleteTodoItem = () => {
-		console.log('削除')
+	const deleteTodoItem = (e: FormEvent<HTMLInputElement>) => {
+		const deleteId = e.currentTarget.id
+		setTodos(todos => {
+			const newTodos = todos.filter((todo) => {
+				if(todo.id.toString() !== deleteId){
+					return {...todo}
+				}
+			})
+			return newTodos
+		})
 	}
 
 	return (
@@ -57,7 +59,6 @@ const Practice5 = () => {
 					{
 						// todos.length > 0 && 
 						todos.map(todo => {
-							// return <todoItem key={todo.id} item={todo} />
 							return (
 								<tr key={todo.id}>
 									<td><input type="checkbox" name="selectFlg" id={todo.id.toString()} /></td>
@@ -67,13 +68,10 @@ const Practice5 = () => {
 								</tr>
 							)
 						})
-						
 					}
 				</tbody>
 			</table>
-
 		</>
-		
 	)
 }
 
