@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
 	.practice1_btn {
-		@apply rounded-md py-[0.5em] px-[2em] text-[1rem] border-[1px] border-solid transition hover:opacity-50
+		@apply rounded-md py-[0.5em] px-[2em] text-[1rem] border-[1px] border-solid transition hover:opacity-50;
 	}
 
 	.p-form__input {
