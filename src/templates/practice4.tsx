@@ -34,12 +34,10 @@ const Practice4: React.FC = () => {
             city: "",
         },
         resolver: yupResolver(schema),
-        // mode:'onBlur'
         mode: "onChange",
     });
 
     const onSubmit: SubmitHandler<FormData> = (data) => {
-        console.log("送信成功", data);
         alert("送信完了しました");
     };
     const handleKeyDown = (e: { key: string; preventDefault: () => void }) => {
@@ -51,7 +49,6 @@ const Practice4: React.FC = () => {
         alert(
             `正しく送信できませんでした。\nエラー内容を修正の上、再度送信をお願いいたします。`
         );
-        console.log("送信エラー", err);
     };
 
     useEffect(() => {
@@ -80,13 +77,10 @@ const Practice4: React.FC = () => {
                 setSubmitable(false);
             } finally {
                 trigger();
-                console.log("検索終了");
             }
         };
         setAddress();
     }, [getValues("zip")]);
-
-    // console.log('isDirty, dirtyFields',isDirty, dirtyFields)
 
     return (
         <div className="flex flex-col gap-5">
