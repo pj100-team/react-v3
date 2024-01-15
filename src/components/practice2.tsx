@@ -13,9 +13,7 @@ export default function Practice2() {
             style="max-w-fit mx-auto flex gap-4"
             onChange={handleChange}
         >
-            <p className={!isCheck ? "opacity-0 invisible" : ""}>
-                hello world!
-            </p>
+            <p className={isCheck ? "" : "opacity-0 invisible"}>hello world!</p>
         </Input>
     );
 }
