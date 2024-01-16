@@ -1,4 +1,4 @@
-import { FormEvent, useState, useRef } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 // import todoItem from '../components/todoItem';
 import AddTodo from '../components/addTodo';
 
@@ -12,7 +12,7 @@ export type Todo = {
 const Practice5 = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
-  const [allSelected, setAllSelected] = useState<boolean>(false);
+  const [hasSelected, setHasSelected] = useState<boolean>(false);
   // const taskText = useRef<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,8 +21,6 @@ const Practice5 = () => {
 
   const addTodoItem = () => {
     if (!inputValue) return;
-    console.log('STEP1');
-
     const newTodo: Todo = {
       id: new Date().getTime(),
       todoText: inputValue,
@@ -30,26 +28,9 @@ const Practice5 = () => {
       selected: false,
     };
     setTodos((todos) => [newTodo, ...todos]);
-
-    // setTodos((state) => {
-    // const getMaxIdNum = () => {
-    //   if (state.length === 0) {
-    //     return 0;
-    //   }
-    //   console.log('STEP2');
-    //   return (
-    //     Math.max.apply(
-    //       null,
-    //       state.map((obj) => obj.id),
-    //     ) + 1
-    //   );
-    // };
-    // return [...state, { id: getMaxIdNum(), todoText: inputValue, createdDate: new Date(), selected: false }];
-    // });
     setInputValue('');
   };
   const handleAllSelect = (isSelected: boolean) => {
-    setAllSelected(isSelected);
     if (isSelected) {
       setTodos((todos) => {
         return todos.map((todo) => {
@@ -65,11 +46,11 @@ const Practice5 = () => {
     }
   };
 
-  const deleteTodoItem = (e: FormEvent<HTMLInputElement>) => {
-    const deleteId = e.currentTarget.id;
+  const handleDelete = (targetID: number) => {
+    // const deleteId = e.currentTarget.id;
     setTodos((todos) => {
       const newTodos = todos.filter((todo) => {
-        if (todo.id.toString() !== deleteId) {
+        if (todo.id !== targetID) {
           return { ...todo };
         }
       });
@@ -77,10 +58,37 @@ const Practice5 = () => {
     });
   };
 
+  const handleAllDelete = () => {
+    setTodos((todos) => {
+      return todos.filter((todo) => {
+        if (!todo.selected) return todo;
+      });
+    });
+  };
+
+  const handleCheck = (targetID: number) => {
+    setTodos((todos) => {
+      return todos.map((todo) => {
+        if (todo.id === targetID) {
+          return { ...todo, selected: !todo.selected };
+        }
+        return todo;
+      });
+    });
+  };
+
+  useEffect(() => {
+    const isDeleteBtnDisplay = todos.some((todo) => todo.selected === true);
+    setHasSelected(isDeleteBtnDisplay);
+  });
+
   return (
     <>
       <h4 className="font-bold text-center text-sm">TODOlist</h4>
       <AddTodo clickHandler={addTodoItem} changeHandler={handleChange} todoText={inputValue} />
+      <button className={hasSelected ? '' : 'opacity-0 invisible'} onClick={handleAllDelete}>
+        一括削除
+      </button>
       {todos.length > 0 && (
         <table>
           <thead>
@@ -90,7 +98,7 @@ const Practice5 = () => {
                   type="checkbox"
                   name="select_all"
                   id="select_all"
-                  onChange={() => handleAllSelect(!allSelected)}
+                  onChange={() => handleAllSelect(!hasSelected)}
                 />
               </th>
               <th>登録日</th>
@@ -103,12 +111,17 @@ const Practice5 = () => {
               return (
                 <tr key={todo.id}>
                   <td>
-                    <input type="checkbox" name="selectFlg" checked={todo.selected} />
+                    <input
+                      type="checkbox"
+                      name="selectFlg"
+                      checked={todo.selected}
+                      onChange={() => handleCheck(todo.id)}
+                    />
                   </td>
                   <td>{todo.createdDate.toLocaleDateString()}</td>
                   <td>{todo.todoText}</td>
                   <td>
-                    <input type="button" name="deleteFlg" value="削除" onClick={deleteTodoItem} />
+                    <input type="button" name="deleteFlg" value="削除" onClick={() => handleDelete(todo.id)} />
                   </td>
                 </tr>
               );
