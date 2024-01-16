@@ -12,7 +12,7 @@ interface Props{
 
 const CityTownVillageForm = ({city, register, errors}:Props)=>{
 
-    return(
+    return( 
         <div className="p-[20px] ">
         <h2>市区町村</h2>
         <input
