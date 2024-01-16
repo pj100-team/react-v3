@@ -27,7 +27,7 @@ const Practice5 = () => {
       createdDate: new Date(),
       selected: false,
     };
-    setTodos((todos) => [newTodo, ...todos]);
+    setTodos((todos) => [...todos, newTodo]);
     setInputValue('');
   };
 
@@ -93,8 +93,8 @@ const Practice5 = () => {
       <AddTodo clickHandler={handleAdd} changeHandler={handleChange} todoText={inputValue} />
       <AllDeleteTodo hasSelectedState={hasSelected} clickHandler={handleAllDelete} />
       {todos.length > 0 && (
-        <table>
-          <thead>
+        <table className="p-table__border w-full mt-4">
+          <thead className="bg-[rgb(149,162,184)] text-white">
             <tr>
               <th>
                 <input

@@ -6,7 +6,7 @@ type PropsAddTodo = {
 
 const AddTodo: React.FC<PropsAddTodo> = ({ clickHandler, changeHandler, todoText }) => {
   return (
-    <div>
+    <div className="relative w-fit mx-auto">
       <input
         type="text"
         name="addItem"
@@ -15,7 +15,11 @@ const AddTodo: React.FC<PropsAddTodo> = ({ clickHandler, changeHandler, todoText
         value={todoText}
         onChange={changeHandler}
       />
-      <button type="button" onClick={clickHandler}>
+      <button
+        type="button"
+        onClick={clickHandler}
+        className="bg-[#95a2b8] absolute right-[-7em] top-[50%] translate-y-[-50%] rounded-md text-white px-[2em] transition hover:opacity-50"
+      >
         追加
       </button>
     </div>

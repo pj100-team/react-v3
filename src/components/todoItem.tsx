@@ -8,13 +8,19 @@ interface Props extends Todo {
 const TodoItem: React.FC<Props> = ({ id, createdDate, todoText, selected, selectHandler, deleteHandler }) => {
   return (
     <tr key={id}>
-      <td>
+      <td className="">
         <input type="checkbox" name="selectFlg" checked={selected} onChange={selectHandler} />
       </td>
       <td>{createdDate.toLocaleDateString()}</td>
       <td>{todoText}</td>
       <td>
-        <input type="button" name="deleteFlg" value="削除" onClick={deleteHandler} />
+        <input
+          type="button"
+          name="deleteFlg"
+          value="削除"
+          onClick={deleteHandler}
+          className="pointer-events-auto transition hover:opacity-50"
+        />
       </td>
     </tr>
   );
