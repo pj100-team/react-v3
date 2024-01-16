@@ -1,4 +1,3 @@
-import { FormEvent } from 'react';
 type PropsAddTodo = {
   clickHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
   changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;

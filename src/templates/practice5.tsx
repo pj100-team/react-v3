@@ -1,6 +1,7 @@
-import { FormEvent, useState, useEffect } from 'react';
-// import todoItem from '../components/todoItem';
+import { useState, useEffect } from 'react';
 import AddTodo from '../components/addTodo';
+import AllDeleteTodo from '../components/allDeleteTodo';
+import TodoItem from '../components/todoItem';
 
 export type Todo = {
   readonly id: number;
@@ -13,13 +14,12 @@ const Practice5 = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
   const [hasSelected, setHasSelected] = useState<boolean>(false);
-  // const taskText = useRef<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const addTodoItem = () => {
+  const handleAdd = () => {
     if (!inputValue) return;
     const newTodo: Todo = {
       id: new Date().getTime(),
@@ -30,6 +30,18 @@ const Practice5 = () => {
     setTodos((todos) => [newTodo, ...todos]);
     setInputValue('');
   };
+
+  const handleCheck = (targetID: number) => {
+    setTodos((todos) => {
+      return todos.map((todo) => {
+        if (todo.id === targetID) {
+          return { ...todo, selected: !todo.selected };
+        }
+        return todo;
+      });
+    });
+  };
+
   const handleAllSelect = (isSelected: boolean) => {
     if (isSelected) {
       setTodos((todos) => {
@@ -44,15 +56,16 @@ const Practice5 = () => {
         });
       });
     }
+    setHasSelected((prev) => !prev);
   };
 
   const handleDelete = (targetID: number) => {
-    // const deleteId = e.currentTarget.id;
     setTodos((todos) => {
       const newTodos = todos.filter((todo) => {
         if (todo.id !== targetID) {
           return { ...todo };
         }
+        return false;
       });
       return newTodos;
     });
@@ -61,18 +74,10 @@ const Practice5 = () => {
   const handleAllDelete = () => {
     setTodos((todos) => {
       return todos.filter((todo) => {
-        if (!todo.selected) return todo;
-      });
-    });
-  };
-
-  const handleCheck = (targetID: number) => {
-    setTodos((todos) => {
-      return todos.map((todo) => {
-        if (todo.id === targetID) {
-          return { ...todo, selected: !todo.selected };
+        if (!todo.selected) {
+          return todo;
         }
-        return todo;
+        return false;
       });
     });
   };
@@ -85,10 +90,8 @@ const Practice5 = () => {
   return (
     <>
       <h4 className="font-bold text-center text-sm">TODOlist</h4>
-      <AddTodo clickHandler={addTodoItem} changeHandler={handleChange} todoText={inputValue} />
-      <button className={hasSelected ? '' : 'opacity-0 invisible'} onClick={handleAllDelete}>
-        一括削除
-      </button>
+      <AddTodo clickHandler={handleAdd} changeHandler={handleChange} todoText={inputValue} />
+      <AllDeleteTodo hasSelectedState={hasSelected} clickHandler={handleAllDelete} />
       {todos.length > 0 && (
         <table>
           <thead>
@@ -109,21 +112,15 @@ const Practice5 = () => {
           <tbody>
             {todos.map((todo) => {
               return (
-                <tr key={todo.id}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      name="selectFlg"
-                      checked={todo.selected}
-                      onChange={() => handleCheck(todo.id)}
-                    />
-                  </td>
-                  <td>{todo.createdDate.toLocaleDateString()}</td>
-                  <td>{todo.todoText}</td>
-                  <td>
-                    <input type="button" name="deleteFlg" value="削除" onClick={() => handleDelete(todo.id)} />
-                  </td>
-                </tr>
+                <TodoItem
+                  id={todo.id}
+                  createdDate={todo.createdDate}
+                  todoText={todo.todoText}
+                  selected={todo.selected}
+                  selectHandler={() => handleCheck(todo.id)}
+                  deleteHandler={() => handleDelete(todo.id)}
+                  key={todo.id}
+                />
               );
             })}
           </tbody>
