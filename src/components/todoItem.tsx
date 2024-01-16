@@ -1,4 +1,4 @@
-import type { PropsTodo } from '../templates/practice5';
+import type { Todo } from '../templates/practice5';
 
 // const todoItem: React.FC<PropsTodo> = ({deleteHandler,item}) => {
 //   return (

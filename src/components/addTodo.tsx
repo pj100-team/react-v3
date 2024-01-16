@@ -1,10 +1,11 @@
-import type { PropsTodo } from '../templates/practice5';
-type Props = {
-  addTodoItem: () => {};
-  taskText: string;
+import { FormEvent } from 'react';
+type PropsAddTodo = {
+  clickHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  todoText: string;
 };
 
-const AddTodo: React.FC<any> = ({ clickHandler, changeHandler, todoText }) => {
+const AddTodo: React.FC<PropsAddTodo> = ({ clickHandler, changeHandler, todoText }) => {
   return (
     <div>
       <input
