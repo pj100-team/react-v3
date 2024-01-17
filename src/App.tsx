@@ -1,5 +1,5 @@
 import './App.css';
-import Practice5 from './templates/practice5';
+import Practice4 from './templates/practice4';
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <main className="mt-[100px]">
         {/* <section className="flex flex-col gap-40"> */}
         <section className="max-w-[600px] mx-auto">
-          <Practice5 />
+          <Practice4 />
         </section>
       </main>
     </>

@@ -1,8 +1,8 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
+import useSearchAddress from '../hooks/useSearchAddress';
 
 const schema = yup
   .object()
@@ -36,6 +36,7 @@ const Practice4: React.FC = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
+  const addressResult = useSearchAddress(getValues('zip'));
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
@@ -45,37 +46,22 @@ const Practice4: React.FC = () => {
       e.preventDefault();
     }
   };
-  const onError: any = (err: any) => {
+  const onError: () => void = () => {
     console.error(`正しく送信できませんでした。\nエラー内容を修正の上、再度送信をお願いいたします。`);
   };
 
   useEffect(() => {
-    const zipVal = getValues('zip');
-    if (!zipVal) {
+    if (addressResult?.data) {
+      setValue('pref', addressResult.data.address1);
+      setValue('city', addressResult.data.address2);
       setIsSubmitable(true);
-      return;
+    } else {
+      setValue('pref', '');
+      setValue('city', '');
+      setIsSubmitable(false);
     }
-    const setAddress = async () => {
-      try {
-        const response = await axios.get('https://zipcloud.ibsnet.co.jp/api/search', {
-          params: {
-            zipcode: Number(zipVal),
-          },
-        });
-        setValue('zip', response.data.results[0].zipcode);
-        setValue('city', response.data.results[0].address2);
-        setValue('pref', response.data.results[0].address1);
-        setIsSubmitable(true);
-      } catch (error) {
-        setValue('city', '');
-        setValue('pref', '');
-        setIsSubmitable(false);
-      } finally {
-        trigger();
-      }
-    };
-    setAddress();
-  }, [getValues('zip')]);
+    trigger();
+  }, [addressResult]);
 
   return (
     <div className="flex flex-col gap-5">
