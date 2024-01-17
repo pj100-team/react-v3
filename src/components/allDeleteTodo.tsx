@@ -8,8 +8,8 @@ const AllDeleteTodo: React.FC<PropsAllDeleteTodo> = ({ hasSelectedState, clickHa
     <button
       className={
         hasSelectedState
-          ? 'text-white bg-[#dc2626] px-[0.5em] pointer-events-auto transition hover:opacity-50'
-          : 'opacity-0 invisibl'
+          ? 'text-white bg-[#dc2626] px-[0.5em] cursor-pointer transition hover:opacity-50'
+          : 'opacity-0 invisibl cursor-pointer'
       }
       onClick={clickHandler}
     >

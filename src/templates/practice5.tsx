@@ -50,9 +50,11 @@ const Practice5 = () => {
 
   return (
     <>
-      <h4 className="text-center text-sm text-[2rem] mb-8">TODOlist</h4>
+      <h4 className="text-center text-[2rem] mb-8">TODOlist</h4>
       <AddTodo clickHandler={handleAdd} changeHandler={handleChange} todoText={inputValue} />
-      <AllDeleteTodo hasSelectedState={hasSelected} clickHandler={handleAllDelete} />
+      <div className="mt-[50px] mb-[20px]">
+        <AllDeleteTodo hasSelectedState={hasSelected} clickHandler={handleAllDelete} />
+      </div>
       {todos.length > 0 && (
         <TodoList items={todos} setTodos={setTodos} setHasSelected={setHasSelected} hasSelected={hasSelected} />
       )}

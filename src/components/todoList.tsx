@@ -49,11 +49,16 @@ const TodoList: React.FC<Props> = ({ items, setTodos, setHasSelected, hasSelecte
     });
   };
   return (
-    <table className="p-table__border w-full mt-4">
+    <table className="p-table__border w-full">
       <thead className="bg-[rgb(149,162,184)] text-white">
         <tr>
           <th>
-            <input type="checkbox" name="select_all" id="select_all" onChange={() => handleAllSelect(!hasSelected)} />
+            <input
+              type="checkbox"
+              name="select_all"
+              className="cursor-pointer"
+              onChange={() => handleAllSelect(!hasSelected)}
+            />
           </th>
           <th>登録日</th>
           <th>TODO</th>
