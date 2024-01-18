@@ -20,62 +20,42 @@ const TodoList: React.FC<Props> = ({ todos, setTodos, setHasSelected, hasSelecte
     });
   };
 
-  const handleAllSelect = (isSelected: boolean) => {
-    if (isSelected) {
-      setTodos((todos) => {
-        return todos.map((todo) => {
-          return { ...todo, selected: true };
-        });
+  const handleAllSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTodos((todos) => {
+      return todos.map((todo) => {
+        return { ...todo, selected: e.target.checked };
       });
-    } else {
-      setTodos((todos) => {
-        return todos.map((todo) => {
-          return { ...todo, selected: false };
-        });
-      });
-    }
+    });
     setHasSelected((prev) => !prev);
   };
 
   const handleDelete = (targetID: number) => {
     setTodos((todos) => {
       const newTodos = todos.filter((todo) => {
-        if (todo.id !== targetID) {
-          return { ...todo };
-        }
-        return false;
+        return todo.id !== targetID;
       });
       return newTodos;
     });
   };
   return (
-    <table className="p-table__border w-full">
+    <table className="w-full">
       <thead className="bg-[rgb(149,162,184)] text-white">
         <tr>
-          <th>
-            <input
-              type="checkbox"
-              name="select_all"
-              className="cursor-pointer"
-              onChange={() => handleAllSelect(!hasSelected)}
-            />
+          <th className="border-[#333] border-[1px] border-solid text-center py-[0.5em]">
+            <input type="checkbox" name="select_all" className="cursor-pointer" onChange={handleAllSelect} />
           </th>
-          <th>登録日</th>
-          <th>TODO</th>
-          <th>削除</th>
+          <th className="border-[#333] border-[1px] border-solid text-center py-[0.5em]">登録日</th>
+          <th className="border-[#333] border-[1px] border-solid text-center py-[0.5em]">TODO</th>
+          <th className="border-[#333] border-[1px] border-solid text-center py-[0.5em]">削除</th>
         </tr>
       </thead>
       <tbody>
         {todos.map((todo) => {
           return (
             <TodoItem
-              id={todo.id}
-              createdDate={todo.createdDate}
-              todoText={todo.todoText}
-              selected={todo.selected}
+              todo={todo}
               selectHandler={() => handleCheck(todo.id)}
               deleteHandler={() => handleDelete(todo.id)}
-              key={todo.id}
             />
           );
         })}
@@ -83,5 +63,4 @@ const TodoList: React.FC<Props> = ({ todos, setTodos, setHasSelected, hasSelecte
     </table>
   );
 };
-
 export default TodoList;

@@ -38,9 +38,9 @@ const Practice5 = () => {
   };
 
   useEffect(() => {
-    const isDeleteBtnDisplay = todos.some((todo) => todo.selected === true);
+    const isDeleteBtnDisplay = todos.some((todo) => todo.selected);
     setHasSelected(isDeleteBtnDisplay);
-  });
+  }, [todos]);
 
   return (
     <>
