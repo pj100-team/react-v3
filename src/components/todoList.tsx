@@ -5,10 +5,9 @@ interface Props {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   setHasSelected: React.Dispatch<React.SetStateAction<boolean>>;
-  hasSelected: boolean;
 }
 
-const TodoList: React.FC<Props> = ({ todos, setTodos, setHasSelected, hasSelected }) => {
+const TodoList: React.FC<Props> = ({ todos, setTodos, setHasSelected }) => {
   const handleCheck = (targetID: number) => {
     setTodos((todos) => {
       return todos.map((todo) => {
