@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useState, useEffect } from 'react';
@@ -36,6 +36,8 @@ const Practice4: React.FC = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
+  // const addressResult = useSearchAddress(getValues('zip'));
+
   const addressResult = useSearchAddress(getValues('zip'));
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -46,7 +48,7 @@ const Practice4: React.FC = () => {
       e.preventDefault();
     }
   };
-  const onError: () => void = () => {
+  const onError: SubmitErrorHandler<FormData> = () => {
     console.error(`正しく送信できませんでした。\nエラー内容を修正の上、再度送信をお願いいたします。`);
   };
 
