@@ -56,6 +56,7 @@ const TodoList: React.FC<Props> = ({ todos, setTodos, setHasSelected, hasSelecte
               todo={todo}
               selectHandler={() => handleCheck(todo.id)}
               deleteHandler={() => handleDelete(todo.id)}
+              key={todo.id}
             />
           );
         })}
