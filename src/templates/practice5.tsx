@@ -33,12 +33,7 @@ const Practice5 = () => {
 
   const handleAllDelete = () => {
     setTodos((todos) => {
-      return todos.filter((todo) => {
-        if (!todo.selected) {
-          return todo;
-        }
-        return false;
-      });
+      return todos.filter((todo) => !todo.selected);
     });
   };
 
@@ -55,7 +50,7 @@ const Practice5 = () => {
         <AllDeleteTodo hasSelectedState={hasSelected} clickHandler={handleAllDelete} />
       </div>
       {todos.length > 0 && (
-        <TodoList items={todos} setTodos={setTodos} setHasSelected={setHasSelected} hasSelected={hasSelected} />
+        <TodoList todos={todos} setTodos={setTodos} setHasSelected={setHasSelected} hasSelected={hasSelected} />
       )}
     </>
   );

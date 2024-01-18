@@ -2,13 +2,13 @@ import type { Todo } from '../templates/practice5';
 import TodoItem from './todoItem';
 
 interface Props {
-  items: Todo[];
+  todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   setHasSelected: React.Dispatch<React.SetStateAction<boolean>>;
   hasSelected: boolean;
 }
 
-const TodoList: React.FC<Props> = ({ items, setTodos, setHasSelected, hasSelected }) => {
+const TodoList: React.FC<Props> = ({ todos, setTodos, setHasSelected, hasSelected }) => {
   const handleCheck = (targetID: number) => {
     setTodos((todos) => {
       return todos.map((todo) => {
@@ -66,16 +66,16 @@ const TodoList: React.FC<Props> = ({ items, setTodos, setHasSelected, hasSelecte
         </tr>
       </thead>
       <tbody>
-        {items.map((item) => {
+        {todos.map((todo) => {
           return (
             <TodoItem
-              id={item.id}
-              createdDate={item.createdDate}
-              todoText={item.todoText}
-              selected={item.selected}
-              selectHandler={() => handleCheck(item.id)}
-              deleteHandler={() => handleDelete(item.id)}
-              key={item.id}
+              id={todo.id}
+              createdDate={todo.createdDate}
+              todoText={todo.todoText}
+              selected={todo.selected}
+              selectHandler={() => handleCheck(todo.id)}
+              deleteHandler={() => handleDelete(todo.id)}
+              key={todo.id}
             />
           );
         })}
