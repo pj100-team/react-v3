@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import AddTodo from '../components/addTodo';
 import AllDeleteTodo from '../components/allDeleteTodo';
-// import TodoItem from '../components/todoItem';
 import TodoList from '../components/todoList';
 
 export type Todo = {

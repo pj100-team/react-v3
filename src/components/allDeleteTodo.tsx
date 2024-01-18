@@ -1,15 +1,13 @@
 type PropsAllDeleteTodo = {
   clickHandler: () => void;
-  hasSelectedState: any;
+  hasSelectedState: boolean;
 };
 
 const AllDeleteTodo: React.FC<PropsAllDeleteTodo> = ({ hasSelectedState, clickHandler }) => {
   return (
     <button
       className={
-        hasSelectedState
-          ? 'text-white bg-[#dc2626] px-[0.5em] cursor-pointer transition hover:opacity-50'
-          : 'opacity-0 invisibl cursor-pointer'
+        hasSelectedState ? 'text-white bg-[#dc2626] px-[0.5em] transition hover:opacity-50' : 'opacity-0 invisible'
       }
       onClick={clickHandler}
     >

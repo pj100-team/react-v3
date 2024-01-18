@@ -11,7 +11,7 @@ const AddTodo: React.FC<PropsAddTodo> = ({ clickHandler, changeHandler, todoText
         type="text"
         name="addItem"
         id="addItem"
-        className="p-form__input"
+        className="border border-gray-200 border-2 rounded-sm px-1"
         value={todoText}
         onChange={changeHandler}
       />
