@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import AddTodo from '../components/addTodo';
 import AllDeleteTodo from '../components/allDeleteTodo';
-// import TodoItem from '../components/todoItem';
 import TodoList from '../components/todoList';
 
 export type Todo = {
@@ -34,28 +33,23 @@ const Practice5 = () => {
 
   const handleAllDelete = () => {
     setTodos((todos) => {
-      return todos.filter((todo) => {
-        if (!todo.selected) {
-          return todo;
-        }
-        return false;
-      });
+      return todos.filter((todo) => !todo.selected);
     });
   };
 
   useEffect(() => {
-    const isDeleteBtnDisplay = todos.some((todo) => todo.selected === true);
+    const isDeleteBtnDisplay = todos.some((todo) => todo.selected);
     setHasSelected(isDeleteBtnDisplay);
-  });
+  }, [todos]);
 
   return (
     <>
-      <h4 className="text-center text-sm text-[2rem] mb-8">TODOlist</h4>
+      <h4 className="text-center text-[2rem] mb-8">TODOlist</h4>
       <AddTodo clickHandler={handleAdd} changeHandler={handleChange} todoText={inputValue} />
-      <AllDeleteTodo hasSelectedState={hasSelected} clickHandler={handleAllDelete} />
-      {todos.length > 0 && (
-        <TodoList items={todos} setTodos={setTodos} setHasSelected={setHasSelected} hasSelected={hasSelected} />
-      )}
+      <div className="mt-[50px] mb-[20px]">
+        <AllDeleteTodo hasSelectedState={hasSelected} clickHandler={handleAllDelete} />
+      </div>
+      {todos.length > 0 && <TodoList todos={todos} setTodos={setTodos} />}
     </>
   );
 };

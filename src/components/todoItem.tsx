@@ -1,26 +1,31 @@
 import type { Todo } from '../templates/practice5';
 
-interface Props extends Todo {
+interface Props {
+  todo: Todo;
   selectHandler: () => void;
   deleteHandler: () => void;
 }
 
-const TodoItem: React.FC<Props> = ({ id, createdDate, todoText, selected, selectHandler, deleteHandler }) => {
+const TodoItem: React.FC<Props> = ({ todo, selectHandler, deleteHandler }) => {
   return (
-    <tr key={id}>
-      <td className="">
-        <input type="checkbox" name="selectFlg" checked={selected} onChange={selectHandler} />
-      </td>
-      <td>{createdDate.toLocaleDateString()}</td>
-      <td>{todoText}</td>
-      <td>
+    <tr>
+      <td className="border-[#333] border-[1px] border-solid text-center py-[0.5em]">
         <input
-          type="button"
-          name="deleteFlg"
-          value="削除"
-          onClick={deleteHandler}
-          className="pointer-events-auto transition hover:opacity-50"
+          type="checkbox"
+          className="cursor-pointer"
+          name="selectFlg"
+          checked={todo.selected}
+          onChange={selectHandler}
         />
+      </td>
+      <td className="border-[#333] border-[1px] border-solid text-center py-[0.5em]">
+        {todo.createdDate.toLocaleDateString()}
+      </td>
+      <td className="border-[#333] border-[1px] border-solid text-center py-[0.5em]">{todo.todoText}</td>
+      <td className="border-[#333] border-[1px] border-solid text-center py-[0.5em]">
+        <button onClick={deleteHandler} className="transition hover:opacity-50">
+          削除
+        </button>
       </td>
     </tr>
   );
