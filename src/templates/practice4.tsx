@@ -56,8 +56,6 @@ const Practice4: React.FC = () => {
     (async () => {
       try {
         const result = await searchAddress();
-
-        console.log(result);
         if (result.data?.results) {
           setValue('pref', result.data?.results[0].address1);
           setValue('city', result.data?.results[0].address2);
