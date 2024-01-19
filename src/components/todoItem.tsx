@@ -1,7 +1,6 @@
-import type { Todo } from '../templates/practice5';
-
+import type { TodoType } from '../hooks/useTodo';
 interface Props {
-  todo: Todo;
+  todo: TodoType;
   selectHandler: () => void;
   deleteHandler: () => void;
 }

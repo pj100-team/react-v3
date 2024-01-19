@@ -1,46 +1,10 @@
-import { useState, useEffect } from 'react';
 import AddTodo from '../components/addTodo';
 import AllDeleteTodo from '../components/allDeleteTodo';
 import TodoList from '../components/todoList';
-
-export type Todo = {
-  readonly id: number;
-  createdDate: Date;
-  todoText: string;
-  selected: boolean;
-};
+import useTodo from '../hooks/useTodo';
 
 const Practice5 = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [inputValue, setInputValue] = useState<string>('');
-  const [hasSelected, setHasSelected] = useState<boolean>(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleAdd = () => {
-    if (!inputValue) return;
-    const newTodo: Todo = {
-      id: new Date().getTime(),
-      todoText: inputValue,
-      createdDate: new Date(),
-      selected: false,
-    };
-    setTodos((todos) => [...todos, newTodo]);
-    setInputValue('');
-  };
-
-  const handleAllDelete = () => {
-    setTodos((todos) => {
-      return todos.filter((todo) => !todo.selected);
-    });
-  };
-
-  useEffect(() => {
-    const isDeleteBtnDisplay = todos.some((todo) => todo.selected);
-    setHasSelected(isDeleteBtnDisplay);
-  }, [todos]);
+  const { todos, setTodos, inputValue, handleChange, handleAdd, hasSelected, handleAllDelete } = useTodo([]);
 
   return (
     <>

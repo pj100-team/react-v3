@@ -1,9 +1,9 @@
-import type { Todo } from '../templates/practice5';
+import type { TodoType } from '../hooks/useTodo';
 import TodoItem from './todoItem';
 
 interface Props {
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  todos: TodoType[];
+  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
 }
 
 const TodoList: React.FC<Props> = ({ todos, setTodos }) => {
