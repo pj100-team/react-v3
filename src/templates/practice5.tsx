@@ -49,7 +49,7 @@ const Practice5 = () => {
       <div className="mt-[50px] mb-[20px]">
         <AllDeleteTodo hasSelectedState={hasSelected} clickHandler={handleAllDelete} />
       </div>
-      {todos.length > 0 && <TodoList todos={todos} setTodos={setTodos} setHasSelected={setHasSelected} />}
+      {todos.length > 0 && <TodoList todos={todos} setTodos={setTodos} />}
     </>
   );
 };

@@ -1,13 +1,13 @@
+import { useCallback } from 'react';
 import type { Todo } from '../templates/practice5';
 import TodoItem from './todoItem';
 
 interface Props {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  setHasSelected: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TodoList: React.FC<Props> = ({ todos, setTodos, setHasSelected }) => {
+const TodoList: React.FC<Props> = ({ todos, setTodos }) => {
   const handleCheck = (targetID: number) => {
     setTodos((todos) => {
       return todos.map((todo) => {
@@ -25,7 +25,6 @@ const TodoList: React.FC<Props> = ({ todos, setTodos, setHasSelected }) => {
         return { ...todo, selected: e.target.checked };
       });
     });
-    setHasSelected((prev) => !prev);
   };
 
   const handleDelete = (targetID: number) => {
