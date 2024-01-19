@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import type { Todo } from '../templates/practice5';
 import TodoItem from './todoItem';
 
