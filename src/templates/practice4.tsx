@@ -86,8 +86,10 @@ const Practice4: React.FC = () => {
             郵便番号
           </label>
           <div className="ml-2 relative">
-            <input className="p-form__input" id="zip" type="text" {...register('zip')} />
-            {errors.zip?.message && <p className="p-form__error">{errors.zip.message}</p>}
+            <input className=" border-gray-200 border-2 rounded-sm px-1" id="zip" type="text" {...register('zip')} />
+            {errors.zip?.message && (
+              <p className="text-red-600 whitespace-nowrap absolute top-7">{errors.zip.message}</p>
+            )}
           </div>
         </div>
         <div className="flex">
@@ -95,8 +97,8 @@ const Practice4: React.FC = () => {
             都道府県
           </label>
           <div className="ml-2 relative">
-            <input className="p-form__input" id="pref" type="text" {...register('pref')} />
-            {errors.pref && <p className="p-form__error">{errors.pref.message}</p>}
+            <input className="border-gray-200 border-2 rounded-sm px-1" id="pref" type="text" {...register('pref')} />
+            {errors.pref && <p className="text-red-600 whitespace-nowrap absolute top-7">{errors.pref.message}</p>}
           </div>
         </div>
         <div className="flex">
@@ -104,12 +106,15 @@ const Practice4: React.FC = () => {
             市区町村
           </label>
           <div className="ml-2 relative">
-            <input className="p-form__input" id="city" type="text" {...register('city')} />
-            {errors.city && <p className="p-form__error">{errors.city.message}</p>}
+            <input className="border-gray-200 border-2 rounded-sm px-1" id="city" type="text" {...register('city')} />
+            {errors.city && <p className="text-red-600 whitespace-nowrap absolute top-7">{errors.city.message}</p>}
           </div>
         </div>
         {isSubmitable ? (
-          <button className="p-form__submit" type="submit">
+          <button
+            className="text-white bg-gray-400 rounded-lg w-fit py-2 px-8 mt-12 flex justify-center items-center transition hover:opacity-50"
+            type="submit"
+          >
             送信
           </button>
         ) : (

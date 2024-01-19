@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useCallback } from 'react';
-// import { tuple } from 'yup';
 
 type AddressType = {
   address1: string;
