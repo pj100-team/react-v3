@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
+// import { tuple } from 'yup';
 
 type AddressType = {
   address1: string;
@@ -11,43 +12,21 @@ type AddressType = {
   prefcode: string;
   zipcode: string;
 };
-type Result = {
-  data: AddressType | null;
-  error: unknown;
+type ResponseType = {
+  results: AddressType[];
+  message: string | null;
+  status: 200 | 400;
 };
+type RequestType = number;
 
-async function getAddressData(zip: string): Promise<Result> {
-  const zipVal = zip;
-  if (!zipVal) {
-    return {
-      data: null,
-      error: '郵便番号が入力されていません',
-    };
-  }
-  try {
-    const response = await axios.get('https://zipcloud.ibsnet.co.jp/api/search', {
+export default function useSearchAddress<RequestData = RequestType, ResponseData = ResponseType>(zip: RequestData) {
+  return useCallback(() => {
+    return axios<ResponseData>({
+      method: 'GET',
+      url: 'https://zipcloud.ibsnet.co.jp/api/search',
       params: {
-        zipcode: Number(zipVal),
+        zipcode: zip,
       },
     });
-    const data: AddressType = await response.data.results[0];
-    return await {
-      data: data,
-      error: null,
-    };
-  } catch (error) {
-    return {
-      data: null,
-      error: error,
-    };
-  }
-}
-
-export default function useSearchAddress(zip: string) {
-  const [result, setResult] = useState<Result>();
-
-  useEffect(() => {
-    getAddressData(zip).then((data) => setResult(data));
   }, [zip]);
-  return result;
 }

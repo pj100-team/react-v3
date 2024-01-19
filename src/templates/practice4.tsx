@@ -36,9 +36,8 @@ const Practice4: React.FC = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
-  // const addressResult = useSearchAddress(getValues('zip'));
 
-  const addressResult = useSearchAddress(getValues('zip'));
+  const searchAddress = useSearchAddress(Number(getValues('zip')));
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
@@ -53,17 +52,27 @@ const Practice4: React.FC = () => {
   };
 
   useEffect(() => {
-    if (addressResult?.data) {
-      setValue('pref', addressResult.data.address1);
-      setValue('city', addressResult.data.address2);
-      setIsSubmitable(true);
-    } else {
-      setValue('pref', '');
-      setValue('city', '');
-      setIsSubmitable(false);
-    }
-    trigger();
-  }, [addressResult]);
+    if (!getValues('zip')) return;
+    (async () => {
+      try {
+        const result = await searchAddress();
+
+        console.log(result);
+        if (result.data?.results) {
+          setValue('pref', result.data?.results[0].address1);
+          setValue('city', result.data?.results[0].address2);
+          setIsSubmitable(true);
+        } else {
+          setValue('pref', '');
+          setValue('city', '');
+          setIsSubmitable(false);
+        }
+        trigger();
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, [getValues, searchAddress, setValue, trigger]);
 
   return (
     <div className="flex flex-col gap-5">
