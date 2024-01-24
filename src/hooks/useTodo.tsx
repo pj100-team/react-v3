@@ -12,7 +12,7 @@ function useTodo(defaultValue: TodoType[]) {
   const [inputValue, setInputValue] = useState<string>('');
   const [hasSelected, setHasSelected] = useState<boolean>(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
@@ -46,7 +46,7 @@ function useTodo(defaultValue: TodoType[]) {
     setInputValue,
     hasSelected,
     setHasSelected,
-    handleChange,
+    handleInputChange,
     handleAdd,
     handleAllDelete,
   };
