@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useState, useEffect } from 'react';
 import useSearchAddress from '../hooks/useSearchAddress';
+import { isAxiosError } from 'axios';
 
 const schema = yup
   .object()
@@ -67,7 +68,7 @@ const Practice4: React.FC = () => {
         }
         trigger();
       } catch (e) {
-        console.error(e);
+        if (isAxiosError(e)) console.error(e);
       }
     })();
   }, [getValues, searchAddress, setValue, trigger]);
