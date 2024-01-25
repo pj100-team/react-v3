@@ -1,55 +1,35 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import AddTodo from '../components/addTodo';
 import AllDeleteTodo from '../components/allDeleteTodo';
 import TodoList from '../components/todoList';
-
-export type Todo = {
-  readonly id: number;
-  createdDate: Date;
-  todoText: string;
-  selected: boolean;
-};
+import useTodo from '../hooks/useTodo';
+import useTodoAdd from '../hooks/useTodoAdd';
+import useTodoChange from '../hooks/useTodoChange';
+import useTodoSelect from '../hooks/useTodoSelect';
+import useTodoDelete from '../hooks/useTodoDelete';
 
 const Practice5 = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
-  const [hasSelected, setHasSelected] = useState<boolean>(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleAdd = () => {
-    if (!inputValue) return;
-    const newTodo: Todo = {
-      id: new Date().getTime(),
-      todoText: inputValue,
-      createdDate: new Date(),
-      selected: false,
-    };
-    setTodos((todos) => [...todos, newTodo]);
-    setInputValue('');
-  };
-
-  const handleAllDelete = () => {
-    setTodos((todos) => {
-      return todos.filter((todo) => !todo.selected);
-    });
-  };
-
-  useEffect(() => {
-    const isDeleteBtnDisplay = todos.some((todo) => todo.selected);
-    setHasSelected(isDeleteBtnDisplay);
-  }, [todos]);
-
+  const { todos, setTodos, hasSelected } = useTodo([]);
+  const { handleAdd } = useTodoAdd({ setTodos, inputValue, setInputValue });
+  const { handleInputChange } = useTodoChange({ setInputValue });
+  const { handleCheck, handleAllSelect } = useTodoSelect({ setTodos });
+  const { handleDelete, handleAllDelete } = useTodoDelete({ setTodos });
   return (
     <>
       <h4 className="text-center text-[2rem] mb-8">TODOlist</h4>
-      <AddTodo clickHandler={handleAdd} changeHandler={handleChange} todoText={inputValue} />
+      <AddTodo clickHandler={handleAdd} changeHandler={handleInputChange} todoText={inputValue} />
       <div className="mt-[50px] mb-[20px]">
         <AllDeleteTodo hasSelectedState={hasSelected} clickHandler={handleAllDelete} />
       </div>
-      {todos.length > 0 && <TodoList todos={todos} setTodos={setTodos} />}
+      {todos.length > 0 && (
+        <TodoList
+          todos={todos}
+          handleAllSelect={handleAllSelect}
+          handleCheck={handleCheck}
+          handleDelete={handleDelete}
+        />
+      )}
     </>
   );
 };

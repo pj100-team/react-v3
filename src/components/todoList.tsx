@@ -1,39 +1,14 @@
-import type { Todo } from '../templates/practice5';
+import type { TodoType } from '../hooks/useTodo';
 import TodoItem from './todoItem';
 
-interface Props {
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-}
+type Props = {
+  todos: TodoType[];
+  handleAllSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCheck: (targetID: number) => void;
+  handleDelete: (targetID: number) => void;
+};
 
-const TodoList: React.FC<Props> = ({ todos, setTodos }) => {
-  const handleCheck = (targetID: number) => {
-    setTodos((todos) => {
-      return todos.map((todo) => {
-        if (todo.id === targetID) {
-          return { ...todo, selected: !todo.selected };
-        }
-        return todo;
-      });
-    });
-  };
-
-  const handleAllSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTodos((todos) => {
-      return todos.map((todo) => {
-        return { ...todo, selected: e.target.checked };
-      });
-    });
-  };
-
-  const handleDelete = (targetID: number) => {
-    setTodos((todos) => {
-      const newTodos = todos.filter((todo) => {
-        return todo.id !== targetID;
-      });
-      return newTodos;
-    });
-  };
+const TodoList: React.FC<Props> = ({ todos, handleAllSelect, handleCheck, handleDelete }) => {
   return (
     <table className="w-full">
       <thead className="bg-[rgb(149,162,184)] text-white">

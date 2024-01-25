@@ -1,8 +1,9 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
+import useSearchAddress from '../hooks/useSearchAddress';
+import { isAxiosError } from 'axios';
 
 const schema = yup
   .object()
@@ -37,6 +38,8 @@ const Practice4: React.FC = () => {
     mode: 'onChange',
   });
 
+  const searchAddress = useSearchAddress(Number(getValues('zip')));
+
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
   };
@@ -45,37 +48,30 @@ const Practice4: React.FC = () => {
       e.preventDefault();
     }
   };
-  const onError: any = (err: any) => {
+  const onError: SubmitErrorHandler<FormData> = () => {
     console.error(`正しく送信できませんでした。\nエラー内容を修正の上、再度送信をお願いいたします。`);
   };
 
   useEffect(() => {
-    const zipVal = getValues('zip');
-    if (!zipVal) {
-      setIsSubmitable(true);
-      return;
-    }
-    const setAddress = async () => {
+    if (!getValues('zip')) return;
+    (async () => {
       try {
-        const response = await axios.get('https://zipcloud.ibsnet.co.jp/api/search', {
-          params: {
-            zipcode: Number(zipVal),
-          },
-        });
-        setValue('zip', response.data.results[0].zipcode);
-        setValue('city', response.data.results[0].address2);
-        setValue('pref', response.data.results[0].address1);
-        setIsSubmitable(true);
-      } catch (error) {
-        setValue('city', '');
-        setValue('pref', '');
-        setIsSubmitable(false);
-      } finally {
+        const result = await searchAddress();
+        if (result.data?.results) {
+          setValue('pref', result.data?.results[0].address1);
+          setValue('city', result.data?.results[0].address2);
+          setIsSubmitable(true);
+        } else {
+          setValue('pref', '');
+          setValue('city', '');
+          setIsSubmitable(false);
+        }
         trigger();
+      } catch (e) {
+        if (isAxiosError(e)) console.error(e);
       }
-    };
-    setAddress();
-  }, [getValues('zip')]);
+    })();
+  }, [getValues, searchAddress, setValue, trigger]);
 
   return (
     <div className="flex flex-col gap-5">
@@ -91,8 +87,10 @@ const Practice4: React.FC = () => {
             郵便番号
           </label>
           <div className="ml-2 relative">
-            <input className="p-form__input" id="zip" type="text" {...register('zip')} />
-            {errors.zip?.message && <p className="p-form__error">{errors.zip.message}</p>}
+            <input className=" border-gray-200 border-2 rounded-sm px-1" id="zip" type="text" {...register('zip')} />
+            {errors.zip?.message && (
+              <p className="text-red-600 whitespace-nowrap absolute top-7">{errors.zip.message}</p>
+            )}
           </div>
         </div>
         <div className="flex">
@@ -100,8 +98,8 @@ const Practice4: React.FC = () => {
             都道府県
           </label>
           <div className="ml-2 relative">
-            <input className="p-form__input" id="pref" type="text" {...register('pref')} />
-            {errors.pref && <p className="p-form__error">{errors.pref.message}</p>}
+            <input className="border-gray-200 border-2 rounded-sm px-1" id="pref" type="text" {...register('pref')} />
+            {errors.pref && <p className="text-red-600 whitespace-nowrap absolute top-7">{errors.pref.message}</p>}
           </div>
         </div>
         <div className="flex">
@@ -109,12 +107,15 @@ const Practice4: React.FC = () => {
             市区町村
           </label>
           <div className="ml-2 relative">
-            <input className="p-form__input" id="city" type="text" {...register('city')} />
-            {errors.city && <p className="p-form__error">{errors.city.message}</p>}
+            <input className="border-gray-200 border-2 rounded-sm px-1" id="city" type="text" {...register('city')} />
+            {errors.city && <p className="text-red-600 whitespace-nowrap absolute top-7">{errors.city.message}</p>}
           </div>
         </div>
         {isSubmitable ? (
-          <button className="p-form__submit" type="submit">
+          <button
+            className="text-white bg-gray-400 rounded-lg w-fit py-2 px-8 mt-12 flex justify-center items-center transition hover:opacity-50"
+            type="submit"
+          >
             送信
           </button>
         ) : (

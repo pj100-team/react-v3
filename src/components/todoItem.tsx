@@ -1,10 +1,9 @@
-import type { Todo } from '../templates/practice5';
-
-interface Props {
-  todo: Todo;
+import type { TodoType } from '../hooks/useTodo';
+type Props = {
+  todo: TodoType;
   selectHandler: () => void;
   deleteHandler: () => void;
-}
+};
 
 const TodoItem: React.FC<Props> = ({ todo, selectHandler, deleteHandler }) => {
   return (
