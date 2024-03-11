@@ -1,0 +1,27 @@
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.py2 {
+  padding: 2em 0;
+}
+.btn {
+  padding: 0.2em 0.5em;
+  color: #f9fafb;
+  border-radius: 4px;
+}
+.red {
+  background-color: #f87171;
+}
+.yellow {
+  background-color: #fcd34d;
+}
+.green {
+  background-color: #86efac;
+}
