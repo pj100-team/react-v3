@@ -5,7 +5,7 @@ import Button from './components/button';
 const Practice3 = () => {
   const [textValue, setTextValue] = useState<string>('');
 
-  const changeText = (e: any) => {
+  const changeText = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     setTextValue(e.target.value);
   };
