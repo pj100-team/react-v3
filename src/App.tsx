@@ -1,11 +1,12 @@
 import './App.css';
-import Practice3 from './practice3';
+import Practice4 from './practice4';
+import styles from './components/Practice4.module.scss';
 
 function App() {
   return (
     <>
-      <header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">React-v3</header>
-      <Practice3 />
+      <header className={styles.header}>React-v3</header>
+      <Practice4 />
     </>
   );
 }
