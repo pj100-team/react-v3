@@ -1,6 +1,6 @@
 import './App.css';
 import Practice4 from './practice4';
-import styles from './components/Address.module.scss';
+import styles from './components/Practice4.module.scss';
 
 function App() {
   return (

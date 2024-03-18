@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
-import styles from './components/Address.module.scss';
+import styles from './components/Practice4.module.scss';
 
 type FormData = {
   zipcode: string;
@@ -13,7 +13,6 @@ const Practice4 = () => {
   const {
     register,
     watch,
-    getValues,
     setValue,
     setError,
     clearErrors,
@@ -24,8 +23,8 @@ const Practice4 = () => {
   const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
 
   useEffect(() => {
-    const zipcodeValue = getValues('zipcode');
-    if (zipcodeValue.length == 7) {
+    const zipcodeValue = watch('zipcode');
+    if (zipcodeValue.length === 7) {
       const getAddress = async () => {
         await axios
           .get(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zipcodeValue}`)
@@ -47,9 +46,6 @@ const Practice4 = () => {
     } else if (zipcodeValue.length == 0) {
       clearErrors('zipcode');
     } else {
-      setError('zipcode', {
-        message: '7桁の数字を入力してください',
-      });
       resetField('city');
       resetField('street');
     }
@@ -67,6 +63,7 @@ const Practice4 = () => {
                 value: true,
                 message: '必須項目です',
               },
+              validate: (value) => value.length === 7 || '7桁の数字を入力してください',
             })}
           />
           {errors.zipcode?.message && <p className={styles.errorMessage}>{errors.zipcode?.message}</p>}
@@ -96,7 +93,9 @@ const Practice4 = () => {
           {errors.street?.message && <p className={styles.errorMessage}>{errors.street?.message}</p>}
         </div>
         <div className={styles.center}>
-          <input type="submit" className={styles.btn} />
+          <button type="submit" className={styles.btn}>
+            送信
+          </button>
         </div>
       </form>
     </div>
