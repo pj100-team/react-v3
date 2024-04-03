@@ -1,0 +1,245 @@
+import { useForm, SubmitHandler } from "react-hook-form";
+import axios from 'axios';
+import "./prac4.css";
+import { useEffect, useState } from "react";
+import { isConstructorDeclaration } from "typescript";
+// import { useState } from "react";
+
+// フォームに入力するデータ
+type Inputs = {
+    postalCode: string,
+    pref: string,
+    city: string,
+    onChange:Event
+};
+  
+export default function Practice4() {
+  /// react-hook-formを使う準備
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+  
+  const [zipCode, setZipCode] = useState('');
+  const [pref, setPref] = useState('');
+  const [city, setCity] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  useEffect(() => {
+    if (zipCode.length === 7){
+      console.log(zipCode)
+      fetchAddress();
+    }
+  }, [zipCode]); //監視する値（watchに含まれたもの）のリストらしい
+  // console.log("test",zipCode);
+
+
+  const onSubmit: SubmitHandler<Inputs> = data => console.log("submit:",data);
+  const rules = {
+    required: '必須項目です',
+    minLength: { value: 7, message: `7桁の数字を入力してください` },
+    maxLength: { value: 7, message: `7桁の数字を入力してください` },
+  }
+
+  const fetchAddress = async () => {
+    try{
+      // console.log(zipCode);
+      const response = await axios.get(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zipCode}`); 
+      console.log(response.data.results[0]);
+      setPref(response.data.results[0].address1);
+      // console.log(response.data.results[0].address1)
+      setCity(response.data.results[0].address2);
+      // console.log(response.data.results[0].address2)
+      setErrorMessage('');
+    }catch (error:any) {
+      console.error("エラー:", error.message)
+      console.log(errors)
+      setErrorMessage('該当する住所が存在しません');
+
+      return '検索失敗';
+    }
+  }
+ 
+  /// 出力するものの指定
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <label htmlFor="">郵便番号</label>
+        <input
+            defaultValue="" {...register("postalCode", rules)}
+            onChange={(e)=> setZipCode(e.target.value)}
+        />
+        {errors.postalCode && errors.postalCode.message}
+        
+      </div>
+      <div>
+        <label htmlFor="">都道府県</label>
+        <input
+            defaultValue="" {...register("pref",  { required: "true" })}
+            value={pref}
+            onChange={(e) => setPref(e.target.value)}
+        />
+        {errors.pref && <span>必須項目です</span>}
+      </div>
+      <div>
+        <label htmlFor="">市区町村</label>
+        <input
+            defaultValue="" {...register("city",  { required: "true" })}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+        />
+        {errors.city && <span>必須項目です</span>}
+      </div>
+      {errors && <div>{errorMessage}</div>}
+    <input type="submit" />
+    </form>
+    
+  );
+}
+
+///ここから約90行は動いていたコード
+// import { type } from "os";
+// import {useState, ChangeEvent} from "react";
+// import { useForm, SubmitHandler } from "react-hook-form";
+
+// type Inputs = {
+//   adress: string,
+//   pref: string,
+//   city: string,
+//   adressRequired: string
+//   onChange:Event
+// };
+
+
+// // APIから取得するデータの型を定義
+// type ApiResponse = {
+//   message: string;
+//   results: {
+//     address1: string;
+//     address2: string;
+//   }[];
+// };
+
+// // APIからデータを取得する関数
+// async function fetchData(): Promise<ApiResponse> {
+//   const response = await fetch('https://zipcloud.ibsnet.co.jp/api/search?zipcode=${adressx}'); //
+//   const data: ApiResponse = await response.json();
+//   return data;
+// }
+// // データ取得を実行
+// fetchData( ).then(data => {
+//   // console.log(data.results[0].address1);
+// });
+
+
+
+// export default function Practice4() {
+//   const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+//   const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+
+//   // console.log(watch("adress")) // watch input value by passing the name of it
+  
+//   const rules = {
+//     required: '必須項目です',
+//     minLength: { value: 7, message: `7桁の数字を入力してください` },
+//     maxLength: { value: 7, message: `7桁の数字を入力してください` },
+//   }
+// 	const [adressx, setAddressx] = useState("");
+//   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+//     setAddressx(event.target.value);
+//     console.log(adressx)
+//     fetchData()
+// 	}
+
+
+  
+
+//   return (
+//     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+// 		<form onSubmit={handleSubmit(onSubmit)}>
+//       {/* register your input into the hook by invoking the "register" function */}
+//       <div>
+//         <label htmlFor="">郵便番号</label>
+//         <input
+//           defaultValue="" {...register("adress", rules)}
+//           id= "zipCode"
+//           onChange={onChange}
+//         />
+//         {errors.adress && errors.adress.message}
+//       </div>
+//       <div>
+//         <label htmlFor="">都道府県</label>
+//         <input defaultValue="" {...register("pref", { required: true })} />
+//         {errors.pref && <div>必須項目です</div>}
+//       </div>    
+//       <div>
+//         <label htmlFor="">市区町村</label>
+//         <input defaultValue="" {...register("city", { required: true })} />
+//         {errors.city && <div>必須項目です</div>}
+//       </div>    
+//       {/* include validation with required or other standard HTML validation rules */}
+//       {/* <input {...register("adressRequired", { required: true })} /> */}
+//       {/* errors will return when field validation fails  */}
+//       {/* {errors.adressRequired && <span>This field is required</span>} */}
+      
+//       <input type="submit" />
+//     </form>
+//   );
+// }
+
+
+/////これより上は動いていたコード
+
+
+// import {useState, ChangeEvent, MouseEvent} from "react";
+// import Form from "../components/form";
+// import { useForm, SubmitHandler } from 'react-hook-form';
+
+
+// function Practice4() {
+// 	const [value, setValue] = useState("");
+//   const handleValue = (event: ChangeEvent<HTMLInputElement>) => {
+//     setValue(event.target.value);
+// 	}
+// 	console.log(value)
+
+
+//   const {register, handleSubmit,formState:{errors}} = useForm<FormData>({
+// 		criteriaMode: "all" ,     // 発生した全てのエラーを受け取る
+// 		defaultValues: {         // 初回レンダリング時のフォームのデフォルト値
+// 				adress: '',
+// 				number: ''
+// 		}
+// 	});
+	
+
+	
+// 	const onSubmit = () =>　{
+// 	 const handleOnSubmit = (values:any) => console.log(values);
+// 	 const handleOnError = (errors:any) => console.log(errors);
+// 	 handleSubmit(handleOnSubmit, handleOnError)
+// 	}
+// 	// const 
+
+
+// 	return (
+// 		<>
+// 			<form onSubmit={onSubmit}>
+//       {/* <form> */}
+//         <div className="adressN">
+//           <label htmlFor="adress">Adress</label>
+//           <input id="adress"
+//            {...register('adress', {
+//               required: true,
+//               maxLength: {
+//                 value: 7,
+//                 message: "7文字で設定してください"
+//               }
+//                })}
+//             onChange={onChange}
+//           />
+//         </div>
+//         <input type="submit" />
+//         {/* <button type="submit">送信</button>  */}
+//     </form>
+// 		</>
+// 	);
+// }
+
+// export default Practice4;

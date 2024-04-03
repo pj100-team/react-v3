@@ -1,0 +1,30 @@
+import {useState, ChangeEvent, MouseEvent} from "react";
+import Input2 from "../components/input2";
+import Button2 from "../components/button2";
+
+
+function Practice3() {
+	const [value, setValue] = useState("");
+  const handleValue = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+	}
+	console.log(value)
+	const resetValue = (event: MouseEvent<HTMLButtonElement>) => {
+    setValue("");
+	}
+
+	return (
+		<>
+			<Input2
+        value={value}
+        onChange= {handleValue}
+
+			/>
+			<Button2
+				onClick={resetValue}
+			/>
+		</>
+	);
+}
+
+export default Practice3;

@@ -1,0 +1,27 @@
+import { isPropertySignature } from "typescript";
+
+interface Props {
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+const Input2: React.FC<Props> = ({
+    value,
+    onChange
+}) => {
+  return (
+    <div className="textbox">
+      <input
+        type="text"
+        value={value}
+        onChange={onChange}
+        style={{
+          backgroundColor:"whitesmoke",
+          outline:"solid 1px grey"
+        }}
+      />
+      </div>
+  );
+  }
+
+export default Input2
