@@ -2,6 +2,8 @@ import {useForm, SubmitHandler} from "react-hook-form";
 import "./prac5.css";
 import { useState } from "react";
 import { FORM_DEFAULT_STATE } from "react-hook-form/dist/constants";
+import { useId } from 'react';
+
 
 // 入力するオブジェクト（１塊のTODO）の型定義
 type Inputs = {
@@ -13,16 +15,16 @@ export default function Practice5() {
   // デフォルトのTODOリストの作成
   const [todos, setTodos] = useState<Inputs[]>([])
   // hookの使用
-  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<Inputs>();
+  const { register, handleSubmit, reset} = useForm<Inputs>();
   // 登録日の設定
   const now = new Date();
-  const today = now.toLocaleDateString();
-  const [regDay, setRegDay] = useState(today);
+  const regDay = now.toLocaleDateString();
   
+  // ToDoの追加
   const addToDo = (todo:string) =>{
     setTodos([...todos, {regDay: regDay, toDo: todo}]);
   }
-
+　// ToDoの削除
   const deleteToDo = (index:number) =>{
     console.log(index)
     const newTodo = [...todos];　//未完了の配列を生成
@@ -30,13 +32,13 @@ export default function Practice5() {
     setTodos(newTodo); //未完了todo更新
     // setTodos([...todos, {regDay: regDay, toDo: todo}]);
   }
-
+  // form送信時の処理
   const onSubmit: SubmitHandler<Inputs> = data => {
     console.log(data);
-
     addToDo(data.toDo)
+    reset()
   }
-
+  // ヘッダーのチェックボックスの判定
   const [checkedStates, setCheckedStates] = useState(new Array(todos.length).fill(false));
 
 /*
@@ -80,7 +82,7 @@ export default function Practice5() {
            <input type="submit" value='追加'/>
         </form>
 
-        {/* {bulkDeleteClicked && <input type="button" value='一括削除'/>} */}
+        {bulkDeleteClicked && <input type="button" value='一括削除'/>}
 
 
 
@@ -115,73 +117,3 @@ export default function Practice5() {
   
 
 }
-
-
-
-///コピー（データの入ったHTMLを直接出力）
-/**
-
-type Inputs = {
-  toDo: string
-
-}
-
-export default function Practice5() {
- 
-const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-  const [toDoText, setToDoText] = useState<string>("");
-  
-  const now = new Date();
-  const today = now.toLocaleDateString();
-  const [regDay, setRegDay] = useState(today);
-  
-  console.log(today)
-  // setRegDay(today)
-
-  const onSubmit: SubmitHandler<Inputs> = data => {
-    console.log(data);
-
-    setToDoText(data.toDo)
-    console.log(toDoText)  }
-   return(
-    <div>
-      <div>TODOList</div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            defaultValue=''{...register('toDo')}
-          />
-          
-           <input type="submit" value='追加'/>
-        </form>
-
-        <table>
-          <thead>
-            <tr>
-              <th><input type="checkbox" /></th>
-              <th>登録日</th>
-              <th>TODO</th>
-              <th>削除</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>デフォ</td>
-              <td>デフォ２</td>
-              <td>デフォ３</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>{regDay}</td>
-              <td>{toDoText}</td>
-              <td>削除（ベタ打ち）</td>
-            </tr>
-            
-          </tbody>
-        </table>
-    </div>
-   
-  ) 
-
-}
- */
