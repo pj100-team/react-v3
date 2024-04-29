@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.buttonRow {
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+	gap: 5%;
+}
+
+.button1 {
+	border-color: #f87171;
+	background-color: #f87171;
+	color: #f9fafb;
+	border-radius: 5px;
+	width: 100px;
+	height: 40px;
+}
+
+.button2 {
+	border-color: #fcd34d;
+	background-color: #fcd34d;
+	color: #f9fafb;
+	border-radius: 5px;
+	width: 100px;
+	height: 40px;
+}
+
+.button3 {
+	border-color: #86efac;
+	background-color: #86efac;
+	color: #f9fafb;
+	border-radius: 5px;
+	width: 100px;
+	height: 40px;
+}
