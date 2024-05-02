@@ -1,15 +1,12 @@
-// components/button.tsx
-
 import React from 'react';
 
-interface ButtonProps {
-  name: string;
+type ButtonProps = {
   className: string;
-  onClick?: () => void;
-}
+  onClick: () => void;
+};
 
-const Button: React.FC<ButtonProps> = ({ name, className, onClick}) => {
-  return <button className={className} onClick={onClick}>{name}</button>;
+const Button: React.FC<ButtonProps> = ({ className, onClick }) => {
+  return <button className={className} onClick={onClick}></button>;
 };
 
 export default Button;
