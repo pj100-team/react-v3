@@ -8,7 +8,7 @@ type ButtonColor = {
 
 const Button: React.FC<ButtonColor> = ({ name, className, onClick }) => {
   return (
-    <button name={name} className={className} onClick={onClick}>
+    <button name={name} className={`rounded-md w-28 h-10 ${className}`} onClick={onClick}>
       {name}
     </button>
   );
