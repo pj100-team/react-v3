@@ -1,12 +1,17 @@
 import React from 'react';
 
-type ButtonProps = {
+type ButtonColor = {
+  name: string;
   className: string;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Button: React.FC<ButtonProps> = ({ className, onClick }) => {
-  return <button className={className} onClick={onClick}></button>;
+const Button: React.FC<ButtonColor> = ({ name, className, onClick }) => {
+  return (
+    <button name={name} className={className} onClick={onClick}>
+      {name}
+    </button>
+  );
 };
 
 export default Button;
