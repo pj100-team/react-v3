@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../components/Button';
+import Button from '../components/Button1';
 
 const Practice1: React.FC = () => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
