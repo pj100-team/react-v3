@@ -1,12 +1,14 @@
 import './App.css';
-import Practice1 from './templates/practice1';
+// import Practice1 from './templates/Practice1';
+import Practice2 from './templates/Practice2';
 
 function App() {
   return (
-    <div>
-      <header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">React-v3</header>;
-      <Practice1 />
-    </div>
+    <>
+      <header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">React-v3</header>
+      {/* <Practice1 /> */}
+      <Practice2 />
+    </>
   );
 }
 

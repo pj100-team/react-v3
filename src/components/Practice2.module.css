@@ -1,0 +1,10 @@
+.center {
+  position: relative;
+  left: 45%;
+  margin-top: 10px;
+}
+
+.space {
+  position: absolute;
+  margin-left: 10px;
+}
