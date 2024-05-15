@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Input from '../components/Input';
-import styles from '../components/Practice2.module.css';
+import Input from '../../components/Input';
+import styles from './Practice2.module.css';
 
 const Practice2: React.FC = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -10,10 +10,10 @@ const Practice2: React.FC = () => {
   };
 
   return (
-    <div className={styles.center}>
+    <label className={styles.center}>
       <Input type="checkbox" onChange={handleCheckboxChange} />
       {isChecked && <span className={styles.space}>Hello world</span>}
-    </div>
+    </label>
   );
 };
 
