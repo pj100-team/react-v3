@@ -2,13 +2,18 @@ import React from 'react';
 
 type InputProps = {
   id: string;
-  type: 'text' | 'checkbox';
-  style?: React.CSSProperties;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  type: 'checkbox';
+  onChange: () => void;
 };
 
-const Input: React.FC<InputProps> = ({ id, type, style, onChange }) => {
-  return <input id={id} type={type} style={style} onChange={onChange} />;
+const Input: React.FC<InputProps> = ({ id, type, onChange }) => {
+  return (
+    <>
+      <label htmlFor={id}>
+        <input id={id} type={type} onChange={onChange} />
+      </label>
+    </>
+  );
 };
 
 export default Input;
