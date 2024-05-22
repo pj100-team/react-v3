@@ -1,0 +1,14 @@
+.center {
+  margin-top: 10px;
+  margin-left: 10px;
+  text-align: center;
+  cursor: default;
+}
+
+.space {
+  margin-left: 10px;
+}
+
+.hidden {
+  visibility: hidden;
+}
