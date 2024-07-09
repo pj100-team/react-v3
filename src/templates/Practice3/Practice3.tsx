@@ -28,8 +28,8 @@ export const Practice3: React.FC = () => {
         onChange={handleTextChange}
         onBlur={handleBlur}
         style={{ border: '1px solid #94A3B8', borderRadius: '5px', padding: '7px' }}
-      ></Input>
-      <Button name="リセット" color="border-[#f87171] bg-[#f87171]" onClick={handleClick}></Button>
+      />
+      <Button name="リセット" color="border-[#f87171] bg-[#f87171]" onClick={handleClick} />
     </div>
   );
 };
