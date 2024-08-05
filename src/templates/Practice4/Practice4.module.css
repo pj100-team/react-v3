@@ -1,0 +1,17 @@
+.center {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.address {
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.from {
+  margin-bottom: 20px;
+}
+
+.error {
+  color: red;
+}

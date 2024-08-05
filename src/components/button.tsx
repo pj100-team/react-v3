@@ -1,15 +1,27 @@
 import React from 'react';
 
 type ButtonProps = {
-  name: string;
-  color: string;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: () => void;
+  children: React.ReactNode;
+  style?: React.CSSProperties;
 };
 
-const Button: React.FC<ButtonProps> = ({ name, color, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ onClick, children, style }) => {
   return (
-    <button name={name} className={`rounded-md w-28 h-10 text-[#f9fafb] ${color}`} onClick={onClick}>
-      {name}
+    <button
+      onClick={onClick}
+      style={{
+        backgroundColor: '#94A3B8',
+        color: 'white',
+        border: 'none',
+        borderRadius: '5px',
+        padding: '5px 25px',
+        fontSize: '16px',
+        cursor: 'pointer',
+        ...style,
+      }}
+    >
+      {children}
     </button>
   );
 };
