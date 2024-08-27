@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import LoginTest from './loginTest';
+import MidTest2 from './MidTest2';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <LoginTest />
+    {/* <LoginTest /> */}
+    <MidTest2 />
     {/* <LowTest title={'FulAi'} /> */}
   </React.StrictMode>,
 );
