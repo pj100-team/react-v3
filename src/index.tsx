@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import HighTest1 from './highTest1';
+import HighTest2 from './highTest2';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -9,6 +9,7 @@ root.render(
     {/* <LoginTest /> */}
     {/* <MidTest2 /> */}
     {/* <LowTest title={'FulAi'} /> */}
-    <HighTest1 state="成功" />
+    {/* <HighTest1 state="成功" /> */}
+    <HighTest2 />
   </React.StrictMode>,
 );
