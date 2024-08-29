@@ -1,11 +1,16 @@
-import "./App.css";
+import './App.css';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import MainContents from './components/MainContents';
 
 function App() {
-	return (
-		<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
-			React-v3
-		</header>
-	);
+  return (
+    <div className="flex flex-col h-screen">
+      <Header title="practice" />
+      <MainContents />
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
