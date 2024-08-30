@@ -3,14 +3,22 @@ import { useState } from 'react';
 const Login = () => {
   const [address, setAddress] = useState<string>('');
   const [pass, setPass] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (address.length > 10 || pass.length > 10) {
+      setError('アドレス及びパスワードは10文字以下で入力してください');
+      return false;
+    }
+
+    setError('');
     console.log('Address:', address);
     console.log('Password:', pass);
   };
 
   return (
-    <div className="flex justify-center items-center mt-4">
+    <div className="flex flex-col justify-center items-center mt-4">
       <form className="flex flex-col space-y-2" onSubmit={onSubmit}>
         <input
           type="text"
@@ -23,6 +31,7 @@ const Login = () => {
           ログイン
         </button>
       </form>
+      <p className="text-red-500">{error}</p>
     </div>
   );
 };
