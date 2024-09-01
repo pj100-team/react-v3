@@ -1,18 +1,11 @@
-import { useState } from 'react';
-import './App.css';
-import LoginButton from './components/LoginButton';
-import StateLabel from './components/StateLabel';
-import LoginInfo from './components/LoginInfo';
+import "./App.css";
 
 function App() {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
-  return (
-    <div className="flex flex-col justify-center items-center">
-      <LoginButton isLogin={isLogin} setIsLogin={setIsLogin} />
-      <StateLabel isLogin={isLogin} />
-      <LoginInfo isLogin={isLogin} />
-    </div>
-  );
+	return (
+		<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
+			React-v3
+		</header>
+	);
 }
 
 export default App;
