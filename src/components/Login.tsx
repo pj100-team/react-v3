@@ -7,6 +7,11 @@ const Login = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (address.length === 0 || pass.length === 0) {
+      setError('アドレス及びパスワードを入力してください');
+      return false;
+    }
+
     if (address.length > 10 || pass.length > 10) {
       setError('アドレス及びパスワードは10文字以下で入力してください');
       return false;
