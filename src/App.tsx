@@ -1,11 +1,18 @@
-import "./App.css";
+import './App.css';
+import ComponentA from './components/ComponentA';
+import { UserContext } from './UserContext';
 
 function App() {
-	return (
-		<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
-			React-v3
-		</header>
-	);
+  const name = 'test';
+
+  return (
+    <div>
+      <UserContext.Provider value={{ name }}>
+        <p>name:{name}</p>
+        <ComponentA />
+      </UserContext.Provider>
+    </div>
+  );
 }
 
 export default App;
