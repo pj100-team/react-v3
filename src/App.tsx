@@ -1,31 +1,8 @@
-import { useEffect, useState } from 'react';
 import './App.css';
+import useGetAddress from './useGetAddress';
 
 function App() {
-  const [postal, setPostal] = useState<string>('');
-  const [address, setAddress] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const getAddress = async (postal: string) => {
-    setIsLoading(true);
-    const res = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${postal}`);
-    const value = await res.json();
-
-    const msg = value.message;
-    if (msg) {
-      setMessage(msg);
-    } else {
-      setMessage('');
-      setAddress(value.results[0].address1 + value.results[0].address2 + value.results[0].address3);
-    }
-
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    getAddress(postal);
-  }, [postal]);
+  const { setPostal, address, message, isLoading } = useGetAddress();
 
   return (
     <>
