@@ -1,13 +1,10 @@
 type Props = {
   isLogin: boolean;
-  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
+  onClick: () => void;
 };
 
-const LoginButton = ({ isLogin, setIsLogin }: Props) => {
+const LoginButton = ({ isLogin, onClick }: Props) => {
   const label = isLogin ? 'ログアウト' : 'ログイン';
-  const onClick = () => {
-    setIsLogin(!isLogin);
-  };
   return (
     <button className="w-32 p-2 bg-gray-300 border-black border-2" onClick={onClick}>
       {label}
