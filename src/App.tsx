@@ -1,11 +1,21 @@
-import "./App.css";
+import { useState } from 'react';
+import './App.css';
+import Counter from './Counter';
 
 function App() {
-	return (
-		<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
-			React-v3
-		</header>
-	);
+  const [count, setCount] = useState<number>(0);
+  console.log(`render Counter:App`);
+  return (
+    <>
+      <div className="bg-gray-100">
+        <p>Counter:App</p>
+        <p>count:{count}</p>
+        <button onClick={() => setCount(count + 1)}>add</button>
+      </div>
+      <Counter num={0} />
+      <Counter num={1} />
+    </>
+  );
 }
 
 export default App;
