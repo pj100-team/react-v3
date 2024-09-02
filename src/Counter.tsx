@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react';
+import { useCallback, memo, useState } from 'react';
 
 type Props = {
   num: number;
 };
 
-const Counter = ({ num }: Props) => {
+const Counter = memo(({ num }: Props) => {
   const [count, setCount] = useState<number>(0);
   console.log(`render Counter:${num}`);
 
@@ -19,6 +19,6 @@ const Counter = ({ num }: Props) => {
       <button onClick={addCount}>add</button>
     </div>
   );
-};
+});
 
 export default Counter;
