@@ -1,24 +1,27 @@
 import { useCallback, useState } from 'react';
 import './App.css';
-import Counter from './Counter';
+import CountText from './CountText';
+import Button from './Button';
 
 function App() {
   const [count, setCount] = useState<number>(0);
-  console.log(`render Counter:App`);
-  const addCount = useCallback(() => {
-    console.log('add count App');
-    setCount((count) => count + 1);
+  const [count2, setCount2] = useState<number>(0);
+
+  // Callback
+  const callback = useCallback(() => {
+    console.log('callback');
   }, []);
 
   return (
     <>
       <div className="bg-gray-100">
         <p>Counter:App</p>
-        <p>count:{count}</p>
-        <button onClick={addCount}>add</button>
+        <CountText num={count} />
+        <button onClick={() => setCount((count) => count + 1)}>add</button>
+        <p>count:{count2}</p>
+        <button onClick={() => setCount2((count2) => count2 + 1)}>add</button>
+        <Button onClick={callback} />
       </div>
-      <Counter num={0} />
-      <Counter num={1} />
     </>
   );
 }
