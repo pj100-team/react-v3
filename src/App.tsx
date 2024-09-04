@@ -1,4 +1,5 @@
-import "./App.css";
+import './App.css';
+import React, { createContext, useContext } from 'react';
 
 type FourthLevelProps = {
   fourthLevelText: string;
@@ -6,93 +7,92 @@ type FourthLevelProps = {
 
 type ThirdLevelProps = {
   thirdLevelText: string;
-  fourthLevelProps: FourthLevelProps;
 };
 
 type SecondLevelProps = {
   secondLevelText: string;
-  thirdLevelProps: ThirdLevelProps;
 };
 
 type FirstLevelProps = {
   firstLevelText: string;
-  secondLevelProps: SecondLevelProps;
 };
+
+const FourthLevelContext = createContext<FourthLevelProps | undefined>(undefined);
+const ThirdLevelContext = createContext<ThirdLevelProps | undefined>(undefined);
+const SecondLevelContext = createContext<SecondLevelProps | undefined>(undefined);
+const FirstLevelContext = createContext<FirstLevelProps | undefined>(undefined);
 
 function App() {
   const fourthLevelProps: FourthLevelProps = {
-    fourthLevelText: "Fourth Level Text",
+    fourthLevelText: 'Fourth Level Text',
   };
 
   const thirdLevelProps: ThirdLevelProps = {
-    thirdLevelText: "Third Level Text",
-    fourthLevelProps: fourthLevelProps,
+    thirdLevelText: 'Third Level Text',
   };
 
   const secondLevelProps: SecondLevelProps = {
-    secondLevelText: "Second Level Text",
-    thirdLevelProps: thirdLevelProps,
+    secondLevelText: 'Second Level Text',
   };
 
   const firstLevelProps: FirstLevelProps = {
-    firstLevelText: "First Level Text",
-    secondLevelProps: secondLevelProps,
+    firstLevelText: 'First Level Text',
   };
 
   return (
     <header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
-      <ChildComponent firstLevelProps={firstLevelProps} />
+      <FirstLevelContext.Provider value={firstLevelProps}>
+        <SecondLevelContext.Provider value={secondLevelProps}>
+          <ThirdLevelContext.Provider value={thirdLevelProps}>
+            <FourthLevelContext.Provider value={fourthLevelProps}>
+              <ChildComponent />
+            </FourthLevelContext.Provider>
+          </ThirdLevelContext.Provider>
+        </SecondLevelContext.Provider>
+      </FirstLevelContext.Provider>
     </header>
   );
 }
 
-type ChildComponentProps = {
-  firstLevelProps: FirstLevelProps;
-};
+function ChildComponent() {
+  const firstLevelProps = useContext(FirstLevelContext);
 
-function ChildComponent({ firstLevelProps }: ChildComponentProps) {
   return (
     <div>
-      <h1>{firstLevelProps.firstLevelText}</h1>
-      <SecondLevelComponent secondLevelProps={firstLevelProps.secondLevelProps} />
+      <h1>{firstLevelProps?.firstLevelText}</h1>
+      <SecondLevelComponent />
     </div>
   );
 }
 
-type SecondLevelComponentProps = {
-  secondLevelProps: SecondLevelProps;
-};
+function SecondLevelComponent() {
+  const secondLevelProps = useContext(SecondLevelContext);
 
-function SecondLevelComponent({ secondLevelProps }: SecondLevelComponentProps) {
   return (
     <div>
-      <h2>{secondLevelProps.secondLevelText}</h2>
-      <ThirdLevelComponent thirdLevelProps={secondLevelProps.thirdLevelProps} />
+      <h2>{secondLevelProps?.secondLevelText}</h2>
+      <ThirdLevelComponent />
     </div>
   );
 }
 
-type ThirdLevelComponentProps = {
-  thirdLevelProps: ThirdLevelProps;
-};
+function ThirdLevelComponent() {
+  const thirdLevelProps = useContext(ThirdLevelContext);
 
-function ThirdLevelComponent({ thirdLevelProps }: ThirdLevelComponentProps) {
   return (
     <div>
-      <h3>{thirdLevelProps.thirdLevelText}</h3>
-      <FourthLevelComponent fourthLevelProps={thirdLevelProps.fourthLevelProps} />
+      <h3>{thirdLevelProps?.thirdLevelText}</h3>
+      <FourthLevelComponent />
     </div>
   );
 }
 
-type FourthLevelComponentProps = {
-  fourthLevelProps: FourthLevelProps;
-};
+function FourthLevelComponent() {
+  const fourthLevelProps = useContext(FourthLevelContext);
 
-function FourthLevelComponent({ fourthLevelProps }: FourthLevelComponentProps) {
   return (
     <div>
-      <h4>{fourthLevelProps.fourthLevelText}</h4>
+      <h4>{fourthLevelProps?.fourthLevelText}</h4>
     </div>
   );
 }
