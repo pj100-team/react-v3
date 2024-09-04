@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 
-function App() {
+function useAddressSearch() {
   const [postalCode, setPostalCode] = useState('');
   const [result, setResult] = useState('');
   const [error, setError] = useState('');
@@ -31,6 +31,12 @@ function App() {
       setIsLoading(false);
     }
   };
+
+  return { postalCode, setPostalCode, result, error, isLoading, fetchData };
+}
+
+function App() {
+  const { postalCode, setPostalCode, result, error, isLoading, fetchData } = useAddressSearch();
 
   return (
     <div className="container mx-auto p-4">
