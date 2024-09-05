@@ -28,10 +28,10 @@ const InputField: React.FC<InputProps> = ({ label, type, value, onChange, error 
 };
 
 function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [emailError, setEmailError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -46,9 +46,7 @@ function App() {
   const checkError = () => {
     if (!email) setEmailError('Please enter your email');
     if (!password) setPasswordError('Please enter your password');
-
-    if (!email || !password) return true;
-    return false;
+    return !email || !password;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
