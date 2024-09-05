@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from 'react';
+import { useState, useCallback, memo } from 'react';
 import './App.css';
 
 const Button = memo(({ onClick }: { onClick: () => void }) => {
@@ -16,8 +16,8 @@ const CountDisplay = memo(({ count }: { count: number }) => {
 });
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [count2, setCount2] = useState(0);
+  const [count, setCount] = useState<number>(0);
+  const [count2, setCount2] = useState<number>(0);
 
   const handleClick = useCallback(() => {
     setCount((prevCount) => prevCount + 1);
