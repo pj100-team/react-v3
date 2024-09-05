@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
 
   const handleLoginToggle = () => {
     setIsLoggedIn(!isLoggedIn);
