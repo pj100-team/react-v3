@@ -1,31 +1,48 @@
 import { useState } from 'react';
 import './App.css';
 
+type Address = {
+  address1: string;
+  address2: string;
+  address3: string;
+  kana1: string;
+  kana2: string;
+  kana3: string;
+  prefcode: string;
+  zipcode: string;
+};
+
+type ApiResponse = {
+  message: string | null;
+  results: Address[] | null;
+  status: number;
+};
+
 function App() {
-  const [postalCode, setPostalCode] = useState('');
-  const [result, setResult] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [postalCode, setPostalCode] = useState<string>('');
+  const [result, setResult] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchData = async () => {
     setIsLoading(true);
 
     try {
       const response = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${postalCode}`);
-      const data = await response.json();
+      const data: ApiResponse = await response.json();
 
-      if (data.status === 400) {
-        setError(data.message);
-        setResult('');
-      } else {
-        const address = data.results[0];
-        const fullAddress = `${address.address1}${address.address2}${address.address3}`;
-        setResult(fullAddress);
-        setError('');
-      }
+      if (data.status !== 200) throw new Error(data.message || 'An error occurred while fetching data.');
+
+      const address = data.results?.[0];
+      const fullAddress = address ? `${address.address1}${address.address2}${address.address3}` : '';
+      setResult(fullAddress);
+      setError('');
     } catch (error) {
-      console.error(error);
-      setError('An error occurred while fetching data.');
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('An unknown error occurred');
+      }
       setResult('');
     } finally {
       setIsLoading(false);
@@ -34,7 +51,6 @@ function App() {
 
   return (
     <div className="container mx-auto p-4">
-      {' '}
       {/* Apply Tailwind CSS classes */}
       <input
         type="text"
