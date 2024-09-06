@@ -1,11 +1,23 @@
-import "./App.css";
+import './App.css';
 
 function App() {
-	return (
-		<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
-			React-v3
-		</header>
-	);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    console.log(`email: ${form.get('email')}`);
+    console.log(`password: ${form.get('pass')}`);
+    console.log('form submitted');
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input name="email" type="text" placeholder="Enter your name" />
+        <input name="pass" type="password" placeholder="Enter your password" />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
 }
 
 export default App;
