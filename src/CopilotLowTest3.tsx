@@ -9,7 +9,7 @@ const CopilotLowTest3 = () => {
   return (
     <div>
       <p>Test3</p>
-      <button onClick={handleClick}>Click Me</button>
+      <button onClick={handleClick}>クリック</button>
     </div>
   );
 };
