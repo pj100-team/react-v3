@@ -1,11 +1,27 @@
-import "./App.css";
+// 配列データを使って、リストを動的に作成するコンポーネントを作成してください(Propsも用意）
+
+type Props = {
+  data: string[];
+};
+
+const List = ({ data }: Props) => {
+  return (
+    <ul>
+      {data.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  );
+};
 
 function App() {
-	return (
-		<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
-			React-v3
-		</header>
-	);
+  const data = ['item1', 'item2', 'item3'];
+
+  return (
+    <div className="App">
+      <List data={data} />
+    </div>
+  );
 }
 
 export default App;
