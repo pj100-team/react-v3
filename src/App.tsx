@@ -1,11 +1,27 @@
-import "./App.css";
+import './App.css';
+
+// クリックすると、受け取った文字のアラートを表示するボタンを作成
+const Button = (props: { text: string }) => {
+  // add tailwind classname this button
+  const className = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded';
+  return (
+    <button className={className} onClick={() => alert(props.text)}>
+      {props.text}
+    </button>
+  );
+};
 
 function App() {
-	return (
-		<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
-			React-v3
-		</header>
-	);
+  // tailwindを使用して、このボタンを中央寄せしたうえでいい感じに配置する
+  // 間隔を開ける
+  const center = 'h-screen flex justify-center items-center gap-4';
+  return (
+    <div className={center}>
+      <Button text="Hello" />
+      <Button text="Next.js" />
+      <Button text="TypeScript" />
+    </div>
+  );
 }
 
 export default App;
