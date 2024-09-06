@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import CopilotLowTest2 from './CopilotLowTest2';
+import CopilotLowTest3 from './CopilotLowTest3';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <CopilotLowTest2 />
+    <CopilotLowTest3 />
   </React.StrictMode>,
 );
