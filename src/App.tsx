@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import './App.css';
 
-const ShowCount = ({ cnt, no }: { cnt: number; no: number }) => {
+const ShowCount = memo(({ cnt, no }: { cnt: number; no: number }) => {
   console.log(`show count:${no}`);
   return <div>count:{cnt}</div>;
-};
+});
 
 function App() {
   const [count1, setCount1] = useState<number>(0);
