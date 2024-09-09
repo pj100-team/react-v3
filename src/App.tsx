@@ -23,7 +23,7 @@ const getData = async (zipcode: string) => {
   const res = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zipcode}`);
   const data: ApiResponse = await res.json();
 
-  if (data.message) throw new Error(data.message);
+  if (!data.results) throw new Error(data.message ?? '住所を取得出来ませんでした');
   return data.results[0].address1 + data.results[0].address2 + data.results[0].address3;
 };
 
