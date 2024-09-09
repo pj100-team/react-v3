@@ -2,10 +2,10 @@ import { useState } from 'react';
 import './App.css';
 
 function useAddressSearch() {
-  const [postalCode, setPostalCode] = useState('');
-  const [result, setResult] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [postalCode, setPostalCode] = useState<string>('');
+  const [result, setResult] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchData = async () => {
     setIsLoading(true);
