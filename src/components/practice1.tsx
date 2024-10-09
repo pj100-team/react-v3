@@ -1,30 +1,33 @@
-// src/practice1.tsx
 import React from 'react';
-import Button from './components/button';
+import Button from './button';
 
 const Practice1: React.FC = () => {
 	const handleClick = (buttonName: string) => {
-		console.log(`${buttonName} was clicked`);
+		console.log(buttonName);
 	};
 
 	return (
-		<div style={{ padding: '20px', textAlign: 'center' }}>
-			<h2>React-v3</h2>
-			<Button
-				label="button1"
-				onClick={() => handleClick('button1')}
-				style={{ backgroundColor: 'red', color: 'white', padding: '10px 20px', margin: '5px' }}
-			/>
-			<Button
-				label="button2"
-				onClick={() => handleClick('button2')}
-				style={{ backgroundColor: 'yellow', color: 'black', padding: '10px 20px', margin: '5px' }}
-			/>
-			<Button
-				label="button3"
-				onClick={() => handleClick('button3')}
-				style={{ backgroundColor: 'green', color: 'white', padding: '10px 20px', margin: '5px' }}
-			/>
+		<div style={{ textAlign: 'center',  borderRadius: '10px',  margin: '100px auto' }}>
+			<div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', gap: '40px' }}>
+				<Button
+					label="button1"
+					backgroundColor="#f87171"
+					textColor="#f9fafb"
+					onClick={() => handleClick('button1')}
+				/>
+				<Button
+					label="button2"
+					backgroundColor="#fcd34d"
+					textColor="#f9fafb"
+					onClick={() => handleClick('button2')}
+				/>
+				<Button
+					label="button3"
+					backgroundColor="#86efac"
+					textColor="#f9fafb"
+					onClick={() => handleClick('button3')}
+				/>
+			</div>
 		</div>
 	);
 };
