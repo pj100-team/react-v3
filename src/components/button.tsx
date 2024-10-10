@@ -5,19 +5,18 @@ interface ButtonProps {
 	backgroundColor: string;
 	textColor: string;
 	onClick: () => void;
+	className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, backgroundColor, textColor, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ label, backgroundColor, textColor, onClick, className }) => {
 	return (
 		<button
 			onClick={onClick}
-			className="p-2 rounded cursor-pointer border-2"
+			className={`p-2 rounded border-2 ${className}`}
 			style={{
 				backgroundColor: backgroundColor,
 				color: textColor,
 				borderColor: backgroundColor,
-				padding: '8px 38px',
-				fontSize: '18px',
 			}}
 		>
 			{label}
