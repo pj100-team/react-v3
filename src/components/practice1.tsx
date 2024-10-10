@@ -13,22 +13,22 @@ const Practice1: React.FC = () => {
 					label="button1"
 					backgroundColor="#f87171"
 					textColor="#f9fafb"
-					onClick={() => handleClick('button1')}
 					className="px-11 py-4 text-lg"
+					handleClick={() => handleClick('button1')}
 				/>
 				<Button
 					label="button2"
 					backgroundColor="#fcd34d"
 					textColor="#f9fafb"
-					onClick={() => handleClick('button2')}
 					className="px-11 py-4 text-lg"
+					handleClick={() => handleClick('button2')}
 				/>
 				<Button
 					label="button3"
 					backgroundColor="#86efac"
 					textColor="#f9fafb"
-					onClick={() => handleClick('button3')}
 					className="px-11 py-4 text-lg"
+					handleClick={() => handleClick('button3')}
 				/>
 			</div>
 		</div>
