@@ -1,0 +1,33 @@
+.header {
+  background-color: #94a3b8;
+  text-align: center;
+  padding: 20px;
+  color: #f9fafb;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+.around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.btn {
+  padding: 0.2rem 0.5rem;
+  color: #f9fafb;
+  border-radius: 4px;
+}
+.red {
+  background-color: #f87171;
+}
+.yellow {
+  background-color: #fcd34d;
+}
+.green {
+  background-color: #86efac;
+}
