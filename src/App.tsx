@@ -1,30 +1,16 @@
-import { useState } from "react";
-import "./App.css";
-import Input from "./components/Input";
-import Button from "./components/botton";
+import React from 'react';
+import './App.css';
+import Practice2 from './components/input';
 
 function App() {
-  const [inputText, setInputText] = useState<string>("");
-
-  return (
-      <div className="flex justify-center my-10">
-        <Input
-          styles="h-8 border-2"
-          value={inputText}
-          onChange={(event) => {
-            setInputText(event.target.value);
-            console.log(event.target.value);
-          }}
-        />
-        <Button
-          buttonName="reset"
-          backGroundColor="red"
-          onClick={() => {
-            setInputText("");
-          }}
-        />
-      </div>
-  );
+	return (
+		<div>
+			<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
+				React-v3
+			</header>
+			<input/>
+		</div>
+	);
 }
 
 export default App;
