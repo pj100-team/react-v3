@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Practice2 from './components/practice2';
+import Input from './components/input';
 
 function App() {
 	return (
@@ -8,8 +8,9 @@ function App() {
 			<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
 				React-v3
 			</header>
-			<Practice2 />
+			<input />
 		</div>
 	);
 }
+
 export default App;
