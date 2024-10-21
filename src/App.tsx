@@ -7,7 +7,6 @@ function App() {
   const [inputText, setInputText] = useState<string>("");
 
   return (
-    <>
       <div className="flex justify-center my-10">
         <Input
           styles="h-8 border-2"
@@ -25,7 +24,6 @@ function App() {
           }}
         />
       </div>
-    </>
   );
 }
 
