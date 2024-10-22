@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface InputProps {
   type: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
