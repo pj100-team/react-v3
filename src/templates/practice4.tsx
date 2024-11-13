@@ -8,7 +8,7 @@ type FormData = {
 };
 
 const Practice4 = () => {
-  const { register, handleSubmit, setValue, formState: { errors }, watch } = useForm<FormData>();
+  const { register, handleSubmit, setValue, formState: { errors }, watch, clearErrors } = useForm<FormData>();
   const [errorMessage, setErrorMessage] = useState("");
 
   const postalCode = watch("postalCode");
@@ -33,13 +33,17 @@ const Practice4 = () => {
   };
 
   useEffect(() => {
-    if (postalCode && postalCode.length === 7) {
-      searchAddress(postalCode);
-    } else {
-      setValue("prefecture", "");
-      setValue("city", "");
+    if (postalCode) {
+      if (postalCode.length === 7) {
+        searchAddress(postalCode);
+      } else {
+        setErrorMessage("");
+        setValue("prefecture", "");
+        setValue("city", "");
+        clearErrors("postalCode");
+      }
     }
-  }, [postalCode, setValue]);
+  }, [postalCode, setValue, clearErrors]);
 
   const onSubmit = (data: FormData) => {
     console.log("入力された値:", data);
