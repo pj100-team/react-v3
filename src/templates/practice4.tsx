@@ -10,10 +10,9 @@ type FormData = {
 const Practice4 = () => {
   const { register, handleSubmit, setValue, formState: { errors }, watch, clearErrors } = useForm<FormData>();
   const [errorMessage, setErrorMessage] = useState("");
-
   const postalCode = watch("postalCode");
 
-  const searchAddress = async (postalCode: string) => {
+  const searchAddress = async () => {
     try {
       const response = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${postalCode}`);
       const data = await response.json();
@@ -35,7 +34,7 @@ const Practice4 = () => {
   useEffect(() => {
     if (postalCode) {
       if (postalCode.length === 7) {
-        searchAddress(postalCode);
+        searchAddress();
       } else {
         setErrorMessage("");
         setValue("prefecture", "");
