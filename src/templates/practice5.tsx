@@ -9,8 +9,8 @@ interface Todo {
 
 const Practice5: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [inputValue, setInputValue] = useState('');
-  const [selectAll, setSelectAll] = useState(false);
+  const [inputValue, setInputValue] = useState<string>('');
+  const [selectAll, setSelectAll] = useState<boolean>(false);
 
   const handleAddTodo = () => {
     if (inputValue.trim() === '') return;
