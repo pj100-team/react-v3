@@ -33,15 +33,13 @@ export const usePostalCodeForm = () => {
   };
 
   useEffect(() => {
-    if (postalCode) {
-      if (postalCode.length === 7) {
-        searchAddress(postalCode);
-      } else {
-        setErrorMessage("");
-        setValue("prefecture", "");
-        setValue("city", "");
-        clearErrors("postalCode");
-      }
+    if (postalCode && postalCode.length === 7) {
+      searchAddress(postalCode);
+    } else {
+      setErrorMessage("");
+      setValue("prefecture", "");
+      setValue("city", "");
+      clearErrors("postalCode");
     }
   }, [postalCode, setValue, clearErrors]);
 
