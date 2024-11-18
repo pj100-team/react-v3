@@ -9,37 +9,48 @@ interface Todo {
 
 export const useTodoList = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [selectAll, setSelectAll] = useState<boolean>(false);
+
+  const selectAll = todos.length > 0 && todos.every(todo => todo.isChecked);
 
   const addTodo = (text: string) => {
-    if (text.trim() === '') return;
+    const trimmedText = text.trim();
+    if (trimmedText === '') return;
+
     const newTodo: Todo = {
       id: Date.now(),
-      text,
+      text: trimmedText,
       date: new Date().toLocaleDateString(),
       isChecked: false,
     };
-    setTodos([...todos, newTodo]);
+    setTodos(prevTodos => [...prevTodos, newTodo]);
   };
 
   const deleteTodo = (id: number) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
   };
 
   const toggleSelectAll = () => {
-    const newSelectAll = !selectAll;
-    setSelectAll(newSelectAll);
-    setTodos(todos.map(todo => ({ ...todo, isChecked: newSelectAll })));
+    const newSelectAllState = !selectAll;
+    setTodos(prevTodos => prevTodos.map(todo => ({ ...todo, isChecked: newSelectAllState })));
   };
 
   const toggleTodoCheck = (id: number) => {
-    setTodos(todos.map(todo => (todo.id === id ? { ...todo, isChecked: !todo.isChecked } : todo)));
+    setTodos(prevTodos =>
+      prevTodos.map(todo => (todo.id === id ? { ...todo, isChecked: !todo.isChecked } : todo))
+    );
   };
 
   const deleteSelectedTodos = () => {
-    setTodos(todos.filter(todo => !todo.isChecked));
-    setSelectAll(false);
+    setTodos(prevTodos => prevTodos.filter(todo => !todo.isChecked));
   };
 
-  return { todos, selectAll, addTodo, deleteTodo, toggleSelectAll, toggleTodoCheck, deleteSelectedTodos };
+  return { 
+    todos, 
+    selectAll, 
+    addTodo, 
+    deleteTodo, 
+    toggleSelectAll, 
+    toggleTodoCheck, 
+    deleteSelectedTodos 
+  };
 };
