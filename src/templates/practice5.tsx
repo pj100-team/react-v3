@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTodoList } from '../hooks/useTodoList';
 
 const Practice5: React.FC = () => {
-  const {todos,addTodo,deleteTodo,toggleSelectAll,toggleTodoCheck,deleteSelectedTodos,} = useTodoList();
+  const {todos,addTodo,deleteTodo,toggleSelectAll,toggleTodoCheck,deleteSelectedTodos, } = useTodoList();
   const [inputValue, setInputValue] = useState<string>('');
 
   const handleAddTodo = () => {
@@ -30,7 +30,7 @@ const Practice5: React.FC = () => {
       </div>
 
       <div className="mb-4">
-        {todos.length > 0 ? (
+        {todos.length > 0 && (
           <table className="w-full table-auto border-collapse text-center text-xs border border-gray-300">
             <thead>
               <tr>
@@ -79,7 +79,7 @@ const Practice5: React.FC = () => {
               ))}
             </tbody>
           </table>
-        ) : null}
+        )}
       </div>
     </div>
   );
