@@ -1,5 +1,4 @@
 /* /components/Button.tsx  */
-
 type ButtonType = 'button' | 'submit' | 'reset';
 interface ButtonProps {
   children: React.ReactNode;
@@ -9,15 +8,16 @@ interface ButtonProps {
   title: string;
 }
 
-export const Button = ({
+const Button = ({
   children,
   className = '',
-  type = 'button',
+  type = 'reset',
+  onClick,
   title,
 }: ButtonProps) => {
   return (
     <button
-      onClick={() => console.log(title)}
+      onClick={onClick}
       className={`text-gray-50 px-16 py-2 rounded-lg font-medium border-2 border-transparent ${className}`}
       type={type}
       title={title}
@@ -26,3 +26,4 @@ export const Button = ({
     </button>
   );
 };
+export default Button;
