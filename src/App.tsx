@@ -1,5 +1,5 @@
 import "./App.css";
-import Practice3 from "./templates/Practice3";
+import Practice4 from "./templates/Practice4"
 
 function App() {
 	return (
@@ -7,7 +7,7 @@ function App() {
 		<div className="bg-slate-400 text-center p-5 text-4xl text-gray-50">
 			React-v3
 		</div>
-		<Practice3 />
+		<Practice4/> 
 		</div>
 	);
 }

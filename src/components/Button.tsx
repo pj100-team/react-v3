@@ -8,10 +8,10 @@ interface ButtonProps {
   title: string;
 }
 
-const Button = ({
+export const Button = ({
   children,
   className = '',
-  type = 'reset',
+  type = 'button',
   onClick,
   title,
 }: ButtonProps) => {
