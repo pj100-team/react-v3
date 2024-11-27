@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+import Button from '../components/Button'
+import ERROR_MESSAGE, { ERROR_MESSAGES } from '../messages'
+import {useFormData} from '../hooks/useFormData';
+
+
+const Practice4: React.FC = () => {
+  const {register,isSubmittable,isSearchable,errors,onSubmit,onSearch} = useFormData();
+=======
 import { useForm} from 'react-hook-form'
 import { object, string,InferType } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -66,6 +75,7 @@ const Practice4: React.FC = () => {
         isSearchable(true);
       }
     };
+>>>>>>> feature/practice5
   return (
     <div className="m-auto flex flex-col gap-4">
       <h1 className="text-4xl text-center mt-2">addressSearch</h1>
@@ -78,7 +88,11 @@ const Practice4: React.FC = () => {
             id="postalCode" type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500"
             {...register('postalCode')}
           />
+<<<<<<< HEAD
+          {isSearchable && errors.postalCode && (
+=======
           {canSearch && errors.postalCode && (
+>>>>>>> feature/practice5
             <p className="text-xs italic text-red-500">{errors.postalCode.message}</p>
           )}
           </div>
@@ -86,7 +100,11 @@ const Practice4: React.FC = () => {
           <Button title="search" onClick={onSearch} className=' bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
           Search
           </Button>
+<<<<<<< HEAD
+          {isSearchable? (null):(<p className="text-xs italic text-red-500">{ERROR_MESSAGE.required}</p>)}
+=======
           {canSearch? (null):(<p className="text-xs italic text-red-500">{ERROR_MESSAGE.required}</p>)}
+>>>>>>> feature/practice5
           </div>
           </div>
         </div>
@@ -114,7 +132,11 @@ const Practice4: React.FC = () => {
           </div>
         </div>
 
+<<<<<<< HEAD
+        {isSubmittable ? (
+=======
         {canSubmit ? (
+>>>>>>> feature/practice5
           <Button title="submit" type="submit" className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 rounded'>
             送信
           </Button>
@@ -126,5 +148,9 @@ const Practice4: React.FC = () => {
   );
 };
 
+<<<<<<< HEAD
+export default Practice4;
+=======
 export default Practice4;
 
+>>>>>>> feature/practice5
