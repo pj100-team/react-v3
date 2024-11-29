@@ -1,66 +1,10 @@
 import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import { InputField } from '../components/InputField';
-import { useState } from 'react';
 import { ERROR_MESSAGES } from '../messages';
-
-export type AddressForm = {
-  postalCode: string;
-  prefecture: string;
-  area: string;
-};
-
-export type AddressSearchResult = {
-  results?: Array<{ address1: string; address2: string }>;
-};
+import { useFormData } from '../hooks/useFormData';
 
 export const Practice4 = () => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<AddressForm>({
-    mode: 'onBlur',
-    defaultValues: {
-      postalCode: '',
-      prefecture: '',
-      area: '',
-    },
-  });
-  const [noResultsMessage, setNoResultsMessage] = useState<string>('');
-  const onSubmit: SubmitHandler<AddressForm> = (data) => console.log(data);
-
-  const postalCode = watch('postalCode', '');
-
-  const fetchData = async (query: string) => {
-    try {
-      const response = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${query}`);
-      const result: AddressSearchResult = await response.json();
-      if (result['results']) {
-        const { address1, address2 } = result['results'][0];
-        setValue('prefecture', address1, { shouldValidate: true });
-        setValue('area', address2, { shouldValidate: true });
-        setNoResultsMessage('');
-      } else {
-        setValue('prefecture', '');
-        setValue('area', '');
-        setNoResultsMessage(ERROR_MESSAGES.invalidPostalCode);
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  const handleClick = () => {
-    if (postalCode.length === 7) {
-      fetchData(postalCode);
-    } else {
-      setValue('prefecture', '');
-      setValue('area', '');
-    }
-  };
+  const { register, handleSubmit, onSubmit, errors, noResultsMessage, validatePostalCode } = useFormData();
 
   return (
     <div className="flex flex-col items-center">
@@ -80,7 +24,7 @@ export const Practice4 = () => {
           <button
             className="self-start mx-2 px-1 py-1 bg-slate-500 text-white rounded-md hover:bg-slate-600"
             type="button"
-            onClick={handleClick}
+            onClick={validatePostalCode}
           >
             Search
           </button>

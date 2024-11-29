@@ -1,32 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Todo } from '../templates/Practice5';
 
 type TodoListProps = {
   todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  isAllChecked: boolean;
+  toggleTodoCheckedStatus: (id: number) => void;
+  toggleAllTodoCheckedStatus: () => void;
+  deleteSelectedTodos: () => void;
+  deleteTodo: (id: number) => void;
 };
 
-export const TodoList = ({ todos, setTodos }: TodoListProps) => {
-  const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
-
-  const handleDeleteTodo = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-
-  const handleDeleteSelected = () => {
-    setIsAllChecked(false);
-    setTodos(todos.filter((todo) => todo.checked === false));
-  };
-
-  const toggleTodoCheckedStatus = (id: number) => {
-    setTodos(todos.map((todo) => (todo.id === id ? { ...todo, checked: !todo.checked } : todo)));
-  };
-
-  const toggleAllTodoCheckedStatus = () => {
-    setIsAllChecked(!isAllChecked);
-    setTodos(todos.map((todo) => ({ ...todo, checked: !isAllChecked })));
-  };
-
+export const TodoList = ({
+  todos,
+  isAllChecked,
+  toggleTodoCheckedStatus,
+  toggleAllTodoCheckedStatus,
+  deleteSelectedTodos,
+  deleteTodo,
+}: TodoListProps) => {
   return (
     <>
       {todos.length !== 0 && (
@@ -37,7 +28,7 @@ export const TodoList = ({ todos, setTodos }: TodoListProps) => {
                 <input type="checkbox" checked={isAllChecked} onChange={toggleAllTodoCheckedStatus} />
                 {todos.some((todo) => todo.checked === true) && (
                   <button
-                    onClick={handleDeleteSelected}
+                    onClick={deleteSelectedTodos}
                     className="w-16 absolute -top-12 left-1/2 transform -translate-x-1/2 px-1 py-1 text-xs bg-red text-white rounded-md cursor-pointer"
                   >
                     一括削除
@@ -58,7 +49,7 @@ export const TodoList = ({ todos, setTodos }: TodoListProps) => {
                 <td className="border border-gray-900 px-4 py-2">{todo.date}</td>
                 <td className="border border-gray-900 px-4 py-2">{todo.text}</td>
                 <td className="border border-gray-900 px-4 py-2">
-                  <button type="button" onClick={() => handleDeleteTodo(todo.id)}>
+                  <button type="button" onClick={() => deleteTodo(todo.id)}>
                     削除
                   </button>
                 </td>
