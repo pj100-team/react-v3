@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface Props {
   type: React.HTMLInputTypeAttribute;
   className: string;
   isChecked: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  children: React.ReactNode;
+  children?: ReactNode;
 }
 
 const Input: React.FC<Props> = ({ type, className, isChecked, onChange, children }) => {
