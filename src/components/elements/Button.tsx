@@ -2,15 +2,13 @@ import React from 'react';
 
 interface ButtonProps {
   label: string;
-  backgroundColor: string;
+  className: string;
+  onClick: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ backgroundColor, label }) => {
-  const handleClick = () => {
-    console.log(label);
-  };
+const Button: React.FC<ButtonProps> = ({ className, label, onClick }) => {
   return (
-    <button className={`px-4 py-1 text-[#f9fafb] rounded-xl ${backgroundColor}`} onClick={handleClick}>
+    <button className={`${className}`} onClick={onClick}>
       {label}
     </button>
   );
