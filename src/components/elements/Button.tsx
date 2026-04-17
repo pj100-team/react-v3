@@ -2,13 +2,13 @@ import React from 'react';
 
 interface ButtonProps {
   label: string;
-  className: string;
-  onClick: () => void;
+  backgroundColor?: string;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ className, label, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ backgroundColor, label, onClick }) => {
   return (
-    <button className={`${className}`} onClick={onClick}>
+    <button className={`px-4 py-1 text-[#f9fafb] rounded-xl ${backgroundColor}`} onClick={onClick}>
       {label}
     </button>
   );
