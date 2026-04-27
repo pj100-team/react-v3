@@ -2,6 +2,7 @@ import React from 'react';
 
 interface ButtonProps {
   label: string;
+  type?: React.HTMLInputTypeAttribute;
   backgroundColor?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
