@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 interface Props {
   type: React.HTMLInputTypeAttribute;
@@ -9,13 +9,12 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const Input: React.FC<Props> = ({ type, className, value, isChecked, onChange, children }) => {
+const Input = forwardRef<HTMLInputElement, Props>(({ children, ...props }, ref) => {
   return (
     <div>
-      <input type={type} className={className} onChange={onChange} value={value} checked={isChecked} />
+      <input {...props} ref={ref} />
       {children}
     </div>
   );
-};
-
+});
 export default Input;
