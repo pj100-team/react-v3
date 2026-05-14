@@ -2,13 +2,20 @@ import React from 'react';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 
-function Practice5() {
-  const [inputText, setInputText] = React.useState('');
+type TodoType = {
+  id: number;
+  content: string;
+  date: string;
+  checked: boolean;
+};
 
-  const [todos, setTodos] = React.useState<{ id: number; content: string; date: string; checked: boolean }[]>([]);
+function Practice5() {
+  const [inputText, setInputText] = React.useState<string>('');
+
+  const [todos, setTodos] = React.useState<TodoType[]>([]);
 
   const handleClick = () => {
-    const newTodo = {
+    const newTodo: TodoType = {
       id: Date.now(),
       content: inputText,
       date: new Date().toLocaleDateString(),
@@ -31,6 +38,16 @@ function Practice5() {
     setTodos(todos.map((t) => (t.id === id ? { ...t, checked: !t.checked } : t)));
   };
 
+  const handleDeleteAll = () => {
+    setTodos(todos.filter((t) => !t.checked));
+  };
+
+  const handleDeleteSelected = (id: number) => {
+    setTodos(todos.filter((t) => t.id !== id));
+  };
+
+  const hasChecked = todos.some((t) => t.checked);
+
   return (
     <>
       <div className="flex justify-center mt-4 mb-4 text-2xl">TODOLIST</div>
@@ -47,14 +64,14 @@ function Practice5() {
       </div>
       <div className="max-w-[600px] flex flex-col m-auto">
         <div className="flex justify-start mb-2">
-          {todos.some((t) => t.checked) && (
+          {hasChecked && (
             <Button
               label="一括削除"
               backgroundColor="bg-red-500"
               textColor="text-[#f9fafb]"
               textSize="text-xs"
               onClick={() => {
-                setTodos(todos.filter((t) => !t.checked));
+                handleDeleteAll();
               }}
             />
           )}
@@ -69,7 +86,7 @@ function Practice5() {
                   <Input
                     type="checkbox"
                     className="flex justify-center w-12"
-                    checked={todos.length > 0 && todos.every((t) => t.checked)}
+                    isChecked={todos.length > 0 && todos.every((t) => t.checked)}
                     onChange={handleAllCheck}
                   ></Input>
                 </th>
@@ -86,7 +103,7 @@ function Practice5() {
                       <Input
                         type="checkbox"
                         className="flex justify-center w-12"
-                        checked={todo.checked}
+                        isChecked={todo.checked}
                         onChange={() => handleCheck(todo.id)}
                       ></Input>
                     </div>
@@ -102,7 +119,7 @@ function Practice5() {
                       <Button
                         label="削除"
                         backgroundColor="bg-white"
-                        onClick={() => setTodos(todos.filter((t) => t.id !== todo.id))}
+                        onClick={() => handleDeleteSelected(todo.id)}
                       ></Button>
                     </div>
                   </td>

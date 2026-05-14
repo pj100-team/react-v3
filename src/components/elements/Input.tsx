@@ -7,8 +7,6 @@ interface Props {
   isChecked?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   children?: React.ReactNode;
-  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
-  checked?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, Props>(({ children, ...props }, ref) => {
