@@ -1,59 +1,10 @@
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
-import { useForm, SubmitHandler } from 'react-hook-form';
-
-interface Inputs {
-  zipcode: string;
-  prefecture: string;
-  city: string;
-}
+import useAddress from '../hooks/useAddress';
 
 const Practice4 = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-    setValue,
-    setError,
-    clearErrors,
-  } = useForm<Inputs>({
-    mode: 'onChange',
-  });
-
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => console.log(data, '入力されたデータ');
-
-  const zipcodeValue = watch('zipcode');
-
-  const fetchData = useCallback(
-    async (zipcode: string) => {
-      try {
-        const response = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zipcode}`);
-        const data = await response.json();
-
-        if (data.results) {
-          const result = data.results[0];
-          setValue('prefecture', result.address1);
-          setValue('city', result.address2 + result.address3);
-          clearErrors('zipcode');
-        } else {
-          setError('zipcode', { type: 'manual', message: '該当する住所が存在しません' });
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    [setValue, clearErrors, setError],
-  );
-
-  useEffect(() => {
-    if (zipcodeValue?.length === 7) {
-      console.log(zipcodeValue, 'zipcodeValue');
-      fetchData(zipcodeValue);
-    }
-  }, [zipcodeValue, fetchData]);
-
+  const { onSubmit, register, handleSubmit, errors } = useAddress();
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col m-auto w-fit">
       <p className="mt-4 mb-4 m-auto">addressSearch</p>
