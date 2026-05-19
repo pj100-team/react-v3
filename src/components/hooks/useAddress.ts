@@ -7,7 +7,7 @@ export interface Inputs {
   city: string;
 }
 
-const useAddress = () => {
+export const useAddress = () => {
   const {
     register,
     handleSubmit,
@@ -60,5 +60,3 @@ const useAddress = () => {
     fetchData,
   };
 };
-
-export default useAddress;

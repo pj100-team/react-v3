@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
-import useAddress from '../hooks/useAddress';
+import { useAddress } from '../hooks/useAddress';
 
 const Practice4 = () => {
   const { onSubmit, register, handleSubmit, errors } = useAddress();

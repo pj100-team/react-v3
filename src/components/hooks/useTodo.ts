@@ -7,7 +7,7 @@ export type TodoType = {
   checked: boolean;
 };
 
-const useTodo = () => {
+export const useTodo = () => {
   const [inputText, setInputText] = React.useState<string>('');
 
   const [todos, setTodos] = React.useState<TodoType[]>([]);
@@ -58,5 +58,3 @@ const useTodo = () => {
     hasChecked,
   };
 };
-
-export default useTodo;
