@@ -5,7 +5,7 @@ interface ButtonProps {
   backgroundColor: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ backgroundColor, label }) => {
+const Button = ({ backgroundColor, label }: ButtonProps) => {
   const handleClick = () => {
     console.log(label);
   };
