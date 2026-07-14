@@ -1,6 +1,6 @@
-import React, { Children } from 'react';
+import React from 'react';
 
-interface Props {
+interface InputProps {
   type: React.HTMLInputTypeAttribute;
   className: string;
   isChecked: boolean;
@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Input: React.FC<Props> = ({ type, className, isChecked, onChange, children }) => {
+const Input = ({ type, className, isChecked, onChange, children }: InputProps) => {
   return (
     <div className={className}>
       <input type={type} checked={isChecked} onChange={onChange} />
