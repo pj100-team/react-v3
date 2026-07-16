@@ -2,8 +2,8 @@ import React from 'react';
 
 interface ButtonProps {
   label: string;
-  backgroundColor: string;
-  onClick: () => void;
+  backgroundColor?: string;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button = ({ backgroundColor, label, onClick }: ButtonProps) => {
