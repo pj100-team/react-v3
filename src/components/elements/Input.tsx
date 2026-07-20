@@ -9,8 +9,14 @@ interface InputProps {
   children?: React.ReactNode;
 }
 
-const Input = ({ type, className, value, isChecked, onChange, children }: InputProps) => {
-  return (
+const Input = ({
+  type,
+  className,
+  value = '',
+  isChecked = false,
+  onChange,
+  children = null,
+}: InputProps) => {  return (
     <div>
       <input type={type} className={className} onChange={onChange} value={value} checked={isChecked} />
       {children}
