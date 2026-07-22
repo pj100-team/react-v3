@@ -1,20 +1,20 @@
-import React, { Children } from 'react';
+import React, { forwardRef } from 'react';
 
-interface InputProps {
+interface Props {
   type: React.HTMLInputTypeAttribute;
   className: string;
-  isChecked: boolean;
+  value?: string;
+  isChecked?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-const Input = ({ type, className, isChecked, onChange, children }: InputProps) => {
+const Input = forwardRef<HTMLInputElement, Props>(({ children, ...props }, ref) => {
   return (
-    <div className={className}>
-      <input type={type} checked={isChecked} onChange={onChange} />
+    <div>
+      <input {...props} ref={ref} />
       {children}
     </div>
   );
-};
-
+});
 export default Input;
