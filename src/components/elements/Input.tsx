@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-interface Props {
+interface InputProps {
   type: React.HTMLInputTypeAttribute;
   className: string;
   value?: string;
@@ -9,7 +9,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const Input = forwardRef<HTMLInputElement, Props>(({ children, ...props }, ref) => {
+const Input = forwardRef<HTMLInputElement, InputProps>(({ children, ...props }, ref) => {
   return (
     <div>
       <input {...props} ref={ref} />

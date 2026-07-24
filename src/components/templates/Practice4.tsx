@@ -47,12 +47,12 @@ const Practice4 = () => {
     [setValue, clearErrors, setError],
   );
 
-  useEffect(() => {
-    if (zipcodeValue?.length === 7) {
-      console.log(zipcodeValue, 'zipcodeValue');
-      fetchData(zipcodeValue);
-    }
-  }, [zipcodeValue, fetchData]);
+useEffect(() => {
+  if (zipcodeValue?.length !== 7) return;
+
+  console.log(zipcodeValue, 'zipcodeValue');
+  fetchData(zipcodeValue);
+}, [zipcodeValue, fetchData]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col m-auto w-fit">
