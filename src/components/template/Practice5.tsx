@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
+import { useState } from 'react';
 
 type TodoType = {
   id: number;
@@ -10,9 +11,9 @@ type TodoType = {
 };
 
 function Practice5() {
-  const [inputText, setInputText] = React.useState<string>('');
+const [inputText, setInputText] = useState<string>('');
 
-  const [todos, setTodos] = React.useState<TodoType[]>([]);
+const [todos, setTodos] = React.useState<TodoType[]>([]);
 
   const handleClick = () => {
     const newTodo: TodoType = {
@@ -70,9 +71,7 @@ function Practice5() {
               backgroundColor="bg-red-500"
               textColor="text-[#f9fafb]"
               textSize="text-xs"
-              onClick={() => {
-                handleDeleteAll();
-              }}
+              onClick={handleDeleteAll}
             />
           )}
         </div>
@@ -120,7 +119,7 @@ function Practice5() {
                         label="削除"
                         backgroundColor="bg-white"
                         onClick={() => handleDeleteSelected(todo.id)}
-                      ></Button>
+                      />
                     </div>
                   </td>
                 </tr>
