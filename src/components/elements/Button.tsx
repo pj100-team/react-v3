@@ -2,16 +2,20 @@ import React from 'react';
 
 interface ButtonProps {
   label: string;
-  type?: React.HTMLInputTypeAttribute;
+  type?: 'button' | 'submit' | 'reset';
   backgroundColor?: string;
   textColor?: string;
   textSize?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ backgroundColor, textColor, textSize, label, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ type, backgroundColor, textColor, textSize, label, onClick }) => {
   return (
-    <button className={`px-4 py-1 rounded-lg font-thin ${backgroundColor} ${textColor} ${textSize}`} onClick={onClick}>
+    <button
+      type={type}
+      className={`px-4 py-1 rounded-lg font-thin ${backgroundColor} ${textColor} ${textSize}`}
+      onClick={onClick}
+    >
       {label}
     </button>
   );
