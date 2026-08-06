@@ -56,7 +56,5 @@ export const useAddress = () => {
     register,
     handleSubmit,
     errors,
-    zipcodeValue,
-    fetchData,
   };
 };

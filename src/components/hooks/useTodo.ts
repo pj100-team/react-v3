@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, ChangeEvent } from 'react';
 
 export type TodoType = {
   id: number;
@@ -8,7 +9,7 @@ export type TodoType = {
 };
 
 export const useTodo = () => {
-  const [inputText, setInputText] = React.useState<string>('');
+  const [inputText, setInputText] = useState<string>('');
 
   const [todos, setTodos] = React.useState<TodoType[]>([]);
 
@@ -23,7 +24,7 @@ export const useTodo = () => {
     setInputText('');
   };
 
-  const handleAllCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAllCheck = (e: ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
     const newTodos = todos.map((t) => ({
       ...t,
