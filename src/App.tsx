@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
-import Practice4 from './components/template/Practice4';
-import Practice5 from './components/template/Practice5';
-import Home from './components/template/Home';
+import Practice4 from './components/templates/Practice4';
+import Practice5 from './components/templates/Practice5';
+import Home from './components/templates/Home';
 
 function AppContent() {
   const location = useLocation();
