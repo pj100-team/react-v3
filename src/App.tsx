@@ -1,6 +1,7 @@
 import "./App.css";
 // import Practice1 from "./templates/practice1";
-import Practice2 from "./templates/practice2";
+// import Practice2 from "./templates/practice2";
+import Practice3 from "./templates/practice3";
 
 function App() {
 	return (
@@ -9,7 +10,8 @@ function App() {
 				React-v3
 			</header>
 			{/* <Practice1 /> */}
-			<Practice2 />
+			{/* <Practice2 /> */}
+			<Practice3 />
 		</>
 	);
 }
