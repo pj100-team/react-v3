@@ -1,16 +1,16 @@
 type InputProps = {
 	type: string;
-	checked: boolean;
+	isChecked: boolean;
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	width: string;
 	height: string;
 };
 
-const Input: React.FC<InputProps> = ({ type, checked, onChange, width, height }) => {
+const Input: React.FC<InputProps> = ({ type, isChecked, onChange, width, height }) => {
   return (
     <input
       type={type}
-	  checked={checked}
+	  checked={isChecked}
       onChange={onChange}
 	  style={{ width: width, height: height }}
     />
