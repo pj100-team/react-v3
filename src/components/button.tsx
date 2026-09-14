@@ -2,6 +2,9 @@ type ButtonStyle = {
     borderColor: string;
     backgroundColor: string;
     color: string;
+    width: string;
+    height: string;
+    borderRadius: string;
 }
 
 type ButtonProps = {
