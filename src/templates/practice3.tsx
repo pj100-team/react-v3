@@ -3,7 +3,7 @@ import Button from "../components/button";
 import { useState } from "react"
 
 const Practice3 = () => {
-	const [inputValue, setInputValue] = useState("");
+	const [inputValue, setInputValue] = useState<string>("");
 
 	return (
 		<div
