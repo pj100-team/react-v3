@@ -19,6 +19,7 @@ function Practice2() {
                     height: "30px"
                 }}
                 onChange = {(e) => setChecked(e.target.checked)}
+                value = ""
             />
             <span
                 style = {{
