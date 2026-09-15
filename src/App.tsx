@@ -1,7 +1,7 @@
 import "./App.css";
-// import Practice1 from "./templates/practice1";
-// import Practice2 from "./templates/practice2";
-import Practice3 from "./templates/practice3";
+// import Practice1 from "./templates/Practice1";
+// import Practice2 from "./templates/Practice2";
+import Practice3 from "./templates/Practice3";
 
 function App() {
 	return (
