@@ -1,13 +1,15 @@
-interface ButtonProps {
+type ButtonProps = {
   label: string;
   backgroundColor: string;
   textColor: string;
-  onClick: () => void;
-}
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
+};
 
-const Button: React.FC<ButtonProps> = ({ label, backgroundColor, textColor, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ label, backgroundColor, textColor, type = "button", onClick }) => {
   return (
     <button
+      type={type}
       style={{
         borderColor: backgroundColor,
         backgroundColor,

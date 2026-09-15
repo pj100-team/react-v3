@@ -1,7 +1,8 @@
 import "./App.css";
 // import Practice1 from "./templates/practice1";
 // import Practice2 from "./templates/practice2";
-import Practice3 from "./templates/practice3";
+// import Practice3 from "./templates/practice3";
+import Practice4 from "./templates/practice4";
 
 function App() {
 	return (
@@ -11,7 +12,8 @@ function App() {
 			</header>
 			{/* <Practice1 /> */}
 			{/* <Practice2 /> */}
-			<Practice3 />
+			{/* <Practice3 /> */}
+			<Practice4 />
 		</>
 	);
 }

@@ -1,23 +1,39 @@
+import { forwardRef } from "react";
+
 type InputProps = {
 	type: string;
+	id?: string;
+	name?: string;
 	value?: string;
 	isChecked?: boolean;
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	placeholder?: string;
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 	width: string;
 	height: string;
 	borderColor?: string;
 };
 
-const Input: React.FC<InputProps> = ({ type, value, isChecked, onChange, width, height, borderColor }) => {
-  return (
-    <input
-      type={type}
-	  value={value}
-	  checked={isChecked}
-      onChange={onChange}
-	  style={{ width: width, height: height, border: `2px solid ${borderColor ?? "#3b82f6"}` }}
-    />
-  );
-};
+const Input = forwardRef<HTMLInputElement, InputProps>(
+	(
+		{ type, id, name, value, isChecked, placeholder, onChange, onBlur, width, height, borderColor },
+		ref
+	) => {
+		return (
+			<input
+				type={type}
+				id={id}
+				name={name}
+				value={value}
+				checked={isChecked}
+				placeholder={placeholder}
+				onChange={onChange}
+				onBlur={onBlur}
+				ref={ref}
+				style={{ width: width, height: height, border: `2px solid ${borderColor ?? "#3b82f6"}` }}
+			/>
+		);
+	}
+);
 
 export default Input;
