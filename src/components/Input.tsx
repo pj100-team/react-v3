@@ -15,7 +15,7 @@ type InputProps = {
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
 	(
-		{ type, id, name, value = "", isChecked = false, placeholder, onChange, onBlur, width, height },
+		{ type, id, name, value, isChecked, placeholder, onChange, onBlur, width, height },
 		ref
 	) => {
 		return (
