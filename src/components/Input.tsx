@@ -11,12 +11,11 @@ type InputProps = {
 	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 	width: string;
 	height: string;
-	borderColor?: string;
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
 	(
-		{ type, id, name, value, isChecked, placeholder, onChange, onBlur, width, height, borderColor },
+		{ type, id, name, value = "", isChecked = false, placeholder, onChange, onBlur, width, height },
 		ref
 	) => {
 		return (
@@ -30,7 +29,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 				onChange={onChange}
 				onBlur={onBlur}
 				ref={ref}
-				style={{ width: width, height: height, border: `2px solid ${borderColor ?? "#3b82f6"}` }}
+				style={{ width: width, height: height, border: "2px solid #3b82f6" }}
 			/>
 		);
 	}

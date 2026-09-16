@@ -1,9 +1,19 @@
-import Input from "../components/input";
-import Button from "../components/button";
+import Input from "../components/Input";
+import Button from "../components/Button";
 import { useState } from "react"
 
 const Practice3 = () => {
 	const [inputValue, setInputValue] = useState<string>("");
+
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setInputValue(e.target.value);
+		console.log(e.target.value);
+	}
+
+	const handleReset = () => {
+		setInputValue("");
+		console.clear();
+	}
 
 	return (
 		<div
@@ -18,22 +28,15 @@ const Practice3 = () => {
 			<Input
 				type="text"
 				value={inputValue}
-				onChange={(e) => {
-					setInputValue(e.target.value);
-					console.log(e.target.value);
-				}}
+				onChange={handleInputChange}
 				width="200px"
 				height="40px"
-				borderColor="#e5e7eb"
 			/>
 			<Button
 				label="リセット"
 				backgroundColor="#3b82f6"
 				textColor="#ffffff"
-				onClick={() => {
-					setInputValue("");
-					console.clear();
-				}}
+				onClick={handleReset}
 			/>
 		</div>
 	);

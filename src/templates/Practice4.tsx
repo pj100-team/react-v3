@@ -1,5 +1,5 @@
-import Input from "../components/input";
-import Button from "../components/button";
+import Input from "../components/Input";
+import Button from "../components/Button";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -115,7 +115,6 @@ const Practice4 = () => {
 							id="postalCode"
 							width="200px"
 							height="40px"
-							borderColor={postalCodeError ? "#ef4444" : "#e5e7eb"}
 							{...register("postalCode", {
 								required: "必須項目です",
 								pattern: {
@@ -144,7 +143,6 @@ const Practice4 = () => {
 							id="prefecture"
 							width="200px"
 							height="40px"
-							borderColor={errors.prefecture ? "#ef4444" : "#e5e7eb"}
 							{...register("prefecture", {
 								required: "必須項目です",
 							})}
@@ -169,7 +167,6 @@ const Practice4 = () => {
 							id="city"
 							width="200px"
 							height="40px"
-							borderColor={errors.city ? "#ef4444" : "#e5e7eb"}
 							{...register("city", {
 								required: "必須項目です",
 							})}
