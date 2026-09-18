@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 const ZIPCLOUD_API_URL = "https://zipcloud.ibsnet.co.jp/api/search";
 
-type ZipcloudResponse = {
+type ZipCloudResponse = {
 	status: number;
 	message: string | null;
 	results:
@@ -44,7 +44,8 @@ const Practice4 = () => {
 	// 郵便番号が7桁になった時点で住所検索APIを呼ぶ
 	useEffect(() => {
 		const zipcode = postalCode.replace(/-/g, "");
-		if (!/^\d{7}$/.test(zipcode)) {
+		const isValidZipcode = /^\d{7}$/.test(zipcode);
+		if (!isValidZipcode) {
 			setSearchError("");
 			return;
 		}
@@ -55,7 +56,7 @@ const Practice4 = () => {
 		const searchAddress = async () => {
 			try {
 				const response = await fetch(`${ZIPCLOUD_API_URL}?zipcode=${zipcode}`);
-				const data: ZipcloudResponse = await response.json();
+				const data: ZipCloudResponse = await response.json();
 				if (ignore) return;
 
 				const address = data.results?.[0];
@@ -92,9 +93,9 @@ const Practice4 = () => {
 
 	return (
 		<>
-			<div style={{ textAlign: "center", fontSize: "24px", marginTop: "24px" }}>
+			<h1 style={{ textAlign: "center", fontSize: "24px", marginTop: "24px" }}>
 				addressForm
-			</div>
+			</h1>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				style={{
@@ -113,6 +114,7 @@ const Practice4 = () => {
 						<Input
 							type="text"
 							id="postalCode"
+							placeholder="100-0000"
 							width="200px"
 							height="40px"
 							{...register("postalCode", {
@@ -141,6 +143,7 @@ const Practice4 = () => {
 						<Input
 							type="text"
 							id="prefecture"
+							placeholder="東京都"
 							width="200px"
 							height="40px"
 							{...register("prefecture", {
@@ -165,6 +168,7 @@ const Practice4 = () => {
 						<Input
 							type="text"
 							id="city"
+							placeholder="千代田区"
 							width="200px"
 							height="40px"
 							{...register("city", {
