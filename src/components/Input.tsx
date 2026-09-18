@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 type InputProps = {
-	type: string;
+	type: "text" | "checkbox";
 	id?: string;
 	name?: string;
 	value?: string;
