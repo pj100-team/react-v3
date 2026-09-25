@@ -1,21 +1,8 @@
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-
-const ZIPCLOUD_API_URL = "https://zipcloud.ibsnet.co.jp/api/search";
-
-type ZipCloudResponse = {
-	status: number;
-	message: string | null;
-	results:
-		| {
-				address1: string;
-				address2: string;
-				address3: string;
-		  }[]
-		| null;
-};
+import useAddress from "../hooks/useAddress";
 
 type AddressForm = {
 	postalCode: string;
@@ -37,53 +24,23 @@ const Practice4 = () => {
 			city: "",
 		},
 	});
-	const [searchError, setSearchError] = useState<string>("");
 
 	const postalCode = watch("postalCode");
+	const { address, error: searchError } = useAddress(postalCode);
 
-	// 郵便番号が7桁になった時点で住所検索APIを呼ぶ
+	// 検索結果をフォームに反映する
 	useEffect(() => {
-		const zipcode = postalCode.replace(/-/g, "");
-		const isValidZipcode = /^\d{7}$/.test(zipcode);
-		if (!isValidZipcode) {
-			setSearchError("");
+		if (address) {
+			setValue("prefecture", address.prefecture, { shouldValidate: true });
+			setValue("city", address.city, { shouldValidate: true });
 			return;
 		}
 
-		// 入力が変わって古いリクエストの結果が返ってきた場合は無視する
-		let ignore = false;
-
-		const searchAddress = async () => {
-			try {
-				const response = await fetch(`${ZIPCLOUD_API_URL}?zipcode=${zipcode}`);
-				const data: ZipCloudResponse = await response.json();
-				if (ignore) return;
-
-				const address = data.results?.[0];
-				if (!address) {
-					setSearchError("該当する住所が存在しません");
-					setValue("prefecture", "");
-					setValue("city", "");
-					return;
-				}
-
-				setSearchError("");
-				setValue("prefecture", address.address1, { shouldValidate: true });
-				setValue("city", `${address.address2}${address.address3}`, {
-					shouldValidate: true,
-				});
-			} catch {
-				if (ignore) return;
-				setSearchError("住所の検索に失敗しました");
-			}
-		};
-
-		searchAddress();
-
-		return () => {
-			ignore = true;
-		};
-	}, [postalCode, setValue]);
+		if (searchError) {
+			setValue("prefecture", "");
+			setValue("city", "");
+		}
+	}, [address, searchError, setValue]);
 
 	const onSubmit: SubmitHandler<AddressForm> = (data) => {
 		console.log(data);
