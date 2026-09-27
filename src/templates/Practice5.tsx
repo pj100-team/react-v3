@@ -1,6 +1,6 @@
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { useRef, useState } from "react"
+import { ChangeEvent, CSSProperties, FormEvent, useRef, useState } from "react"
 
 type Todo = {
 	id: number;
@@ -11,13 +11,13 @@ type Todo = {
 
 const border = "1px solid #d1d5db";
 
-const rowStyle: React.CSSProperties = {
+const rowStyle: CSSProperties = {
 	display: "grid",
 	gridTemplateColumns: "60px 110px 1fr 96px",
 	borderBottom: border,
 };
 
-const cellStyle: React.CSSProperties = {
+const cellStyle: CSSProperties = {
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "center",
@@ -30,7 +30,7 @@ const Practice5 = () => {
 	const [todos, setTodos] = useState<Todo[]>([]);
 	const nextId = useRef<number>(1);
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);
 	}
 
@@ -50,6 +50,11 @@ const Practice5 = () => {
 		setInputValue("");
 	}
 
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		handleAdd();
+	}
+
 	const handleToggle = (id: number) => {
 		setTodos(
 			todos.map((todo) =>
@@ -58,7 +63,7 @@ const Practice5 = () => {
 		);
 	}
 
-	const handleToggleAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleToggleAll = (e: ChangeEvent<HTMLInputElement>) => {
 		const isDone = e.target.checked;
 		setTodos(todos.map((todo) => ({ ...todo, isDone: isDone })));
 	}
@@ -79,7 +84,8 @@ const Practice5 = () => {
 			<h1 style={{ textAlign: "center", fontSize: "24px", marginTop: "24px" }}>
 				TO DO List
 			</h1>
-			<div
+			<form
+				onSubmit={handleSubmit}
 				style={{
 					display: "flex",
 					flexDirection: "row",
@@ -103,9 +109,8 @@ const Practice5 = () => {
 					textColor="#ffffff"
 					padding="0.5rem 1.25rem"
 					fontSize="0.875rem"
-					onClick={handleAdd}
 				/>
-			</div>
+			</form>
 			<div style={{ width: "500px", margin: "24px auto 0" }}>
 				{hasCheckedTodo && (
 					<div style={{ marginBottom: "8px" }}>
