@@ -1,22 +1,35 @@
 import "./App.css";
-// import Practice1 from "./templates/Practice1";
-// import Practice2 from "./templates/Practice2";
-// import Practice3 from "./templates/Practice3";
-// import Practice4 from "./templates/Practice4";
+import { BrowserRouter, Outlet, Route, Routes, useLocation, } from "react-router-dom";
+import Home from "./templates/Home";
+import Practice4 from "./templates/Practice4";
 import Practice5 from "./templates/Practice5";
 
-function App() {
+const Layout = () => {
+	const { pathname } = useLocation();
+	// Home のときだけヘッダー文言を HOME にする
+	const headerTitle = pathname === "/" ? "HOME" : "React-v3";
+
 	return (
 		<>
 			<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
-				React-v3
+				{headerTitle}
 			</header>
-			{/* <Practice1 /> */}
-			{/* <Practice2 /> */}
-			{/* <Practice3 /> */}
-			{/* <Practice4 /> */}
-			<Practice5 />
+			<Outlet />
 		</>
+	);
+};
+
+function App() {
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route element={<Layout />}>
+					<Route path="/" element={<Home />} />
+					<Route path="/practice5" element={<Practice5 />} />
+					<Route path="/practice4" element={<Practice4 />} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
