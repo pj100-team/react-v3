@@ -14,7 +14,7 @@ type ZipCloudResponse = {
 		| null;
 };
 
-export type Address = {
+type Address = {
 	prefecture: string;
 	city: string;
 };
