@@ -11,24 +11,22 @@ const linkStyle: CSSProperties = {
 
 const Home = () => {
 	return (
-		<>
-			<nav
-				style={{
-					display: "flex",
-					flexDirection: "column",
-					alignItems: "center",
-					gap: "16px",
-					marginTop: "50px",
-				}}
-			>
-				<Link to="/practice5" style={linkStyle}>
-					TODOList
-				</Link>
-				<Link to="/practice4" style={linkStyle}>
-					addressSearch
-				</Link>
-			</nav>
-		</>
+		<nav
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				gap: "16px",
+				marginTop: "50px",
+			}}
+		>
+			<Link to="/practice5" style={linkStyle}>
+				TODOList
+			</Link>
+			<Link to="/practice4" style={linkStyle}>
+				addressSearch
+			</Link>
+		</nav>
 	);
 };
 
