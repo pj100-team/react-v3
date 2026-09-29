@@ -1,13 +1,7 @@
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { ChangeEvent, CSSProperties, FormEvent, useRef, useState } from "react"
-
-type Todo = {
-	id: number;
-	text: string;
-	createdAt: string;
-	isDone: boolean;
-};
+import { ChangeEvent, CSSProperties, FormEvent, useState } from "react"
+import useTodo from "../hooks/useTodo";
 
 const border = "1px solid #d1d5db";
 
@@ -27,57 +21,32 @@ const cellStyle: CSSProperties = {
 
 const Practice5 = () => {
 	const [inputValue, setInputValue] = useState<string>("");
-	const [todos, setTodos] = useState<Todo[]>([]);
-	const nextId = useRef<number>(1);
+	const {
+		todos,
+		isAllChecked,
+		hasCheckedTodo,
+		addTodo,
+		toggleTodo,
+		toggleAllTodos,
+		deleteTodo,
+		deleteCheckedTodos,
+	} = useTodo();
 
 	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);
 	}
 
-	const handleAdd = () => {
-		const text = inputValue.trim();
-		if (text === "") return;
-
-		const newTodo: Todo = {
-			id: nextId.current,
-			text: text,
-			createdAt: new Date().toLocaleDateString("ja-JP"),
-			isDone: false,
-		};
-		nextId.current += 1;
-
-		setTodos([...todos, newTodo]);
-		setInputValue("");
-	}
-
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		handleAdd();
-	}
-
-	const handleToggle = (id: number) => {
-		setTodos(
-			todos.map((todo) =>
-				todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
-			)
-		);
+		// 追加できたときだけ入力欄をクリアする
+		if (addTodo(inputValue)) {
+			setInputValue("");
+		}
 	}
 
 	const handleToggleAll = (e: ChangeEvent<HTMLInputElement>) => {
-		const isDone = e.target.checked;
-		setTodos(todos.map((todo) => ({ ...todo, isDone: isDone })));
+		toggleAllTodos(e.target.checked);
 	}
-
-	const handleDelete = (id: number) => {
-		setTodos(todos.filter((todo) => todo.id !== id));
-	}
-
-	const handleBulkDelete = () => {
-		setTodos(todos.filter((todo) => !todo.isDone));
-	}
-
-	const isAllChecked = todos.length > 0 && todos.every((todo) => todo.isDone);
-	const hasCheckedTodo = todos.some((todo) => todo.isDone);
 
 	return (
 		<>
@@ -120,7 +89,7 @@ const Practice5 = () => {
 							textColor="#ffffff"
 							padding="0.25rem 0.75rem"
 							fontSize="0.75rem"
-							onClick={handleBulkDelete}
+							onClick={deleteCheckedTodos}
 						/>
 					</div>
 				)}
@@ -160,7 +129,7 @@ const Practice5 = () => {
 										<Input
 											type="checkbox"
 											isChecked={todo.isDone}
-											onChange={() => handleToggle(todo.id)}
+											onChange={() => toggleTodo(todo.id)}
 											width="20px"
 											height="20px"
 										/>
@@ -190,7 +159,7 @@ const Practice5 = () => {
 											textColor="#ffffff"
 											padding="0.25rem 0.75rem"
 											fontSize="0.75rem"
-											onClick={() => handleDelete(todo.id)}
+											onClick={() => deleteTodo(todo.id)}
 										/>
 									</div>
 								</li>
