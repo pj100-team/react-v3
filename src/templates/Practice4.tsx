@@ -84,7 +84,7 @@ function Practice4(){
     }, [postalcode]);
 
     return(
-        <div
+        <form
             style={{
                 display: "flex",
                 alignItems: "center",
@@ -92,6 +92,7 @@ function Practice4(){
                 gap: "10px",
                 marginTop: "40px"
             }}
+            onSubmit={handleSubmit(onSubmit)}
         >
             <span>addressSearch</span>
             <div
@@ -159,11 +160,11 @@ function Practice4(){
                 <Button
                     name = "送信"
                     style = {buttonStyle}
-                    onClick = {handleSubmit(onSubmit)}
-                ></Button>
+                    type = "submit"
+                />
                 }
             </div>
-        </div>
+        </form>
     );
 }
 
