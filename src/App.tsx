@@ -1,5 +1,5 @@
 import "./App.css";
-import Practice4 from "./templates/Practice4";
+import Practice5 from "./templates/practice5";
 
 function App() {
 	return (
@@ -7,7 +7,7 @@ function App() {
 			<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
 			React-v3
 			</header>
-			<Practice4></Practice4>
+			<Practice5></Practice5>
 		</>
 	);
 }
