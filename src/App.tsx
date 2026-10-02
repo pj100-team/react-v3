@@ -1,5 +1,5 @@
 import "./App.css";
-import Practice4 from "./templates/practice4";
+import Practice4 from "./templates/Practice4";
 
 function App() {
 	return (

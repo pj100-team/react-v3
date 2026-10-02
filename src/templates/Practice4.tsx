@@ -1,6 +1,7 @@
 import {useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
-import Button from "../components/button";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 function Practice4(){
     type FormData = {
@@ -17,7 +18,7 @@ function Practice4(){
         formState: {errors}
     } = useForm<FormData>();
     const postalcode = watch("postalcode");
-    const [addressError, setAddressError] = useState("");
+    const [addressError, setAddressError] = useState<string>("");
     const onSubmit = (data: FormData) => {
         console.log(data);
     }
@@ -97,7 +98,7 @@ function Practice4(){
                 style={fieldStyle}
             >
                 <label>郵便番号</label>
-                <input 
+                <Input 
                     type = "text"
                     style = {inputStyle}
                     {...register("postalcode", {
@@ -118,7 +119,7 @@ function Practice4(){
                 style={fieldStyle}
             >
                 <label>都道府県</label>
-                <input 
+                <Input 
                     type = "text"
                     style = {inputStyle}
                     {...register("prefecture", {
@@ -135,7 +136,7 @@ function Practice4(){
                 style={fieldStyle}
             >
                 <label>市区町村</label>
-                <input 
+                <Input 
                     type = "text"
                     style = {inputStyle}
                     {...register("city", {
