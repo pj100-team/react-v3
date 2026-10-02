@@ -10,12 +10,13 @@ type ButtonStyle = {
 type ButtonProps = {
     name: string;
     style: ButtonStyle;
-    onClick: () => void;
+    onClick?: () => void;
+    type?: "button" | "submit" | "reset";
 }
 
-function Button({name, style, onClick}: ButtonProps) {
+function Button({name, style, onClick, type = "button"}: ButtonProps) {
     return(
-        <button style = {style} onClick = {onClick}>
+        <button type = {type} style = {style} onClick = {onClick}>
             {name}
         </button>
     );
