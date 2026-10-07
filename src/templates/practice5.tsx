@@ -9,8 +9,11 @@ function Practice5() {
         todo: string;
         check: boolean
     }
-    const [input, setInput] = useState("");
+    const [input, setInput] = useState<string>("");
     const [todos, setTodos] = useState<Todo[]>([]);
+    const checkCount = todos.filter((todo) => 
+        todo.check
+    ).length;
     const fieldStyle = {
         display: "flex",
         alignItems: "center",
@@ -47,7 +50,9 @@ function Practice5() {
         setInput("");
     }
     const deleteTodo = (id: number) => {
-        const newTodos = todos.filter((todo) => todo.id !== id);
+        const newTodos = todos.filter((todo) => 
+            todo.id !== id
+        );
         setTodos(newTodos);
     };
     const checkAll = (checked : boolean) => {
@@ -64,7 +69,8 @@ function Practice5() {
         setTodos(newTodos);
     }
     const deleteAll = () => {
-        
+        const newTodos = todos.filter((todo) => todo.check === false);
+        setTodos(newTodos);
     }
 
     return(
@@ -93,17 +99,20 @@ function Practice5() {
                     onClick = {addTodo}
                 />
             </div>
-            <table>
-              <Button
-                    name = "一括削除"
-                    style = {buttonStyle}
-                    onClick = {deleteAll}
+            {checkCount !== 0 && (
+                <Button
+                name = "一括削除"
+                style = {buttonStyle}
+                onClick = {deleteAll}
                 />
+            )}
+            {todos.length !== 0 && <table>
                 <thead>
                     <tr>
                         <th>
                             <input 
                                 type = "checkbox"
+                                checked={todos.length > 0 && todos.every((todo) => todo.check)}
                                 onChange = {(e) => checkAll(e.target.checked)}
                              />
                         </th>
@@ -140,7 +149,7 @@ function Practice5() {
                         </tr>
                     ))}
                 </tbody>
-            </table>
+            </table>}
         </div>
     )
 }
