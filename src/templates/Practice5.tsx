@@ -69,7 +69,7 @@ function Practice5() {
         borderRadius: "0px"
     };
 
-    const addTodo = () => {
+    const handleAddTodo = () => {
         const today = new Date().toLocaleDateString("ja-JP", {
             year: "numeric",
             month: "2-digit",
@@ -83,30 +83,34 @@ function Practice5() {
         }
         setTodos([...todos, newTodo])
         setInput("");
-    }
-    const deleteTodo = (id: number) => {
+    };
+    const handleDeleteTodo = (id: number) => {
         const newTodos = todos.filter((todo) => 
             todo.id !== id
         );
         setTodos(newTodos);
     };
-    const checkAll = (checked : boolean) => {
+    const handleCheckAll = (checked : boolean) => {
         const newTodos = todos.map((todo) => ({
             ...todo,
             check: checked
         }));
         setTodos(newTodos);
     };
-    const checkTodo = (id: number, checked: boolean) => {
+    const handleCheckTodo = (id: number, checked: boolean) => {
         const newTodos = todos.map((todo) => 
             todo.id === id ? {...todo, check: checked} :todo
         );
         setTodos(newTodos);
-    }
-    const deleteAll = () => {
+    };
+    const handleDeleteAll = () => {
         const newTodos = todos.filter((todo) => todo.check === false);
         setTodos(newTodos);
-    }
+    };
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        handleAddTodo();
+    };
 
     return(
         <div
@@ -127,10 +131,7 @@ function Practice5() {
             </span>
             <form
                 style={fieldStyle}
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    addTodo();
-                }}
+                onSubmit={handleSubmit}
             >
                 <Input
                     type = "text"
@@ -141,7 +142,7 @@ function Practice5() {
                 <Button
                     name = "追加"
                     style = {buttonStyle}
-                    onClick = {addTodo}
+                    type = "submit"
                 />
             </form>
             <div
@@ -155,7 +156,7 @@ function Practice5() {
                 <Button
                 name = "一括削除"
                 style = {extraDeleteButtonStyle}
-                onClick = {deleteAll}
+                onClick = {handleDeleteAll}
                 />
             </div>
             {todos.length !== 0 && 
@@ -170,7 +171,7 @@ function Practice5() {
                             <Input 
                                 type = "checkbox"
                                 checked={todos.length > 0 && todos.every((todo) => todo.check)}
-                                onChange = {(e) => checkAll(e.target.checked)}
+                                onChange = {(e) => handleCheckAll(e.target.checked)}
                              />
                         </th>
                         <th
@@ -200,7 +201,7 @@ function Practice5() {
                                     type = "checkbox"
                                     checked = {todo.check}
                                     onChange = {(e) =>
-                                        checkTodo(todo.id, e.target.checked)
+                                        handleCheckTodo(todo.id, e.target.checked)
                                     }
                                  />
                             </td>
@@ -220,7 +221,7 @@ function Practice5() {
                                 <Button
                                     name = "削除"
                                     style = {deleteButtonStyle}
-                                    onClick = {() => deleteTodo(todo.id)}
+                                    onClick = {() => handleDeleteTodo(todo.id)}
                                 />
                             </td>
                         </tr>
