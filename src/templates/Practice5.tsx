@@ -2,7 +2,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import useTodoList from "../hooks/useTodoList"
 
-function Practice5() {
+const Practice5 = () => {
     const {
         handleSubmit,
         setInput,

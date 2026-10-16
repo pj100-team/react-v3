@@ -7,7 +7,7 @@ type FormData = {
     city: string
 }
 
-function useAddressSearch() {
+const useAddressSearch = () => {
     const {
         register, 
         watch, 

@@ -2,7 +2,7 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import useAddressSearch from "../hooks/useAddressSearch";
 
-function Practice4(){
+const Practice4 = () =>{
     const {
         handleSubmit,
         onSubmit,

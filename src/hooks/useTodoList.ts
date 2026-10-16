@@ -7,7 +7,7 @@ type Todo = {
     check: boolean
 }
 
-function useTodoList() {
+const useTodoList = () => {
     const [input, setInput] = useState<string>("");
     const [todos, setTodos] = useState<Todo[]>([]);
 
