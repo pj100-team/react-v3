@@ -1,15 +1,22 @@
-import "./App.css";
+import Home from "./templates/Home";
+import Practice4 from "./templates/Practice4";
 import Practice5 from "./templates/Practice5";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-function App() {
+const App = () => {
 	return (
-		<>
+		<BrowserRouter>
 			<header className="bg-[#94A3B8] text-center p-[20px] text-4xl text-[#F9FAFB]">
 			React-v3
 			</header>
-			<Practice5 />
-		</>
+
+			<Routes>
+				<Route path = "/" element = {<Home/>}/>
+				<Route path = "/Practice4" element = {<Practice4/>}/>
+				<Route path = "Practice5" element = {<Practice5/>}/>
+			</Routes>
+		</BrowserRouter>
 	);
-}
+};
 
 export default App;
