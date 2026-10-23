@@ -20,13 +20,13 @@ const Home = () => {
             style = {homeStyle}
         >
             <Link 
-                to = "Practice4"
+                to = "/practice4"
                 style = {linkStyle}
             >
                 AddressSearch
             </Link>
             <Link 
-                to = "Practice5"
+                to = "/practice5"
                 style = {linkStyle}
             >
                 TodoList
